@@ -59,6 +59,8 @@ body {
 .productImage {
     display:block;
     margin:auto;
+    height: 150px;
+    width: 150px;
 }
 
 .ratingImg{
