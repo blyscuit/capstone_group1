@@ -92,3 +92,21 @@ body {
 .my-popover-content {
     display:none;
 }
+
+.toPopup {
+   background-color: #ffffff;
+    border: 1px solid #b0b0b0;
+    bottom: 0;
+    display: none;
+    height: 50px;
+    position: fixed;
+    right: 70px;
+    width: 300px;
+}
+
+.chatBtn {
+    position: fixed;
+    width: 296px;
+    bottom: 0px;
+    right: 72px; 
+}
