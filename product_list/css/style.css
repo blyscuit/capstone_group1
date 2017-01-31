@@ -1,13 +1,15 @@
 body {
 	background-color: #f9f9f9;
-	padding-top: 70px; 
+	padding-top: 80px; 
 }
 
 * {
   border-radius: 0 !important;
 }
 
-.nav ul{margin:0;}
+.nav ul{
+	margin:0;
+}
 
 .navbar-default .navbar-nav > li > a {
 	color: #4d6ac8; /*Change active text color here*/
@@ -43,6 +45,11 @@ body {
 	transform: translateY(25%);
 }
 
+.tutorial {
+	display:block;
+    margin-bottom : 10px;
+}
+
 .navchat {
 	padding: 8px 0px;
 }
@@ -59,15 +66,29 @@ body {
 .productImage {
     display:block;
     margin:auto;
+    height: 150px;
+    width: auto;
 }
 
 .ratingImg{
+	margin-top :20px;
 	float: left;
 	width: auto;
     height: 20px;
 }
 
 .productPrice {
+	margin-top :20px;
 	color: #4d6ac8;
 	float:right
+}
+
+.productPanel {
+	width: 220px;
+	max-width:220px;
+	height: auto;
+}
+
+.my-popover-content {
+    display:none;
 }

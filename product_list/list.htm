@@ -18,6 +18,12 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="./js/bootstrap.min.js"></script>
 
+	<link rel="stylesheet" href="./css/chatbox.css" rel="stylesheet">
+
+	<script src="./js/hover4content.js"></script>
+
+	<script src="./js/chatbox.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 
 </head>
@@ -27,10 +33,11 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
-			<img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon">
+			<a href="#"><img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon"></a>
 			<!-- <a class="navbar-brand" href="#">Kaidee</a> -->
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" id="addClass">พูดคุย</a></li>
 					<li><a href="http://snowywords2.ddns.net:7777/kaidee">แก้ไขข้อมูลผู้ขาย</a></li>
 					<li><button id="btnsell" type="button" class="btn btn-warning">ขาย</button></li>
 				</ul>
@@ -38,42 +45,317 @@
 		</div>
 	</nav>
 
+	<div class="container">
+		<img class="img-responsive tutorial" href="#" src="img/tutorial2.png">
+		</br>
+	</div>
+
 	<div id="productList">
-		<div id="productList">
-			<div class="container">
-		<div class="row">
-	<a href="./kaidee1.htm"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k1.jpeg"></div><div class="panel-body"><div class="productName">ITEM #1</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r2.png"></span><span class="productPrice">THB 11.00</span></div></div></div></div></a>
+		<div class="container">
+			<div class="row">
 
-	<a href="./kaidee2.htm"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k2.png"></div><div class="panel-body"><div class="productName">ITEM #2</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r1.png"></span><span class="productPrice">THB 974.00</span></div></div></div></div></a>
+				<a href="./kaidee1.htm">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="#" src="img/k1.jpeg">
+							</div>
+							<div class="panel-body">
+								<div class="productName">Apple iPad Pro 9.7</div>
+								<div class="productLocation">อ.เมืองเชียงใหม่ จ.เชียงใหม่</div>
+								<div>
+									<span>
+										<img class="img-responsive ratingImg" src="img/r2.png">
+										<div class="my-popover-content">Verification Lv.2</div>
+									</span>
+									<span class="productPrice">฿23,900.00</span>
+								</div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
 
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #3</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r2.png"></span><span class="productPrice">THB 683.00</span></div></div></div></div></a>
+				<a href="./kaidee2.htm">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="#" src="img/k2.png">
+							</div>
+							<div class="panel-body">
+								<div class="productName">คริสตัน ดราก้อน 25 เล่ม</div>
+								<div class="productLocation">อ.เมืองนครราชสีมา จ.นครราชสีมา</div>
+								<div><span>
+									<img class="img-responsive ratingImg" src="img/r1.png">
+									<div class="my-popover-content">Verification Lv.1</div>
+								</span><span class="productPrice">฿750.00</span>
+								</div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
 
-	<a href="./kaidee3.htm"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="./kaidee3.htm" src="img/k3.jpeg"></div><div class="panel-body"><div class="productName">ITEM #4</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r3.png"></span><span class="productPrice">THB 836.00</span></div></div></div></div></a>
+				<a href="./kaidee3.htm">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k3.jpeg">
+							</div>
+							<div class="panel-body">
+								<div class="productName">NIKE FLYKNIT MAX 26.5cm</div>
+								<div class="productLocation">อ.เขตบางรัก จ.กรุงเทพมหานคร</div>
+								<div><span>
+									<img class="img-responsive ratingImg" src="img/r3.png">
+									<div class="my-popover-content">Verification Lv.3</div>
+								</span><span class="productPrice">฿5,000.00</span></div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION 
+							</div>
+						</div>
+					</div>
+				</a>
 
+				<a href="javascript:void(0)">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+							</div>
+							<div class="panel-body">
+								<div class="productName">ITEM</div>
+								<div class="productLocation">Location</div>
+								<div><span><img class="img-responsive ratingImg" src="img/r2.png"><div class="my-popover-content">Verification Lv.2</div></span><span class="productPrice">฿980</span></div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<a href="javascript:void(0)">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+							</div>
+							<div class="panel-body">
+								<div class="productName">ITEM</div>
+								<div class="productLocation">Location</div>
+								<div><span><img class="img-responsive ratingImg" src="img/r1.png"><div class="my-popover-content">Verification Lv.1</div></span><span class="productPrice">฿46,800</span></div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<a href="javascript:void(0)">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+							</div>
+							<div class="panel-body">
+								<div class="productName">ITEM</div>
+								<div class="productLocation">Location</div>
+								<div><span><img class="img-responsive ratingImg" src="img/r3.png"><div class="my-popover-content">Verification Lv.3</div></span><span class="productPrice">฿4,500</span></div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<a href="javascript:void(0)">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+							</div>
+							<div class="panel-body">
+								<div class="productName">ITEM</div>
+								<div class="productLocation">Location</div>
+								<div><span><img class="img-responsive ratingImg" src="img/r2.png"><div class="my-popover-content">Verification Lv.2</div></span><span class="productPrice">฿9,000</span></div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<a href="javascript:void(0)">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+							</div>
+							<div class="panel-body">
+								<div class="productName">ITEM</div>
+								<div class="productLocation">Location</div>
+								<div><span><img class="img-responsive ratingImg" src="img/r3.png"><div class="my-popover-content">Verification Lv.3</div></span><span class="productPrice">฿1,150</span></div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<a href="javascript:void(0)">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+							</div>
+							<div class="panel-body">
+								<div class="productName">ITEM</div>
+								<div class="productLocation">Location</div>
+								<div><span><img class="img-responsive ratingImg" src="img/r1.png"><div class="my-popover-content">Verification Lv.1</div></span><span class="productPrice">฿5,730</span></div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<a href="javascript:void(0)">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+							</div>
+							<div class="panel-body">
+								<div class="productName">ITEM</div>
+								<div class="productLocation">Location</div>
+								<div><span><img class="img-responsive ratingImg" src="img/r2.png"><div class="my-popover-content">Verification Lv.2</div></span><span class="productPrice">฿5,550</span></div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<a href="javascript:void(0)">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+							</div>
+							<div class="panel-body">
+								<div class="productName">ITEM</div>
+								<div class="productLocation">Location</div>
+								<div><span><img class="img-responsive ratingImg" src="img/r1.png"><div class="my-popover-content">Verification Lv.1</div></span><span class="productPrice">฿420</span></div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
+
+				<a href="javascript:void(0)">
+					<div class="col-sm-3">
+						<div class="panel panel-default productPanel">
+							<div class="panel-heading text-center">
+								<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+							</div>
+							<div class="panel-body">
+								<div class="productName">ITEM</div>
+								<div class="productLocation">Location</div>
+								<div><span><img class="img-responsive ratingImg" src="img/r1.png"><div class="my-popover-content">Verification Lv.1</div></span><span class="productPrice">฿1,240</span></div>
+							</div>
+							<div class="my-popover-content">
+								DESCRIPTION
+							</div>
+						</div>
+					</div>
+				</a>
+
+			</div>
 		</div>
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #5</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r2.png"></span><span class="productPrice">THB 252.00</span></div></div></div></div></a>
+	</div>
 
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #6</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r1.png"></span><span class="productPrice">THB 63.00</span></div></div></div></div></a>
+	<div class="popup-box chat-popup" id="qnimate">
+		<div class="popup-head">
+			<div class="popup-head-left pull-left"><img src="img/profile.png" alt="iamgurdeeposahan"> Mr. Osas</div>
+			<div class="popup-head-right pull-right">
+						  <!--
+							<div class="btn-group">
+	    							<button class="chat-header-button" data-toggle="dropdown" type="button" aria-expanded="false">
+									<i class="glyphicon glyphicon-cog"></i> </button>
+									<ul role="menu" class="dropdown-menu pull-right">
+										<li><a href="#">Media</a></li>
+										<li><a href="#">Block</a></li>
+										<li><a href="#">Clear Chat</a></li>
+										<li><a href="#">Email Chat</a></li>
+									</ul>
+							</div>
+							
+							<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button>
+						-->
+						<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button">X</button>
+					</div>
+				</div>
+				<div class="popup-messages">
+					<div class="direct-chat-messages">
 
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #7</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r1.png"></span><span class="productPrice">THB 477.00</span></div></div></div></div></a>
+						
+						<div class="chat-box-single-line">
+							<abbr class="timestamp">September 11th, 2016</abbr>
+						</div>
+						
+						
+						<!-- Message. Default to the left -->
+						<div class="direct-chat-msg doted-border">
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-name pull-left">Mr. Osas</span>
+							</div>
+							<!-- /.direct-chat-info -->
+							<img alt="message user image" src="img/profile.png" class="direct-chat-img"><!-- /.direct-chat-img -->
+							<div class="direct-chat-text">
+								My name? My name na Uvuvwevwevwe Onyetenyevwe Ugwemuhwem Osas
+							</div>
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-timestamp pull-right">1.12 AM</span>
+							</div>
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-img-reply-small pull-left">
 
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #8</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r3.png"></span><span class="productPrice">THB 916.00</span></div></div></div></div></a>
+								</span>
+								<span class="direct-chat-reply-name">Me</span>
+							</div>
+							<!-- /.direct-chat-text -->
+							<div class="direct-chat-text">
+								Pardon?
+							</div>
+						</div>
+						<!-- /.direct-chat-msg -->
 
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #9</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r3.png"></span><span class="productPrice">THB 556.00</span></div></div></div></div></a>
-
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #10</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r1.png"></span><span class="productPrice">THB 251.00</span></div></div></div></div></a>
-
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #11</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r2.png"></span><span class="productPrice">THB 709.00</span></div></div></div></div></a>
-
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #12</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r1.png"></span><span class="productPrice">THB 603.00</span></div></div></div></div></a>
-
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #13</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r2.png"></span><span class="productPrice">THB 169.00</span></div></div></div></div></a>
-
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #14</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r1.png"></span><span class="productPrice">THB 789.00</span></div></div></div></div></a>
-
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #15</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r2.png"></span><span class="productPrice">THB 675.00</span></div></div></div></div></a>
-
-	<a href="javascript:void(0)"><div class="col-sm-3"><div class="panel panel-default"><div class="panel-heading text-center"><img class="img-responsive productImage" href="#" src="img/k.png"></div><div class="panel-body"><div class="productName">ITEM #16</div><div class="productLocation">Location</div><br><div><span><img class="img-responsive ratingImg" src="img/r3.png"></span><span class="productPrice">THB 495.00</span></div></div></div></div></a></div>
+					</div>
+					<div class="popup-messages-footer">
+						<textarea id="status_message" placeholder="Type a message..." rows="10" cols="40" name="message"></textarea>
+						<div class="btn-footer">
+			<!--
+				<button class="bg_none"><i class="glyphicon glyphicon-film"></i> </button>
+				<button class="bg_none"><i class="glyphicon glyphicon-camera"></i> </button>
+	            <button class="bg_none"><i class="glyphicon glyphicon-paperclip"></i> </button>
+				<button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
+			-->
+			<span class="pull-left"><a>UPLOAD</a></span>
+			<span class="pull-right"><a>LIKE!</a></span>
+		</div>
 	</div>
 	</div>
 
