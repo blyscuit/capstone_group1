@@ -110,3 +110,41 @@ body {
     bottom: 0px;
     right: 72px; 
 }
+
+.ad-contacts, .product-active .ad-info, .ad-info-mb, .additional-info, .main-information {
+    background-color: #fff;
+    box-shadow: 1px 1px 2px 1px hsla(0,0%,59%,.05);
+    margin-bottom: 20px;
+}
+.price-mb {
+    top: 4px;
+    font-size: 180%;
+    color: #f70;
+}
+.ad-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f70;
+}
+.call-to-buyer {
+    display: block;
+    color: #00c977;
+}
+.ad-info-mb>li [class*=df-icon], .ad-info>li [class*=df-icon], .additional-info>li [class*=df-icon], .additional-info, .main-information {
+    display: block;
+    line-height: 38px;
+    color: #969696;
+    font-size: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
