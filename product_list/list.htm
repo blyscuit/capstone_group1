@@ -52,7 +52,7 @@
 
 	<div id="productList">
 		<div class="container">
-			<div class="row">
+			<div class="row" id="productListRow">
 
 				<a href="#">
 					<div class="col-sm-3">
@@ -85,7 +85,7 @@
 								<img class="img-responsive productImage" href="#" src="img/nike3.png">
 							</div>
 							<div class="panel-body">
-								<div class="productName">Nike basketball shoe for boys.</div>
+								<div class="productName">Nike basketball shoe.</div>
 								<div class="productLocation">อ.เมืองนครราชสีมา จ.นครราชสีมา</div>
 								<div><span>
 									<img class="img-responsive ratingImg" src="img/r1.png">
@@ -115,7 +115,7 @@
 								</span><span class="ad-price">฿5,000.00</span></div>
 							</div>
 							<div class="my-popover-content">
-								DESCRIPTION 
+								DESCRIPTION
 							</div>
 						</div>
 					</div>
@@ -306,7 +306,7 @@
 										<li><a href="#">Email Chat</a></li>
 									</ul>
 							</div>
-							
+
 							<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button>
 						-->
 						<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button">X</button>
@@ -315,12 +315,12 @@
 				<div class="popup-messages">
 					<div class="direct-chat-messages">
 
-						
+
 						<div class="chat-box-single-line">
 							<abbr class="timestamp">September 11th, 2016</abbr>
 						</div>
-						
-						
+
+
 						<!-- Message. Default to the left -->
 						<div class="direct-chat-msg doted-border">
 							<div class="direct-chat-info clearfix">
@@ -364,3 +364,87 @@
 	</div>
 
 </body>
+
+<script>
+
+$(document).ready(function(){
+
+	$.get("http://snowywords2.ddns.net:5000/browse_product/", function(data, status){
+			alert("Data: " + data + "\nStatus: " + status);
+	});
+
+	$("#productListRow").append(`
+		<a href="javascript:void(0)">
+			<div class="col-sm-3">
+				<div class="panel panel-default productPanel">
+					<div class="panel-heading text-center">
+						<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+					</div>
+					<div class="panel-body">
+						<div class="productName">ITEM</div>
+						<div class="productLocation">Location</div>
+						<div><span><img class="img-responsive ratingImg" src="img/r1.png"><div class="my-popover-content">UVUVUVVU</div></span><span class="ad-price">฿99999</span></div>
+					</div>
+					<div class="my-popover-content">
+						DESCRIPTION
+					</div>
+				</div>
+			</div>
+		</a>
+		<a href="javascript:void(0)">
+			<div class="col-sm-3">
+				<div class="panel panel-default productPanel">
+					<div class="panel-heading text-center">
+						<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+					</div>
+					<div class="panel-body">
+						<div class="productName">ITEM</div>
+						<div class="productLocation">Location</div>
+						<div><span><img class="img-responsive ratingImg" src="img/r1.png"><div class="my-popover-content">UVUVUVVU</div></span><span class="ad-price">฿99999</span></div>
+					</div>
+					<div class="my-popover-content">
+						DESCRIPTION
+					</div>
+				</div>
+			</div>
+		</a>
+		<a href="javascript:void(0)">
+			<div class="col-sm-3">
+				<div class="panel panel-default productPanel">
+					<div class="panel-heading text-center">
+						<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+					</div>
+					<div class="panel-body">
+						<div class="productName">ITEM</div>
+						<div class="productLocation">Location</div>
+						<div><span><img class="img-responsive ratingImg" src="img/r1.png"><div class="my-popover-content">UVUVUVVU</div></span><span class="ad-price">฿99999</span></div>
+					</div>
+					<div class="my-popover-content">
+						DESCRIPTION
+					</div>
+				</div>
+			</div>
+		</a>
+		<a href="javascript:void(0)">
+			<div class="col-sm-3">
+				<div class="panel panel-default productPanel">
+					<div class="panel-heading text-center">
+						<img class="img-responsive productImage" href="./kaidee3.htm" src="img/k.png">
+					</div>
+					<div class="panel-body">
+						<div class="productName">ITEM</div>
+						<div class="productLocation">Location</div>
+						<div><span><img class="img-responsive ratingImg" src="img/r1.png"><div class="my-popover-content">UVUVUVVU</div></span><span class="ad-price">฿99999</span></div>
+					</div>
+					<div class="my-popover-content">
+						DESCRIPTION
+					</div>
+				</div>
+			</div>
+		</a>`);
+
+});
+
+
+
+</script>
