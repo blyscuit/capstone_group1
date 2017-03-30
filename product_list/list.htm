@@ -370,7 +370,36 @@
 $(document).ready(function(){
 
 	$.get("http://snowywords2.ddns.net:5000/browse_product/", function(data, status){
-			alert("Data: " + data + "\nStatus: " + status);
+			for (count in data){
+				itemObject = data[count];
+				console.log(itemObject);
+				iId = itemObject.ItemID;
+				iImg = itemObject.ItemImage[0];
+				iLv = itemObject.LevelID_u;
+				iName = itemObject.Name;
+				iPost = itemObject.Postcode;
+				iPrice = itemObject.Price;
+
+				$("#productListRow").append(`
+					<a href="javascript:void(0)">
+						<div class="col-sm-3">
+							<div class="panel panel-default productPanel">
+								<div class="panel-heading text-center">
+									<img class="img-responsive productImage" href="./kaidee3.htm" src="`+iImg+`">
+								</div>
+								<div class="panel-body">
+									<div class="productName">`+iName+`</div>
+									<div class="productLocation">`+iPost+`</div>
+									<div><span><img class="img-responsive ratingImg" src="img/r`+iLv+`.png"><div class="my-popover-content">Verification Lv.`+iLv+`</div></span><span class="ad-price">฿`+iPrice+`</span></div>
+								</div>
+								<div class="my-popover-content">
+									DESCRIPTION
+								</div>
+							</div>
+						</div>
+					</a>
+					`);
+			}
 	});
 
 	$("#productListRow").append(`
