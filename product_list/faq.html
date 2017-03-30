@@ -16,13 +16,12 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="./js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/style.css">
-        
     </head>
     <body>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <nav class="navbar navbar-default navbar-fixed-top">
-            
+         
 		<div class="container">
 			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
 			<img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon">
@@ -35,6 +34,41 @@
 			</div>
 		</div>
 	    </nav>
+        <div class="container">
+            <div id="textAndPic" class="row">
+                <div class="col-md-12">
+                    <h1 id='title'></h1>
+                    <p></p>
+                </div>
+            </div>
+        </div>
         
+        <script>
+            var result = []
+            
+            $(document).ready(function() {
+                var num = localStorage.getItem('click');
+                var cate = 'Catagory' + num
+                var temp = localStorage.getItem('topic');
+                var topic = temp.substr(1,(temp.length)-2);
+                var result = JSON.parse(localStorage.getItem(cate));
+                console.log(result);
+                console.log(jQuery.type(result));
+                document.getElementById('title').textContent = topic;    
+                
+                  for(var i=0; i < result.length;i++){
+                     console.log(result[i]);
+                    $('#textAndPic').append('<div class="col-md-12"><p>'+result[i].Title+'</p></div>');
+                    $('#textAndPic').append('<div class="col-md-12"><p>'+result[i].Detail+'</p></div>');
+                }
+  
+            });
+            
+
+            
+
+        </script>
+        
+    
     </body>
 </html>    
