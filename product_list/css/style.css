@@ -1,6 +1,6 @@
 body {
 	background-color: #f9f9f9;
-	padding-top: 80px; 
+	padding-top: 80px;
 }
 
 * {
@@ -108,7 +108,7 @@ body {
     position: fixed;
     width: 296px;
     bottom: 0px;
-    right: 72px; 
+    right: 72px;
 }
 
 .ad-contacts, .product-active .ad-info, .ad-info-mb, .additional-info, .main-information {
@@ -122,6 +122,8 @@ body {
     color: #f70;
 }
 .ad-price {
+    margin-top :20px;
+    float: right;
     font-size: 14px;
     font-weight: 700;
     color: #f70;
