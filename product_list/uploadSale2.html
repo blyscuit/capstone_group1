@@ -60,9 +60,23 @@
             <input type='file' />
             <img id="myImg" src="#" alt="your image" />
         </div>
-        <button id="goToPreviousPage" style="float:left;">ย้อนกลับ</button>
-        <button id="goToNextPage" style="float:left;">ไปต่อ</button>
+        
+        <div style="margin-left: 100px;">
+            <button id="goToPreviousPage" style="float:left;" type="button" class="btn btn-warning">ย้อนกลับ</button>
+        </div>
+        <div style="margin-right: 100px;">
+            <button id="goToNextPage" style="float:right;" type="button" class="btn btn-success">ไปต่อ</button>
+        </div>
+        
         <script>
+            
+            $(document).ready(function() {
+                var name = localStorage.getItem('pname');
+                var price = localStorage.getItem('price');
+                var cate = localStorage.getItem('cate');
+                alert(cate);
+                //alert(name);
+            });
             $('#goToNextPage').click(function(){
                 window.location.href = "file:///Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/uploadSale3.html";
                 
