@@ -21,7 +21,7 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <nav class="navbar navbar-default navbar-fixed-top">
-         
+            
 		<div class="container">
 			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
 			<img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon">
@@ -34,44 +34,44 @@
 			</div>
 		</div>
 	    </nav>
-        <div class="container">
-            <div id="textAndPic" class="row">
-                <div class="col-md-12">
-                    <h1 id='title'></h1>
+        <div class="container" >
+            <div class="row" >
+                <div class="col-md-1 ">
+                    <img src="img/iconsale1_bright.png" style="width:100px;height:100px;">
+                </div>
+                <div class="col-md-1">
+                    <img src="img/iconsale2_bright.png" style="width:200px;height:100px;">
+                </div>
+                <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale3_bright.png" style="width:200px;height:100px;">
+                </div>
+                 <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale4_bright.png" style="width:200px;height:100px;">
+                </div>
+                 <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale5_bright.png" style="width:200px;height:100px;">
+                </div>
+                <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale6_dark.png" style="width:200px;height:100px;">
                 </div>
             </div>
         </div>
-        
+        <div style="text-align: center;">
+            
+        </div>
+        <button id="goToPreviousPage" style="float:left;">ย้อนกลับ</button>
+        <button id="goToNextPage" style="float:left;">ไปต่อ</button>
         <script>
-            var result = []
-            
-            $(document).ready(function() {
-                var num = localStorage.getItem('click');
-                var cate = 'Category' + num
-                var temp = localStorage.getItem('topic');
-                var topic = temp.substr(1,(temp.length)-2);
-                var result = JSON.parse(localStorage.getItem(cate));
-                console.log(result);
-                console.log(jQuery.type(result));
-                document.getElementById('title').textContent = topic;    
+            $('#goToNextPage').click(function(){
+                window.location.href = "file:///Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/uploadSale6.html";
                 
-                  for(var i=0; i < result.length;i++){
-                     console.log(result[i]);
-                    $('#textAndPic').append('<div class="col-md-12"><h4>'+result[i].Detail+'</h4></div>');
-                      for(var j=0; j < result[i].FAQImage.length;j++){
-                          $('#textAndPic').append('<div class="col-md-12"><img src="'+result[i].FAQImage[j]+'"></div>');  
-                      }
-                    
-                    //$('#textAndPic').append('<div class="col-md-12"><p>'+result[i].Detail+'</p></div>');
-                }
-  
             });
-            
-
-            
-
+        
+            $('#goToPreviousPage').click(function(){
+                window.location.href = "file:///Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/uploadSale4.html";
+                
+            });
         </script>
         
-    
     </body>
-</html>    
+</html> 
