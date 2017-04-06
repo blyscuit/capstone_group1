@@ -78,8 +78,20 @@
                       type: "POST",
                       url: 'http://snowywords2.ddns.net:5000/faqfeedback',
                       data: {timestamp:1491492379,vote_status:"yes",userID:1006,FAQID:1},
-                      success: success
+                      success: function(data){
+                          console.log("Post Complete");
+                      }
                 });
+                
+//                var saveData = $.ajax({
+//                      type: 'POST',
+//                      url: "http://snowywords2.ddns.net:5000/faqfeedback",
+//                      data: {timestamp:1491492379,vote_status:"yes",userID:1006,FAQID:1},
+//                      dataType: "text",
+//                      success: function(resultData) { alert("Save Complete") }
+//                });
+//                saveData.error(function() { alert("Something went wrong"); });
+                
                 
             });
             
@@ -88,7 +100,9 @@
                       type: "POST",
                       url: 'http://snowywords2.ddns.net:5000/faqfeedback',
                       data: {timestamp:1491492379,vote_status:"no",userID:1006,FAQID:1},
-                      success: success
+                      success: function(data){
+                          console.log("Post Complete");
+                      }
                 });
                 
             });
