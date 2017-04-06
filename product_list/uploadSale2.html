@@ -16,6 +16,16 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="./js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <style>
+            #space{
+                height: 30px;
+            }
+            
+            #uploadPic{
+                align-content: center;
+            }
+        </style>
+        
     </head>
     <body>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -56,11 +66,14 @@
                 </div>
             </div>
         </div>
+        <div id="space"></div>
+        <div id="space"></div>
         <div style="text-align: center;">
-            <input type='file' />
-            <img id="myImg" src="#" alt="your image" />
+            <img style="text-align: center;" id="myImg" src="#" alt="your image" />
+            <div id="space"></div>
+            <input id="uploadPic" type='file' />
         </div>
-        
+        <div id="space"></div>
         <div style="margin-left: 100px;">
             <button id="goToPreviousPage" style="float:left;" type="button" class="btn btn-warning">ย้อนกลับ</button>
         </div>
@@ -74,7 +87,7 @@
                 var name = localStorage.getItem('pname');
                 var price = localStorage.getItem('price');
                 var cate = localStorage.getItem('cate');
-                alert(cate);
+                //alert(cate);
                 //alert(name);
             });
             $('#goToNextPage').click(function(){

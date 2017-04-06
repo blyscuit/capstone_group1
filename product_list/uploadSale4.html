@@ -16,6 +16,21 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="./js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <style>
+            #name{
+                font-size: 150%;
+            }
+            
+            #categoryChoice{
+                font-size: 150%;
+            }
+            
+            #space{
+                height: 30px;
+            }
+        
+        </style>
+        
     </head>
     <body>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -57,19 +72,23 @@
             </div>
         </div>
         <div style="text-align: center;">
-            ระบุพื้นที่ของสินค้า<select>
+            <div id="space"></div>
+            <div id="space"></div>
+            <label id="name">ระบุพื้นที่ของสินค้า</label><select id="categoryChoice">
                 <option value="" disabled selected>เลือกจังหวัด</option>
                 <option value="hurr">กรุงเทพมหานคร</option>
                 <option value="hurr">ปทุมธานี</option>
                 <option value="hurr">สมุทรปราการ</option>
             </select><br>
-            <select>
+            <div id="space"></div>
+            <select id="categoryChoice">
                 <option value="" disabled selected>เลือกอำเภอ</option>
                 <option value="hurr">ลำลูกกา</option>
                 <option value="hurr">ธัณณบุรี</option>
                 <option value="hurr">เมือง</option>
             </select><br>
         </div>
+        <div id="space"></div>
         <div style="margin-left: 100px;">
             <button id="goToPreviousPage" style="float:left;" type="button" class="btn btn-warning">ย้อนกลับ</button>
         </div>

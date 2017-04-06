@@ -16,6 +16,25 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="./js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <style>
+            #name{
+                font-size: 150%;
+            }
+        
+            #fillAnswer{
+                font-size: 150%;
+            }
+            
+            #categoryChoice{
+                font-size: 150%;
+            }
+            
+            #space{
+                height: 30px;
+            }
+            
+        </style>
+        
     </head>
     <body>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -57,16 +76,21 @@
             </div>
         </div>
         <div style="text-align: center;">
-            ชื่อสินค้า<input type="text" name="pname"><br>
-            หมวดสินค้า<select id="categoryChoice" onChange="getSelected(this);">
+            <div id="space"></div>
+            <div id="space"></div>
+            <label id="name">ชื่อสินค้า </label><input id="fillAnswer" type="text" name="pname"><br>
+            <div id="space"></div>
+            <label id="name">หมวดสินค้า </label><select id="categoryChoice" onChange="getSelected(this);">
                 <option value="cate0">กรุณาเลือดหมวดสินค้า</option>
                 <option value="cate1">พระเครื่อง</option>
                 <option value="cate2">เสื้อผ้า</option>
                 <option value="cate3">หนังสือ</option>
             </select><br>
-            ราคาสินค้า<input type="text" name="price">
+            <div id="space"></div>
+            <label id="name">ราคาสินค้า</label><input id="fillAnswer" type="text" name="price">
         </div>
-        <div style="margin-left: 100px;">
+        <div id="space"></div>
+        <div style="margin-right: 100px;">
             <button id="goToNextPage" style="float:right;" type="button" class="btn btn-success" >ไปต่อ</button>
         </div>
         <script>
