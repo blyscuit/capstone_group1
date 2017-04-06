@@ -41,6 +41,11 @@
                 </div>
             </div>
         </div>
+        <div style="text-align: center;">
+            <label>คุณคิดว่าข้อมูลนี้มีประโยชน์หรือไม่</label><br>
+            <button id="yes">มีประโยชน์</button>
+            <button id="no">ไม่มีประโยชน์</button>
+        </div>
         
         <script>
             var result = []
@@ -67,7 +72,26 @@
   
             });
             
-
+            
+            $('#yes').click(function(){
+                $.ajax({
+                      type: "POST",
+                      url: 'http://snowywords2.ddns.net:5000/faqfeedback',
+                      data: {timestamp:1491492379,vote_status:"yes",userID:1006,FAQID:1},
+                      success: success
+                });
+                
+            });
+            
+            $('#no').click(function(){
+                $.ajax({
+                      type: "POST",
+                      url: 'http://snowywords2.ddns.net:5000/faqfeedback',
+                      data: {timestamp:1491492379,vote_status:"no",userID:1006,FAQID:1},
+                      success: success
+                });
+                
+            });
             
 
         </script>
