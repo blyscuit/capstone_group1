@@ -29,6 +29,14 @@
                 height: 30px;
             }
         
+            .form-table {
+                margin: 5% auto;
+            }
+            
+            td{
+                height: 50px;
+
+            }
         </style>
         
     </head>
@@ -71,24 +79,29 @@
                 </div>
             </div>
         </div>
-        <div style="text-align: center;">
-            <div id="space"></div>
-            <div id="space"></div>
-            <label id="name">ระบุพื้นที่ของสินค้า</label><select id="categoryChoice">
+   
+            <table class="form-table">
+            <tr>
+                <td align='right'><label id="name">ระบุพื้นที่ของสินค้า</label></td>
+                <td><select id="categoryChoice">
                 <option value="" disabled selected>เลือกจังหวัด</option>
                 <option value="hurr">กรุงเทพมหานคร</option>
                 <option value="hurr">ปทุมธานี</option>
                 <option value="hurr">สมุทรปราการ</option>
-            </select><br>
-            <div id="space"></div>
-            <select id="categoryChoice">
+                </select></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><select id="categoryChoice">
                 <option value="" disabled selected>เลือกอำเภอ</option>
                 <option value="hurr">ลำลูกกา</option>
                 <option value="hurr">ธัณณบุรี</option>
                 <option value="hurr">เมือง</option>
-            </select><br>
-        </div>
+            </select></td>
+            </tr>
         <div id="space"></div>
+        </table>
+        
         <div style="margin-left: 100px;">
             <button id="goToPreviousPage" style="float:left;" type="button" class="btn btn-warning">ย้อนกลับ</button>
         </div>

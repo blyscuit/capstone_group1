@@ -19,12 +19,22 @@
         <style>
              #name{
                 font-size: 150%;
+                 text-align-last: right;
+                
             }
             
             #space{
                 height: 30px;
             }
-        
+    
+            
+              
+            .form-table {
+                margin: 5% auto;
+            }
+            td{
+                height: 50px;
+            }
         </style>
     </head>
     <body>
@@ -66,15 +76,38 @@
                 </div>
             </div>
         </div>
-        <div style="text-align: center;">
-            <label id="name">ชื่อสินค้า</label><label></label><br>
-            <label id="name">หมวดสินค้า</label><label></label><br>
-            <label id="name">ราคาสินค้า</label><label></label><br>
-            <label id="name">รายละเอียดสินค้า</label><label></label><br>
-            <label id="name">จังหวัด</label><label></label><br>
-            <label id="name">อำเภอ</label><label></label><br>
-            <label id="name">รูปภาพสินค้า</label><img src="/Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/img/nike2.png"><br>
-        </div>
+        <table class="form-table">
+            <tr>
+                <td align='right'><label id="name">ชื่อสินค้า: </label></td>
+                <td ><label id="answer"> รองเท้าnike</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label id="name">หมวดสินค้า: </label></td>
+                <td><label id="answer"> รองเท้า</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label id="name">ราคาสินค้า: </label></td>
+                <td><label id="answer"> 106บาท</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label id="name">รายละเอียดสินค้า: </label></td>
+                <td><label id="answer"> ก็รองเท้า</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label id="name">จังหวัด: </label></td>
+                <td><label id="answer">ปทุมธานี</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label id="name">อำเภอ: </label></td>
+                <td><label id="answer">ลำลูกกา</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label id="name">รูปภาพสินค้า: </label></td>
+                <td><img src="/Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/img/nike2.png" ></td>
+            </tr>
+
+        </table>
+
         <div style="margin-left: 100px;">
             <button id="goToPreviousPage" style="float:left;" type="button" class="btn btn-warning">ย้อนกลับ</button>
         </div>
