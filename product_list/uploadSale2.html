@@ -85,13 +85,7 @@
         
         <script>
             
-            $(document).ready(function() {
-                var name = localStorage.getItem('pname');
-                var price = localStorage.getItem('price');
-                var cate = localStorage.getItem('cate');
-                //alert(cate);
-                //alert(name);
-            });
+            
             $('#goToNextPage').click(function(){
                 window.location.href = "file:///Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/uploadSale3.html";
                 
@@ -108,13 +102,15 @@
                         var reader = new FileReader();
                         reader.onload = imageIsLoaded;
                     reader.readAsDataURL(this.files[0]);
+                    
                     }
                 });
             });
 
-function imageIsLoaded(e) {
-    $('#myImg').attr('src', e.target.result);
-};
+            function imageIsLoaded(e) {
+                $('#myImg').attr('src', e.target.result);
+//                window.localStorage.setItem("pic",JSON.stringify(e.target.result));
+            };
             
         </script>
         

@@ -72,18 +72,29 @@
   
             });
             
+            var fid = []
             
             $('#yes').click(function(){
-//                $.ajax({
-//                      type: "POST",
-//                      url: 'http://snowywords2.ddns.net:5000/faqfeedback',
-//                      data: {timestamp:1491492379,vote_status:"yes",userID:1006,FAQID:1},
-//                      success: function(data){
-//                          console.log("Post Complete");
-//                      }
-//                });
+               
+                for(var i=0; i < result.length;i++){
+                    fid.push(result.FAQID);
+                }
                 
-                var tempdata = {timestamp:1491492379,vote_status:"yes",userID:1006,FAQID:1}
+                temptime = new Date();
+                timevalue = toString(temptime.getTime());
+                
+                val= {timestamp: timevalue, userID: "1", FAQID:fid,vote:"1"}
+                
+                $.ajax({
+                      type: "POST",
+                      url: 'http://snowywords2.ddns.net:5000/faqfeedback',
+                      data: val,
+                      success: function(data){
+                          console.log("Post Complete");
+                      }
+                });
+                
+//                var tempdata = {timestamp:1491492379,vote_status:"yes",userID:1006,FAQID:1}
                 
 //                var saveData = $.ajax({
 //                      type: 'POST',
@@ -94,21 +105,32 @@
 //                });
 //                saveData.error(function() { alert("Something went wrong"); });
                 
-                $.post("http://snowywords2.ddns.net:5000/faqfeedback",
-                       "tempdata",
-                       function(data) { alert("Save Complete");}
-                );
-        
-                //$.get
-
-                
-            });
+//                $.post("http://snowywords2.ddns.net:5000/faqfeedback",
+//                       "tempdata",
+//                       function(data) { alert("Save Complete");}
+//                );
+//        
+//                //$.get
+//
+//                
+//            });
             
             $('#no').click(function(){
+                
+                for(var i=0; i < result.length;i++){
+                    fid.push(result.FAQID);
+                }
+                
+                temptime = new Date();
+                timevalue = toString(temptime.getTime());
+                
+                val= {timestamp: timevalue, userID: "1", FAQID:fid,vote:"0"}
+                
+                
                 $.ajax({
                       type: "POST",
                       url: 'http://snowywords2.ddns.net:5000/faqfeedback',
-                      data: {timestamp:1491492379,vote_status:"no",userID:1006,FAQID:1},
+                      data: val,
                       success: function(data){
                           console.log("Post Complete");
                       }

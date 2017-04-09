@@ -120,12 +120,14 @@
             <button id="goToNextPage" style="float:right;" type="button" class="btn btn-success" >ไปต่อ</button>
         </div>
         <script>
-            var cate = ""
+            var catearray = ["ไม่ได้เรื่องประเภท","พระเครื่อง","เสื้อผ้า","หนังสือ"]
+            
             $('#goToNextPage').click(function(){
 
                 window.localStorage.setItem("pname",JSON.stringify($('input[name="pname"]').val()));
                 window.localStorage.setItem("price",JSON.stringify($('input[name="price"]').val()));
-                window.localStorage.setItem("price",JSON.stringify(cate));
+                var cate = document.getElementById('categoryChoice').selectedIndex;
+                window.localStorage.setItem("cate",JSON.stringify(catearray[cate]));
                 window.location.href = "file:///Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/uploadSale2.html";
             });
         
