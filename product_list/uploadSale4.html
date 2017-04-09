@@ -83,7 +83,7 @@
             <table class="form-table">
             <tr>
                 <td align='right'><label id="name">ระบุพื้นที่ของสินค้า</label></td>
-                <td><select id="categoryChoice">
+                <td><select id="categoryChoice1">
                 <option value="" disabled selected>เลือกจังหวัด</option>
                 <option value="hurr">กรุงเทพมหานคร</option>
                 <option value="hurr">ปทุมธานี</option>
@@ -92,7 +92,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><select id="categoryChoice">
+                <td><select id="categoryChoice2">
                 <option value="" disabled selected>เลือกอำเภอ</option>
                 <option value="hurr">ลำลูกกา</option>
                 <option value="hurr">ธัณณบุรี</option>
@@ -109,7 +109,18 @@
             <button id="goToNextPage" style="float:right;" type="button" class="btn btn-success">ไปต่อ</button>
         </div>
         <script>
+            var array1 = ["ไม่ได้เลือกจังหวัด","กรุงเทพมหานคร","ปทุมธานี","สมุทรปราการ"]
+            var array2 = ["ไม่ได้เลือกอำเภอ","ลำลูกกา","ธัณญบุรี","เมือง"]
+            
+            
             $('#goToNextPage').click(function(){
+                
+                var cate1 = document.getElementById('categoryChoice1').selectedIndex;
+                window.localStorage.setItem("cate1",JSON.stringify(array1[cate1]));
+                
+                var cate2 = document.getElementById('categoryChoice2').selectedIndex;
+                window.localStorage.setItem("cate2",JSON.stringify(array2[cate2]));
+                
                 window.location.href = "file:///Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/uploadSale5.html";
                 
             });

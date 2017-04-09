@@ -17,7 +17,7 @@
         <script src="./js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/style.css">
         <style>
-             #name{
+             .name{
                 font-size: 150%;
                  text-align-last: right;
                 
@@ -78,31 +78,31 @@
         </div>
         <table class="form-table">
             <tr>
-                <td align='right'><label id="name">ชื่อสินค้า: </label></td>
-                <td ><label id="answer"> รองเท้าnike</label></td>
+                <td align='right'><label class="name">ชื่อสินค้า: </label></td>
+                <td ><label id='pname'> รองเท้าnike</label></td>
             </tr>
             <tr>
-                <td align='right'><label id="name">หมวดสินค้า: </label></td>
-                <td><label id="answer"> รองเท้า</label></td>
+                <td align='right'><label class="name">หมวดสินค้า: </label></td>
+                <td><label id='category'> รองเท้า</label></td>
             </tr>
             <tr>
-                <td align='right'><label id="name">ราคาสินค้า: </label></td>
-                <td><label id="answer"> 106บาท</label></td>
+                <td align='right'><label class="name">ราคาสินค้า: </label></td>
+                <td><label id='price'> 106บาท</label></td>
             </tr>
             <tr>
-                <td align='right'><label id="name">รายละเอียดสินค้า: </label></td>
-                <td><label id="answer"> ก็รองเท้า</label></td>
+                <td align='right'><label class="name">รายละเอียดสินค้า: </label></td>
+                <td><label id='detail'> ก็รองเท้า</label></td>
             </tr>
             <tr>
-                <td align='right'><label id="name">จังหวัด: </label></td>
-                <td><label id="answer">ปทุมธานี</label></td>
+                <td align='right'><label class="name">จังหวัด: </label></td>
+                <td><label id="category1">ปทุมธานี</label></td>
             </tr>
             <tr>
-                <td align='right'><label id="name">อำเภอ: </label></td>
-                <td><label id="answer">ลำลูกกา</label></td>
+                <td align='right'><label class="name">อำเภอ: </label></td>
+                <td><label id="category2">ลำลูกกา</label></td>
             </tr>
             <tr>
-                <td align='right'><label id="name">รูปภาพสินค้า: </label></td>
+                <td align='right'><label class="name">รูปภาพสินค้า: </label></td>
                 <td><img src="/Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/img/nike2.png" ></td>
             </tr>
 
@@ -115,6 +115,26 @@
             <button id="goToNextPage" style="float:right;" type="button" class="btn btn-success">ไปต่อ</button>
         </div>
         <script>
+            
+            
+            $(document).ready(function() {
+                var pname = localStorage.getItem('pname');
+                var price = localStorage.getItem('price');
+                var cate = localStorage.getItem('cate');
+                var cate1 = localStorage.getItem('cate1');
+                var cate2 = localStorage.getItem('cate2');
+                var detail = localStorage.getItem('pdetail');
+//                var pic = localStorage.getItem('pic');
+                document.getElementById('pname').innerHTML = pname.substr(1,pname.length-2);
+                document.getElementById('price').innerHTML = price.substr(1,price.length-2);
+                document.getElementById('category').innerHTML = cate.substr(1,cate.length-2);
+                document.getElementById('category1').innerHTML = cate1.substr(1,cate1.length-2);
+                document.getElementById('category2').innerHTML = cate2.substr(1,cate2.length-2);
+                document.getElementById('detail').innerHTML = detail.substr(1,detail.length-2);
+//                console.log(pic);
+            });
+            
+            
             $('#goToNextPage').click(function(){
                 window.location.href = "file:///Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/uploadSale6.html";
                 
