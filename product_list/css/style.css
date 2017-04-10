@@ -3,9 +3,9 @@ body {
 	padding-top: 80px;
 }
 
-* {
+/** {
   border-radius: 0 !important;
-}
+}*/
 
 .nav ul{
 	margin:0;
@@ -153,8 +153,12 @@ ul, menu, dir {
 
 .verify-stat-text {
 		text-align:center;
-		font-size: 50px;
+		font-size: 30px;
 		height: 150px;
 		line-height: 150px;
 		color:#4d6ac8;"
+}
+
+.verify-row > div{
+	margin-right:100px;
 }
