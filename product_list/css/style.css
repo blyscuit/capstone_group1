@@ -150,3 +150,11 @@ ul, menu, dir {
     -webkit-margin-end: 0px;
     -webkit-padding-start: 40px;
 }
+
+.verify-stat-text {
+		text-align:center;
+		font-size: 50px;
+		height: 150px;
+		line-height: 150px;
+		color:#4d6ac8;"
+}
