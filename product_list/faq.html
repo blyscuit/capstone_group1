@@ -49,7 +49,7 @@
         
         <script>
             var result = []
-            
+            var faqid = []
             $(document).ready(function() {
                 var num = localStorage.getItem('click');
                 var cate = 'Category' + num
@@ -60,7 +60,9 @@
                 console.log(jQuery.type(result));
                 document.getElementById('title').textContent = topic;    
                 
+                
                   for(var i=0; i < result.length;i++){
+                      faqid.push(result[i].FAQID)
                      console.log(result[i]);
                     $('#textAndPic').append('<div class="col-md-12"><h4>'+result[i].Detail+'</h4></div>');
                       for(var j=0; j < result[i].FAQImage.length;j++){
@@ -71,71 +73,40 @@
                 }
   
             });
-            
-            var fid = []
+            var t = new Date()
             
             $('#yes').click(function(){
-               
-                for(var i=0; i < result.length;i++){
-                    fid.push(result.FAQID);
-                }
                 
-                temptime = new Date();
-                timevalue = toString(temptime.getTime());
-                
-                val= {timestamp: timevalue, userID: "1", FAQID:fid,vote:"1"}
-                
+                datatosenty = '{"timestamp":' + String(t.getTime()).substr(0,10) + ', "vote_status":' + 1 + ', "userID":' + 1 + ', "FAQID":[' + faqid + ']}'
+                console.log(typeof(datatosenty));
                 $.ajax({
-                      type: "POST",
+                      type: 'POST',
                       url: 'http://snowywords2.ddns.net:5000/faqfeedback',
-                      data: val,
+                      data: datatosenty,
+                      dataType:'json',    
+                      contentType: "application/json",
                       success: function(data){
-                          console.log("Post Complete");
+                          
+                          console.log(datatosenty);
                       }
                 });
+
                 
-//                var tempdata = {timestamp:1491492379,vote_status:"yes",userID:1006,FAQID:1}
-                
-//                var saveData = $.ajax({
-//                      type: 'POST',
-//                      url: "http://snowywords2.ddns.net:5000/faqfeedback",
-//                      data: tempdata,
-////                      dataType: "text",
-//                      success: function(resultData) { alert("Save Complete") }
-//                });
-//                saveData.error(function() { alert("Something went wrong"); });
-                
-//                $.post("http://snowywords2.ddns.net:5000/faqfeedback",
-//                       "tempdata",
-//                       function(data) { alert("Save Complete");}
-//                );
-//        
-//                //$.get
-//
-//                
-//            });
+            });
             
             $('#no').click(function(){
-                
-                for(var i=0; i < result.length;i++){
-                    fid.push(result.FAQID);
-                }
-                
-                temptime = new Date();
-                timevalue = toString(temptime.getTime());
-                
-                val= {timestamp: timevalue, userID: "1", FAQID:fid,vote:"0"}
-                
-                
+                datatosentn = '{"timestamp":' + String(t.getTime()).substr(0,10) + ', "vote_status":' + 0 + ', "userID":' + 1 + ', "FAQID":[' + faqid + ']}'
+                console.log(typeof(datatosentn));
                 $.ajax({
-                      type: "POST",
+                      type: 'POST',
                       url: 'http://snowywords2.ddns.net:5000/faqfeedback',
-                      data: val,
+                      data: datatosentn,
+                      dataType:'json',    
+                      contentType: "application/json",
                       success: function(data){
-                          console.log("Post Complete");
+                          console.log(datatosentn);
                       }
                 });
-                
             });
             
 
