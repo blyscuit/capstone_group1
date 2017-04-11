@@ -162,3 +162,37 @@ ul, menu, dir {
 .verify-row > div{
 	margin-right:100px;
 }
+
+.verify-result-text {
+	margin-top: 50px;
+	text-align:center;
+	font-size: 45px;
+	color:#4d6ac8;"
+}
+
+.verify-title {
+	text-align:center;
+	font-size: 35px;
+	color:#4d6ac8;"
+}
+
+.verify-sub-container {
+	margin-top: 30px;
+}
+
+.verify-subtitle {
+	font-size: 20px;
+	color:#DA1C1C;
+	margin-left: 200px;
+}
+
+.upload-container{
+	margin-top: 50px;
+}
+
+.verify-example-text{
+	text-align:center;
+	font-size: 35px;
+	color:#4d6ac8;
+	margin-top:10px;
+}
