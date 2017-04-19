@@ -103,7 +103,7 @@
             </tr>
             <tr>
                 <td align='right'><label class="name">รูปภาพสินค้า: </label></td>
-                <td><img src="/Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/img/nike2.png" ></td>
+                <td><img id="myImg" src="" ></td>
             </tr>
 
         </table>
@@ -124,6 +124,7 @@
                 var cate1 = localStorage.getItem('cate1');
                 var cate2 = localStorage.getItem('cate2');
                 var detail = localStorage.getItem('pdetail');
+                var pic = localStorage.getItem('pic');
 //                var pic = localStorage.getItem('pic');
                 document.getElementById('pname').innerHTML = pname.substr(1,pname.length-2);
                 document.getElementById('price').innerHTML = price.substr(1,price.length-2);
@@ -131,17 +132,18 @@
                 document.getElementById('category1').innerHTML = cate1.substr(1,cate1.length-2);
                 document.getElementById('category2').innerHTML = cate2.substr(1,cate2.length-2);
                 document.getElementById('detail').innerHTML = detail.substr(1,detail.length-2);
+                $('#myImg').attr('src', JSON.parse(pic));
 //                console.log(pic);
             });
             
             
             $('#goToNextPage').click(function(){
-                window.location.href = "file:///Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/uploadSale6.html";
+                window.location.href = "./uploadSale6.html";
                 
             });
         
             $('#goToPreviousPage').click(function(){
-                window.location.href = "file:///Users/PantiraSuttipongkanasai/Documents/capstone_group1/product_list/uploadSale4.html";
+                window.location.href = "./uploadSale4.html";
                 
             });
         </script>
