@@ -171,7 +171,6 @@ ul, menu, dir {
 }
 
 .verify-title {
-	text-align:center;
 	font-size: 35px;
 	color:#4d6ac8;"
 }
@@ -183,7 +182,7 @@ ul, menu, dir {
 .verify-subtitle {
 	font-size: 20px;
 	color:#DA1C1C;
-	margin-left: 200px;
+	margin-left: 50px;
 }
 
 .upload-container{
