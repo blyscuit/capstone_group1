@@ -30,12 +30,37 @@
   <link rel="stylesheet" type="text/css" href="//assets.kaidee.com/blackpearl/ff8cf73f8638040cc0f30e2cf8980588/stylesheets/style.css" />
   <link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/1.6/appboy.min.css" />
 -->
-
+    <style>
+          * {
+                margin: 0;
+            }
+            html, body {
+                height: 100%;
+            }
+            
+             .wrapper {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
+            }
+            .footerr{
+                height: 55px; /* .push must be the same height as .footer */
+                background: #efefef;
+                text-indent: 20px;
+                vertical-align: middle;
+            }
+            .push{
+                height: 80px; /* .push must be the same height as .footer */
+            }
+    
+    
+    </style>
 
 </head>
 
 <body>
-
+<div class="wrapper">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
@@ -81,6 +106,12 @@
       </div>
     </div>
   </div>
+</div>  
+</div>      
+        <div class="push"></div>
+        <div class="footerr">
+            <a href="./help.html"><h3 id='openfaq' style="line-height:50px; height:50px;">FAQ</h3></a>
+        </div>      
 
  <script>
         $('#btnsell').click(function(){

@@ -48,6 +48,7 @@
                   padding: 3px;
                   background-color: #efefef;
                   text-align: left;
+                    z-index: 99;
             }
             #openfaq{
                 align-content: center;
@@ -61,8 +62,7 @@
     <body>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            
+        <nav class="navbar navbar-default navbar-fixed-top">    
 		<div class="container">
 			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
 			<img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon">
@@ -132,9 +132,10 @@
         <div style="margin-right: 100px;">
             <button id="goToNextPage" style="float:right;" type="button" class="btn btn-success" >ไปต่อ</button>
         </div>
-        <div class="footer">
-            <a><h3 id='openfaq'>FAQ</h3></a>
-        </div>
+    
+        <footer class="footer">
+            <a href="./help.html"><h3 id='openfaq'>FAQ</h3></a>
+        </footer>
         
         <script>
             var catearray = ["ไม่ได้เรื่องประเภท","พระเครื่อง","เสื้อผ้า","หนังสือ"]
@@ -150,9 +151,7 @@
             function getSelected(sel){
                 cate = sel.options[sel.selectedIndex].text;
             }    
-            $('#openfaq').click(function(){
-                window.localtion.href="./uploadSale2.html";
-            });
+
             
         </script>
     </body>

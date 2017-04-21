@@ -40,14 +40,38 @@
                 max-height: 300px;
                 max-width: 500px
             }
+  
+           
+             * {
+                margin: 0;
+            }
+            html, body {
+                height: 100%;
+            }
             
+             .wrapper {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
+            }
+            .footerr{
+                height: 55px; /* .push must be the same height as .footer */
+                background: #efefef;
+                text-indent: 20px;
+                vertical-align: middle;
+            }
+            .push{
+                height: 80px; /* .push must be the same height as .footer */
+            }
+
         </style>
     </head>
     <body>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+        <div class="wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top">  
 		<div class="container">
 			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
 			<img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon">
@@ -60,6 +84,7 @@
 			</div>
 		</div>
 	    </nav>
+        
         <div class="container" >
             <div class="row" >
                 <div class="col-md-1 ">
@@ -120,6 +145,12 @@
         <div style="margin-right: 100px;">
             <button id="goToNextPage" style="float:right;" type="button" class="btn btn-success">ไปต่อ</button>
         </div>
+        </div>
+        <div class="push"></div>
+        <div class="footerr">
+            <a href="./help.html" id='openfaq'><h3 style="line-height:50px; height:50px;">FAQ</h3></a>
+        </div>
+        
         <script>
             
             

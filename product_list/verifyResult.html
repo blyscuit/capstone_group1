@@ -30,12 +30,29 @@
 		<link rel="stylesheet" type="text/css" href="//assets.kaidee.com/blackpearl/ff8cf73f8638040cc0f30e2cf8980588/stylesheets/style.css" />
     <link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/1.6/appboy.min.css" />
 		-->
-
+      <style>
+            .footer {
+                  position: absolute;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                  padding: 3px;
+                  background-color: #efefef;
+                  text-align: left;
+                    z-index: 99;
+            }
+            #openfaq{
+                align-content: center;
+                margin-left: 10px;
+                
+            }
+    
+    </style>
 
 </head>
 
 <body>
-
+    <div class="wrapper">
     <nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
@@ -61,7 +78,10 @@
       </div>
 		</div>
 	</div>
-
+    </div>
+        <div class="footer">
+            <a href="./help.html"><h3 id='openfaq'>FAQ</h3></a>
+        </div>
  <script>
         $('#btnsell').click(function(){
                 window.location.href = "./uploadSale1.html";
