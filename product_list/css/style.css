@@ -156,7 +156,13 @@ ul, menu, dir {
 		font-size: 30px;
 		height: 150px;
 		line-height: 150px;
-		color:#4d6ac8;"
+		color:#4d6ac8;
+}
+
+.verify-level-text {
+	text-align:center;
+	font-size: 30px;
+	color:#4d6ac8;
 }
 
 .verify-row > div{
@@ -195,3 +201,4 @@ ul, menu, dir {
 	color:#4d6ac8;
 	margin-top:10px;
 }
+
