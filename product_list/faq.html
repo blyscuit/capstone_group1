@@ -16,10 +16,40 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="./js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <style>
+            
+             * {
+                margin: 0;
+            }
+            html, body {
+                height: 100%;
+            }
+            
+             .wrapper {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
+            }
+            .footerr{
+                height: 55px; /* .push must be the same height as .footer */
+                background: #efefef;
+                text-indent: 20px;
+                vertical-align: middle;
+            }
+            .push{
+                height: 80px; /* .push must be the same height as .footer */
+            }
+        
+        
+        </style>
+        
     </head>
     <body>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <div class="wrapper">
+        
         <nav class="navbar navbar-default navbar-fixed-top">
          
 		<div class="container">
@@ -41,15 +71,21 @@
                 </div>
             </div>
         </div>
-        <div style="text-align: center;">
+        <div style="text-align: center;" id="vote">
             <label>คุณคิดว่าข้อมูลนี้มีประโยชน์หรือไม่</label><br>
             <button id="yes">มีประโยชน์</button>
             <button id="no">ไม่มีประโยชน์</button>
+        </div>
+        </div>
+         <div class="push"></div>
+        <div class="footerr">
+            <a href="./help.html" id='openfaq'><h3 style="line-height:50px; height:50px;">FAQ</h3></a>
         </div>
         
         <script>
             var result = []
             var faqid = []
+            var userID = ''
             $(document).ready(function() {
                 var num = localStorage.getItem('click');
                 var cate = 'Category' + num
@@ -71,42 +107,70 @@
                     
                     //$('#textAndPic').append('<div class="col-md-12"><p>'+result[i].Detail+'</p></div>');
                 }
+                
+                $.getJSON('http://snowywords2.ddns.net:5000/session_data', function(data) {
+                   
+                    
+                    if(data == 404){
+                        userID = null;
+                    }else{
+                        userID = data.UserID
+                    }
+                    
+                });
+                
+                
   
             });
             var t = new Date()
             
             $('#yes').click(function(){
+                if(userID == null){
+                    alert('Please Log-In');
+                }else{
                 
-                datatosenty = '{"timestamp":' + String(t.getTime()).substr(0,10) + ', "vote_status":' + 1 + ', "userID":' + 1 + ', "FAQID":[' + faqid + ']}'
-                console.log(typeof(datatosenty));
-                $.ajax({
-                      type: 'POST',
-                      url: 'http://snowywords2.ddns.net:5000/faqfeedback',
-                      data: datatosenty,
-                      dataType:'json',    
-                      contentType: "application/json",
-                      success: function(data){
-                          
-                          console.log(datatosenty);
-                      }
-                });
+                    datatosenty = '{"timestamp":' + String(t.getTime()).substr(0,10) + ', "vote_status":' + 1 + ', "userID":' + userID + ', "FAQID":[' + faqid + ']}'
+                    console.log(typeof(datatosenty));
+                    $.ajax({
+                          type: 'POST',
+                          url: 'http://snowywords2.ddns.net:5000/faqfeedback',
+                          data: datatosenty,
+                          dataType:'json',    
+                          contentType: "application/json",
+                          success: function(data){
 
+                              console.log(datatosenty);
+                              $('#yes').remove();
+                              $('#no').remove();
+                              $('#vote').append('<label>คุณได้ทำการโหวดเรียบร้อยแล้ว</label>');
+                          }
+                    });
+                }
                 
             });
             
             $('#no').click(function(){
-                datatosentn = '{"timestamp":' + String(t.getTime()).substr(0,10) + ', "vote_status":' + 0 + ', "userID":' + 1 + ', "FAQID":[' + faqid + ']}'
-                console.log(typeof(datatosentn));
-                $.ajax({
-                      type: 'POST',
-                      url: 'http://snowywords2.ddns.net:5000/faqfeedback',
-                      data: datatosentn,
-                      dataType:'json',    
-                      contentType: "application/json",
-                      success: function(data){
-                          console.log(datatosentn);
-                      }
-                });
+                
+                if(userID == null){
+                     alert('Please Log-In');
+                }else{
+                    datatosentn = '{"timestamp":' + String(t.getTime()).substr(0,10) + ', "vote_status":' + 0 + ', "userID":' + userID + ', "FAQID":[' + faqid + ']}'
+                    console.log(typeof(datatosentn));
+                    $.ajax({
+                          type: 'POST',
+                          url: 'http://snowywords2.ddns.net:5000/faqfeedback',
+                          data: datatosentn,
+                          dataType:'json',    
+                          contentType: "application/json",
+                          success: function(data){
+                              console.log(datatosentn);
+                              $('#yes').remove();
+                              $('#no').remove();
+                              $('#vote').append('<label>คุณได้ทำการโหวดเรียบร้อยแล้ว</label>');
+                          }
+                    });
+                    
+                }
             });
             
 
