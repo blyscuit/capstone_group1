@@ -81,7 +81,7 @@
 				ระดับการยืนยันตัวตนปัจจุบันของคุณ
 			</div>
 			<div class="col-md-6" style="text-align:center;">
-				<img style='height: 100%; width: 100%; object-fit: contain' src="img/verifyStat.png">
+				<img id="verify-show" style='height: 100%; width: 100%; object-fit: contain' src="img/Level0.png">
 
 			</div>
 		</div>
@@ -99,8 +99,8 @@
 				</div>
 				<div class="bottom-row" style="margin-top:25px; text-align:center;">
 					<a href="./verifyLevel1.html">
-						<div class="bottom-button" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:orange; color:white; font-size:25px; height:50px; line-height:50px; ">
-							แก้ไขข้อมูล
+						<div id="level-1-button" class="bottom-button" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58; color:white; font-size:25px; height:50px; line-height:50px; ">
+							เพิ่ม
 						</div>
 					</a>
 				</div>
@@ -116,8 +116,8 @@
 				</div>
 				<div class="bottom-row" style="margin-top:25px; text-align:center;">
 					<a href="./verifyLevel2.html">
-						<div class="bottom-button" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:orange; color:white; font-size:25px; height:50px; line-height:50px; ">
-							แก้ไขข้อมูล
+						<div id="level-2-button" class="bottom-button" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58; color:white; font-size:25px; height:50px; line-height:50px; ">
+							เพิ่ม
 						</div>
 					</a>
 				</div>
@@ -133,8 +133,8 @@
 				</div>
 				<div class="bottom-row" style="margin-top:25px; text-align:center;">
 					<a href="./verifyLevel3.html">
-						<div class="bottom-button" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:orange; color:white; font-size:25px; height:50px; line-height:50px; ">
-							แก้ไขข้อมูล
+						<div id="level-3-button" class="bottom-button" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58; color:white; font-size:25px; height:50px; line-height:50px; ">
+							เพิ่ม
 						</div>
 					</a>
 				</div>
@@ -145,12 +145,56 @@
         <div class="footerr">
             <a href="./help.html"><h3 id='openfaq' style="line-height:50px; height:50px;">FAQ</h3></a>
         </div>
- <script>
-        $('#btnsell').click(function(){
-                window.location.href = "./uploadSale1.html";
 
-        });
-    </script>
+		<script>
+
+		$(document).ready(function(){
+			$.get(`http://snowywords2.ddns.net:5000/session_data`, function(data, status){
+					console.log(data);
+					var displayName = data.Display_name;
+					var email = data.Email;
+					var firstName = data.Firstname;
+					var lastName = data.Lastname;
+					var Postcode = data.Postcode;
+					var profilePic = data.ProfilePic;
+					var vlevel = data.VLevel;
+						  // "Firstname": "a",
+						  // "Lastname": "a",
+						  // "Postcode": "11111",
+						  // "ProfilePic": "pic5",
+						  // "VLevel": 2
+					switch (vlevel) {
+						case 1:
+							$("#verify-show").attr('src',"img/Level1.png");
+							$("#level-1-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							break;
+						case 2:
+							$("#verify-show").attr('src',"img/Level2.png");
+							$("#level-1-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							$("#level-2-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							break;
+						case 3:
+							$("#verify-show").attr('src',"img/Level3.png");
+							$("#level-1-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							$("#level-2-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							$("#level-3-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							break;
+						default:
+							console.log("ERROR getting verification level");
+
+					}
+			});
+
+		});
+
+		        $('#btnsell').click(function(){
+		                window.location.href = "./uploadSale1.html";
+
+		        });
+
+
+
+		</script>
 
 
 </body>
