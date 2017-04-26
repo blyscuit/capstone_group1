@@ -167,7 +167,10 @@
                               $('#yes').remove();
                               $('#no').remove();
                               $('#vote').append('<label>คุณได้ทำการโหวดเรียบร้อยแล้ว</label>');
-                          }
+                          },
+                         error : function(data){
+                             alert("Please try again and check you internet connection");
+                         }
                     });
                     
                 }
