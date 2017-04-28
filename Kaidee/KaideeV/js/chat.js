@@ -348,6 +348,7 @@ function getSession(){
 }
 
 function startChat(itemID){
+  console.log('create new chat for'+itemID)
     $.ajax({
         type: 'GET',
         url: './start_chat/' + itemID,

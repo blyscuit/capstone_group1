@@ -92,7 +92,7 @@
 		            	<span id="price" class="price-mb">3,800</span>
 					</li>
 		            <li>
-                <span class="call-to-buyer">คุยกับผู้ขาย</span>
+                <span class="call-to-buyer" id='createNewChat' style="cursor:nw-resize">คุยกับผู้ขาย</span>
 					</li>
 		            <li>
                 <span class="call-to-buyer">กดดูเบอร์โทรผู้ขาย</class>
@@ -148,7 +148,7 @@
 			 <div class="footerr">
 					 <a href="./help"><h3 id='openfaq' style="line-height:50px; height:50px;">FAQ</h3></a>
 			 </div>
-			 
+
 <!-- CHAT UI -->
 <div class="container">
 		<div class="row chat-window col-xs-10 col-md-3" id="chat_window_1">
@@ -249,7 +249,9 @@ $('#btnsell').click(function(){
 				window.location.href = "./upload_sale_1";
 
 });
-
+$('#createNewChat').click(function(){
+				startChat($(document).getUrlParam("id"));
+});
 
 
 </script>
