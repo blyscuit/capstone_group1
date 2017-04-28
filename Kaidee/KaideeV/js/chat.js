@@ -1,5 +1,4 @@
 // //FOR TESTING ONLY
-UserID = null;
 // USERNAME = "Newy";
 
 //DO NOT DELETE THIS
@@ -8,9 +7,10 @@ latestMessage = 0;
 chatIDAvaiable = [];
 notiDict = {};
 
-getSession();
 
 $(document).ready(function() {
+var UserID = null;
+getSession();
     //document.getElementById('#minim_chat_window').click();
     $("#notification").hide();
     $('#chatpage, #to_contact').hide();
@@ -121,6 +121,7 @@ function getDealInfo(ItemID){
             ItemID: ItemID
          },
          success: function(response){
+           console.log("getting deal:"+ItemID);
             $('#contactpage').hide();
             $('#chatpage, #to_contact').fadeIn();
             $(".msg_container_base").empty();
@@ -287,7 +288,7 @@ function countUnread(chatid){
         success: function(response){
             for(var i = 0; i < response.length; i++){
                 if(response != 'No data found at the index'){
-                    if(UserID = response[i].SenderID){
+                    if(UserID == response[i].SenderID){
                         if(notiDict["noti_chat_"+chatid] != response[i].UnreadQty){
                             notiDict["noti_chat_"+chatid] = response[i].UnreadQty;
                         }
@@ -329,9 +330,11 @@ function getSession(){
   $.getJSON('./session_data', function(data) {
   // $.getJSON('http://localhost:5000/session_data', function(data) {
       if(data == 404){
+      console.log("no user:"+UserID);
           UserID = null;
       }else{
           UserID = data.UserID;
+          console.log("get user: "+UserID);
           USERNAME = data.Display_name;
           getDealList(UserID);
           console.log(UserID);
@@ -348,15 +351,20 @@ function getSession(){
 }
 
 function startChat(itemID){
-  console.log('create new chat for'+itemID)
+  console.log('create new chat for'+itemID+""+UserID)
     $.ajax({
         type: 'GET',
         url: './start_chat/' + itemID,
         success: function(response){
+          if(response==404||response==404){
+            alert('Please try again.');
+          }else{
             newChatID = response[0].ChatID;
+              console.log("new chat"+newChatID);
             $("#itemList").empty();
             getDealList(UserID);
-            getDealInfo(newChatID);
+            getDealInfo(itemID);
+          }
         },
         error: function(){
 
