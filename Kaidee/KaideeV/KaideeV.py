@@ -284,30 +284,28 @@ def view_product(ItemID):
 
 # ========================= Chat System =========================
 
-@app.route('/get_deal_list/<int:UserID>', methods=['GET'])
-def get_deal_list(UserID):
+@app.route('/get_deal_list', methods=['GET'])
+def get_deal_list():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return ('Cannot load data: user is not logged in')
+    userID = json.loads(session.get('udata'))[0].get('UserID')
     cur = mysql.get_db().cursor()
     cur2 = mysql.get_db().cursor()
-    query_string = "SELECT ItemID, Name as ItemName, Description as ItemDescription, Display_name  \
-                   FROM item i, user u \
-                   WHERE i.UserID_i = '{UserID}' AND i.UserID_i = u.UserID".format(UserID=UserID)
+    query_string = "SELECT ItemID, Name AS ItemName, Description AS ItemDescription, Display_name, BuyerID_c AS BuyerID, \
+                    SellerID_c AS SellerID, ChatID FROM item i, user u, chat c \
+                    WHERE i.ItemID = c.ItemID_c AND u.UserID = " + str(userID) + " AND (c.BuyerID_c = " + str(userID) + " \
+                    OR c.SellerID_c = " + str(userID) + ")"
     cur.execute(query_string)
     columns = [column[0] for column in cur.description]
     results = []
     columns.append('ItemImage')
-    columns.append('ChatID')
     for row in cur.fetchall():
         itemID = row[0]
         row = list(row)
         query_string_2 = "SELECT ItemImage FROM itempicture WHERE ItemID_ip=" + str(itemID)
         cur2.execute(query_string_2)
         row.append(cur2.fetchall()[0][0])
-        query_string_2 = "SELECT ChatID FROM chat WHERE ItemID_c=" + str(itemID)
-        cur2.execute(query_string_2)
-        chats = []
-        for i in cur2.fetchall():
-            chats.append(i[0])
-        row.append(chats)
         results.append(dict(zip(columns, row)))
     if len(results)>0:
         return jsonify(results)
@@ -318,6 +316,9 @@ def get_deal_list(UserID):
 
 @app.route('/get_deal_info/<int:ChatID>', methods=['GET'])
 def get_deal_info(ChatID):
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return ('Cannot load data: user is not logged in')
     cur = mysql.get_db().cursor()
     cur2 = mysql.get_db().cursor()
     query_string = "SELECT ItemID, Name AS ItemName, Description AS ItemDescription, BuyerID_c AS BuyerID, SellerID_c AS SellerID, \
@@ -343,6 +344,9 @@ def get_deal_info(ChatID):
 
 @app.route('/get_message_history/<int:ChatID>', methods=['GET'])
 def get_message_history(ChatID):
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return ('Cannot load data: user is not logged in')
     cur = mysql.get_db().cursor()
     query_string = "SELECT * FROM message WHERE ChatID_m = '{ChatID}' ORDER BY MessageID DESC".format(ChatID=ChatID)
     cur.execute(query_string)
@@ -359,6 +363,9 @@ def get_message_history(ChatID):
 
 @app.route('/get_latest_msg/<int:ChatID>', methods=['GET'])
 def get_latest_msg(ChatID):
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return ('Cannot load data: user is not logged in')
     cur = mysql.get_db().cursor()
     query_string = "SELECT * FROM message WHERE ChatID_m = '{ChatID}' AND IsRead = 0 ORDER BY MessageID DESC".format(ChatID=ChatID)
     cur.execute(query_string)
@@ -375,6 +382,9 @@ def get_latest_msg(ChatID):
 
 @app.route('/count_unread/<int:ChatID>', methods=['GET'])
 def count_unread(ChatID):
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return ('Cannot load data: user is not logged in')
     cur = mysql.get_db().cursor()
     query_string = "SELECT COUNT(MessageID) AS UnreadQty, SenderID FROM message \
                     WHERE ChatID_m = '{ChatID}' AND IsRead = 0 GROUP BY SenderID".format(ChatID=ChatID)
@@ -392,6 +402,9 @@ def count_unread(ChatID):
 
 @app.route('/send_message', methods=['POST'])
 def send_message():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return ('Cannot post data: user is not logged in')
     data = request.get_json()
     db = mysql.get_db()
     cur = db.cursor()
@@ -411,6 +424,10 @@ def send_message():
 
 @app.route('/set_as_read', methods=['POST'])
 def set_as_read():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return ('Cannot post data: user is not logged in')
+    userID = json.loads(session.get('udata'))[0].get('UserID')
     data = request.get_json()
     db = mysql.get_db()
     cur = db.cursor()
@@ -429,8 +446,8 @@ def set_as_read():
 @app.route('/start_chat/<int:itemID>', methods=['GET'])
 def start_chat(itemID):
     if not session.get('logged_in'):
-        print ('Not logged in : redirect to login page')
-        return redirect('/loginpage')
+        print('Not logged in!')
+        return ('Cannot load data: user is not logged in')
     userID = json.loads(session.get('udata'))[0].get('UserID')
     db = mysql.get_db()
     cur = db.cursor()
@@ -546,36 +563,48 @@ def get_verification():
 
 @app.route('/unverified', methods=['GET'])
 def getUnverified():
-	cur = mysql.get_db().cursor()
-	query_string = "SELECT VerificationID, VLevel, VPicture, Status, OTP, UserID_v as UserID FROM kaidee.verification WHERE Status = 0"
-	cur.execute(query_string)
-	cur.execute(query_string)
-	columns = [column[0] for column in cur.description]
-	results = []
-	for row in cur.fetchall():
-		results.append(dict(zip(columns, row)))
-	if len(results)>0:
-		return jsonify(results)
-	else:
-		print('No data found at the index')
-		return ('404')
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return ('Cannot load data: user is not logged in')
+    if json.loads(session.get('udata'))[0].get('Email') != "admin@admin.com":
+        print('Access Denied')
+        return ('Cannot load data: user is unauthorized')
+    cur = mysql.get_db().cursor()
+    query_string = "SELECT VerificationID, VLevel, VPicture, Status, OTP, UserID_v as UserID FROM kaidee.verification WHERE Status = 0"
+    cur.execute(query_string)
+    cur.execute(query_string)
+    columns = [column[0] for column in cur.description]
+    results = []
+    for row in cur.fetchall():
+        results.append(dict(zip(columns, row)))
+    if len(results)>0:
+        return jsonify(results)
+    else:
+        print('No data found at the index')
+        return ('404')
 
 
 @app.route('/verify', methods=['POST'])
 def verify():
-	data = request.get_json()
-	db = mysql.get_db()
-	cur = db.cursor()
-	try:
-		query_string = "UPDATE verification SET status =" +str(data.get('Status')) + " WHERE VerificationID = " + str(data.get('VerificationID'))
-		cur.execute(query_string)
-		db.commit()
-		print("Update data success")
-		return ('201')
-	except:
-		print("Update data failed")
-		db.rollback()
-		return ('403')
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return ('Cannot post data: user is not logged in')
+    if json.loads(session.get('udata'))[0].get('Email') != "admin@admin.com":
+        print('Access Denied')
+        return ('Cannot post data: user is unauthorized')
+    data = request.get_json()
+    db = mysql.get_db()
+    cur = db.cursor()
+    try:
+        query_string = "UPDATE verification SET status =" +str(data.get('Status')) + " WHERE VerificationID = " + str(data.get('VerificationID'))
+        cur.execute(query_string)
+        db.commit()
+        print("Update data success")
+        return ('201')
+    except:
+        print("Update data failed")
+        db.rollback()
+        return ('403')
 
 
 # ========================= Page Hosting =========================
@@ -590,13 +619,16 @@ def loginpage():
         return "Hello " + data.get('Display_name') + "! <a href='/logout'>Logout</a>"
 
 
-@app.route('/verification_upload')
-def verification_upload():
-    return render_template('verificationUpload.html')
+# @app.route('/verification_upload')
+# def verification_upload():
+#     return render_template('verificationUpload.html')
 
 
 @app.route('/verify_admin')
 def verify_admin():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     if json.loads(session.get('udata'))[0].get('Email') == "admin@admin.com":
         return render_template('VerifyAdmin.html')
     else:
@@ -606,26 +638,41 @@ def verify_admin():
 
 @app.route('/verification')
 def verification():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('verifyMain.html')
 
 
 @app.route('/verification_1')
 def verification1():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('verifyLevel1.html')
 
 
 @app.route('/verification_2')
 def verification2():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('verifyLevel2.html')
 
 
 @app.route('/verification_3')
 def verification3():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('verifyLevel3.html')
 
 
 @app.route('/verification_result')
 def verification_result():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('verifyResult.html')
 
 
@@ -652,31 +699,49 @@ def faq():
 
 @app.route('/upload_sale_1')
 def uploadsale1():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('uploadSale1.html')
 
 
 @app.route('/upload_sale_2')
 def uploadsale2():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('uploadSale2.html')
 
 
 @app.route('/upload_sale_3')
 def uploadsale3():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('uploadSale3.html')
 
 
 @app.route('/upload_sale_4')
 def uploadsale4():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('uploadSale4.html')
 
 
 @app.route('/upload_sale_5')
 def uploadsale5():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('uploadSale5.html')
 
 
 @app.route('/upload_sale_6')
 def uploadsale6():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
     return render_template('uploadSale6.html')
 
 
