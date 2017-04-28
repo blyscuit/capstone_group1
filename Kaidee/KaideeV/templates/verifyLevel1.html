@@ -110,8 +110,9 @@
 </div>
 
 <form action="./upload" method="post" enctype="multipart/form-data">
-    <input id="fileInput" name="file" type="file" style="display:none;" />
-    <input id="theButton" type="button" value="Upload" />
+   <!-- <input id="fileInput" name="file" type="file"  style="display:none;"> /> -->
+      <input id="fileInput" name="file" type="file" />
+    <input id="theButton" type="submit" name="u_button" value="Upload" />
 </form>
 
         <div class="push"></div>
@@ -126,12 +127,14 @@
                 window.location.href = "./upload_sale_1";
 
         });
-        document.getElementById('file').onclick = function() {
-          document.getElementById('fileInput').click();
-        };
-        document.getElementById('upload').onclick = function() {
-          document.getElementById('theButton').click();
-        };
+        window.onload = function () {
+          document.getElementById('file').onclick = function() {
+            document.getElementById('fileInput').click();
+          };
+          document.getElementById('upload').onclick = function() {
+            document.getElementById('theButton').click();
+          };
+        }
     </script>
 
     <!-- CHAT UI -->
