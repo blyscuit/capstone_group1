@@ -124,8 +124,8 @@ def logout():
 @app.route('/users', methods=['GET'])
 def users():
     if not session.get('logged_in'):
-        print ('Not logged in : redirect to login page')
-        return redirect('/loginpage')
+        print('Not logged in!')
+        return ('Cannot load data: user is not logged in')
     userID = json.loads(session.get('udata'))[0].get('UserID')
     cur = mysql.get_db().cursor()
     cur2 = mysql.get_db().cursor()
@@ -464,6 +464,11 @@ def start_chat(itemID):
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return ('Cannot load data: user is not logged in')
+    userID = json.loads(session.get('udata'))[0].get('UserID')
+    vlevel = request.args.get('vlevel')
     file = request.files['file']
     if not session.get('logged_in'):
         print ("Not logged in")
@@ -486,9 +491,8 @@ def upload():
         cur = mysql.get_db().cursor()
         db = mysql.get_db()
         url = "http://snowywords2.ddns.net:5000" + str(url_for('uploaded_file', filename = unique_filename))
-        userID = json.loads(session.get('udata'))[0].get('UserID')
         query_string = "INSERT INTO verification(Vlevel, VPicture, Status, OTP, UserID_v) \
-                        VALUES (1, \"" + url + "\", 0, " + randomOTP() + ", " + str(userID) +")"
+                        VALUES (" + str(vlevel) + ", \"" + url + "\", 0, " + randomOTP() + ", " + str(userID) +")"
         try:
             cur.execute(query_string)
             db.commit()
@@ -497,7 +501,7 @@ def upload():
             print("Upload failed")
             db.rollback()
 
-        return render_template('result.html')
+        return redirect('/verification_result')
     else:
         print ('Invalid file type')
         return ('403')
