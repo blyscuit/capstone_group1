@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Kaidee || ช่วยเหลือ หัวข้อย่อย</title>
+	    <link rel="shortcut icon" href="./img/web_favicon.png">
+        <!--jQuery-->
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	    <!-- Latest compiled and minified CSS -->
+	    <link rel="stylesheet" href="./css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="./css/bootstrap-theme.min.css" rel="stylesheet">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="./js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <style>
+            
+             * {
+                margin: 0;
+            }
+            html, body {
+                height: 100%;
+            }
+            
+             .wrapper {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
+            }
+            .footerr{
+                height: 55px; /* .push must be the same height as .footer */
+                background: #efefef;
+                text-indent: 20px;
+                vertical-align: middle;
+            }
+            .push{
+                height: 80px; /* .push must be the same height as .footer */
+            }
+        
+        
+        </style>
+        
+    </head>
+    <body>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <div class="wrapper">
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+         
+		<div class="container">
+			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
+			<img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon" id="logokaidee">
+			<!-- <a class="navbar-brand" href="#">Kaidee</a> -->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="http://snowywords2.ddns.net:7777/kaidee">แก้ไขข้อมูลผู้ขาย</a></li>
+					<li><button id="btnsell" type="button" class="btn btn-warning">ขาย</button></li>
+				</ul>
+			</div>
+		</div>
+	    </nav>
+        <div class="container">
+            <div id="textAndPic" class="row">
+                <div class="col-md-12">
+                    <h1 id='title'></h1>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center;" id="vote">
+            <label>คุณคิดว่าข้อมูลนี้มีประโยชน์หรือไม่</label><br>
+            <button id="yes">มีประโยชน์</button>
+            <button id="no">ไม่มีประโยชน์</button>
+        </div>
+        </div>
+         <div class="push"></div>
+        <div class="footerr">
+            <a href="./help.html" id='openfaq'><h3 style="line-height:50px; height:50px;">FAQ</h3></a>
+        </div>
+        
+        <script>
+            var result = []
+            var faqid = []
+            var userID = ''
+            $(document).ready(function() {
+                var num = localStorage.getItem('click');
+                var cate = 'Category' + num
+                var temp = localStorage.getItem('topic');
+                var topic = temp.substr(1,(temp.length)-2);
+                var result = JSON.parse(localStorage.getItem(cate));
+                console.log(result);
+                console.log(jQuery.type(result));
+                document.getElementById('title').textContent = topic;    
+                
+                
+                  for(var i=0; i < result.length;i++){
+                      faqid.push(result[i].FAQID)
+                     console.log(result[i]);
+                    $('#textAndPic').append('<div class="col-md-12"><h4>'+result[i].Detail+'</h4></div>');
+                      for(var j=0; j < result[i].FAQImage.length;j++){
+                          $('#textAndPic').append('<div class="col-md-12"><img src="'+result[i].FAQImage[j]+'"></div>');  
+                      }
+                    
+                    //$('#textAndPic').append('<div class="col-md-12"><p>'+result[i].Detail+'</p></div>');
+                }
+                
+                $.getJSON('http://snowywords2.ddns.net:5000/session_data', function(data) {
+                   
+                    
+                    if(data == 404){
+                        userID = null;
+                    }else{
+                        userID = data.UserID
+                    }
+                    
+                });
+                
+                
+  
+            });
+            var t = new Date()
+            
+            $('#yes').click(function(){
+                if(userID == null){
+                    alert('Please Log-In');
+                }else{
+                
+                    datatosenty = '{"timestamp":' + String(t.getTime()).substr(0,10) + ', "vote_status":' + 1 + ', "userID":' + userID + ', "FAQID":[' + faqid + ']}'
+                    console.log(typeof(datatosenty));
+                    $.ajax({
+                          type: 'POST',
+                          url: 'http://snowywords2.ddns.net:5000/faqfeedback',
+                          data: datatosenty,
+                          dataType:'json',    
+                          contentType: "application/json",
+                          success: function(data){
+
+                              console.log(datatosenty);
+                              $('#yes').remove();
+                              $('#no').remove();
+                              $('#vote').append('<label>คุณได้ทำการโหวดเรียบร้อยแล้ว</label>');
+                          }
+                    });
+                }
+                
+            });
+            
+            $('#no').click(function(){
+                
+                if(userID == null){
+                     alert('Please Log-In');
+                }else{
+                    datatosentn = '{"timestamp":' + String(t.getTime()).substr(0,10) + ', "vote_status":' + 0 + ', "userID":' + userID + ', "FAQID":[' + faqid + ']}'
+                    console.log(typeof(datatosentn));
+                    $.ajax({
+                          type: 'POST',
+                          url: 'http://snowywords2.ddns.net:5000/faqfeedback',
+                          data: datatosentn,
+                          dataType:'json',    
+                          contentType: "application/json",
+                          success: function(data){
+                              console.log(datatosentn);
+                              $('#yes').remove();
+                              $('#no').remove();
+                              $('#vote').append('<label>คุณได้ทำการโหวดเรียบร้อยแล้ว</label>');
+                          },
+                         error : function(data){
+                             alert("Please try again and check you internet connection");
+                         }
+                    });
+                    
+                }
+            });
+            
+               $('#btnsell').click(function(){
+                window.location.href = "./uploadSale1.html";
+
+            });
+            
+            $('#logokaidee').click(function(){
+                window.location.href = "./index.html";
+
+            });
+
+        </script>
+        
+    
+    </body>
+</html>    

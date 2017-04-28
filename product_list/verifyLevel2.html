@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Kaidee || รถ มือสอง, บ้าน, มือถือ มือสอง ซื้อขายใกล้บ้าน</title>
+  <link rel="shortcut icon" href="./img/web_favicon.png">
+
+  <!--jQuery-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="./css/bootstrap-theme.min.css" rel="stylesheet">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="./js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="./css/chatbox.css" rel="stylesheet">
+
+  <script src="./js/hover4content.js"></script>
+
+  <script src="./js/chatbox.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+  <!--  ?????????? wtf Jchul
+  <link rel="stylesheet" type="text/css" href="//assets.kaidee.com/blackpearl/ff8cf73f8638040cc0f30e2cf8980588/stylesheets/style.css" />
+  <link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/1.6/appboy.min.css" />
+-->
+      <style>
+          * {
+                margin: 0;
+            }
+            html, body {
+                height: 100%;
+            }
+
+             .wrapper {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
+            }
+            .footerr{
+                height: 55px; /* .push must be the same height as .footer */
+                background: #efefef;
+                text-indent: 20px;
+                vertical-align: middle;
+            }
+            .push{
+                height: 80px; /* .push must be the same height as .footer */
+            }
+
+
+    </style>
+
+</head>
+
+<body>
+<div class="wrapper">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
+      <a href="#"><img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon"></a>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" id="addClass">พูดคุย</a></li>
+          <li><a href="./verify.html">แก้ไขข้อมูลผู้ขาย</a></li>
+          <li><button id="btnsell" type="button" class="btn btn-warning">ขาย</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="verify-title">
+      <img src="img/r2.png">
+      &nbsp;&nbsp;&nbsp;&nbsp;เพิ่มข้อมูลยืนยันตัวตนระดับ 2 : บัตรประชาชน
+    </div>
+    <div class="verify-sub-container">
+      <div class="verify-subtitle">
+        ** ข้อมูลที่อัพโหลดเพื่อใช้ในการยืนยันตัวตน จะถูกใช้เพื่อประโยชน์ในการยืนยันตัวตนสไหรับเว็บไซด์ kaidee.com เท่านั้น <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; และจะไม่ถูกใช้ไปในทางอื่น
+      </div>
+      <div class="verify-subtitle">
+        ** ทางเว็บไซด์ kaidee.com จะเก็บรูปภาพที่ถูกใส่ลายน้ำแล้วเท่านั้น เพื่อป้องกันการนำไปใช้กระทำการอื่นๆ ที่นอกเหนือจาก <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; ที่ได้กล่าวไว้ข้างต้น
+      </div>
+    </div>
+    <div class="upload-container">
+      <div class="col-md-4" style="border-radius: 10px; background: #eeeeee; width: 550px; height: 350px;">
+        <img src="img/choosePic.png" style="border-radius: 10px; margin-top:25px; margin-left:25px; background-color:white; height:250px;">
+      </img>
+        <div style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58  ; color:white; font-size:25px; height:50px; line-height:50px;position:absolute; bottom:10px; left:225px; ">
+          อัพโหลด
+        </div>
+      </div>
+      <div class="col-md-4" style="border-radius: 10px; margin-left:50px; background: #eeeeee; width: 450px; height: 350px; ">
+        <div class="verify-example-text">
+          ภาพตัวอย่าง
+          <div>
+        <div style=" border-radius: 10px; margin-top:20px; background-color:white; height:240px;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    </div>
+ <div class="push"></div>
+        <div class="footerr">
+            <a href="./help.html"><h3 id='openfaq' style="line-height:50px; height:50px;">FAQ</h3></a>
+        </div>
+ <script>
+        $('#btnsell').click(function(){
+                window.location.href = "./uploadSale1.html";
+
+        });
+    </script>
+
+
+
+</body>
+</html>
