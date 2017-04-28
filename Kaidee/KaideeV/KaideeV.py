@@ -19,13 +19,16 @@ from random import randint
 app = Flask(__name__, static_url_path = "", static_folder = "")
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '0904'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+
+# app.config['MYSQL_DATABASE_PASSWORD'] = '0904'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+
 app.config['MYSQL_DATABASE_DB'] = 'kaidee'
 app.config['UPLOAD_FOLDER'] = 'upload/'
 app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-app.config['SERVER_NAME'] = 'snowywords2.ddns.net:5000'
-# app.config['SERVER_NAME'] = 'localhost:5000'
+
+# app.config['SERVER_NAME'] = 'snowywords2.ddns.net:5000'
+
 app.config.update(dict(
     # DATABASE=os.path.join(app.root_path, 'flaskr.db'),
     DEBUG=True,
@@ -428,6 +431,40 @@ def set_as_read():
         print("Update data failed")
         db.rollback()
         return ('403')
+
+        
+@app.route('/start_chat/<int:itemID>', methods=['GET'])
+def start_chat(itemID):
+    if not session.get('logged_in'):
+        print ('Not logged in : redirect to login page')
+        return redirect('/loginpage')
+    userID = json.loads(session.get('udata'))[0].get('UserID')
+    db = mysql.get_db()
+    cur = db.cursor()
+    query_string = "SELECT ChatID FROM chat WHERE BuyerID_c = " + str(userID) + " AND ItemID_c = " + str(itemID)
+    cur.execute(query_string)
+    if cur.fetchall() == ():
+        print ('Chat does not exist : creating...')
+        try:
+            query_string = "INSERT INTO chat (ItemID_c, BuyerID_c) VALUES (" + str(itemID) + ", " + str(userID) + ")"
+            cur.execute(query_string)
+            db.commit()
+            print("Create chat success")
+        except:
+            print("Create chat failed")
+            db.rollback()
+            return ('403')
+    query_string = "SELECT ChatID FROM chat WHERE BuyerID_c = " + str(userID) + " AND ItemID_c = " + str(itemID)
+    cur.execute(query_string)
+    columns = [column[0] for column in cur.description]
+    results = []
+    for row in cur.fetchall():
+        results.append(dict(zip(columns, row)))
+    if len(results)>0:
+        return jsonify(results)
+    else:
+        print('No data found at the index')
+        return ('404')
 
 
 # ========================= User Verification =========================
