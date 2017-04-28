@@ -91,8 +91,8 @@
     </div>
     <div class="upload-container">
       <div class="col-md-4" style="border-radius: 10px; background: #eeeeee; width: 550px; height: 350px;">
-        <div id="file" style="border-radius: 10px; margin-top:25px; background-color:white; height:250px;">
-        </div>
+        <img src="img/choosePic.png" style="border-radius: 10px; margin-top:25px; margin-left:25px; background-color:white; height:250px;">
+        </img>
         <div id="upload" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58  ; color:white; font-size:25px; height:50px; line-height:50px;position:absolute; bottom:10px; left:225px; ">
           อัพโหลด
         </div>
@@ -109,7 +109,7 @@
 </div>
 </div>
 
-<form action="http://snowywords2.ddns.net:5000/upload" method="post" enctype="multipart/form-data">
+<form action="./upload" method="post" enctype="multipart/form-data">
     <input id="fileInput" name="file" type="file" style="display:none;" />
     <input id="theButton" type="button" value="Upload" />
 </form>

@@ -37,6 +37,7 @@
   </head>
 
   <body style="margin-bottom:60px;">
+              <div class="wrapper">
     <nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
@@ -61,7 +62,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">กรุณาอัพโหลดรูปภาพบัตรประชาชนของท่านเพื่อใช้ในการยืนยันตัวตน</div>
         <div class="panel-body text-center">
-          <form  action="http://snowywords2.ddns.net:5000/upload" method="post" enctype="multipart/form-data">
+          <form  action="./upload" method="post" enctype="multipart/form-data">
           <!-- <form  action="http://localhost:5000/upload" method="post" enctype="multipart/form-data"> -->
             <input class="center-block" type="file" name="file" id="file" size="80">
             <h1>
@@ -83,7 +84,10 @@
       <button type="button" onclick="skip()" class="btn btn-warning center-block">ข้ามขั้นตอนนี้</button>
     </div>
 
-
+    <div class="push"></div>
+           <div class="footerr">
+               <a href="./help"><h3 id='openfaq' style="line-height:50px; height:50px;">FAQ</h3></a>
+           </div>
 
 <script>
   function skip() {

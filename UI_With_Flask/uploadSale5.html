@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Kaidee || ช่วยเหลือ หัวข้อย่อย</title>
+	    <link rel="shortcut icon" href="./img/web_favicon.png">
+        <!--jQuery-->
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	    <!-- Latest compiled and minified CSS -->
+	    <link rel="stylesheet" href="./css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="./css/bootstrap-theme.min.css" rel="stylesheet">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="./js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <style>
+             .name{
+                font-size: 150%;
+                 text-align-last: right;
+                
+            }
+            
+            #space{
+                height: 30px;
+            }
+    
+            
+              
+            .form-table {
+                margin: 5% auto;
+            }
+            td{
+                height: 50px;
+            }
+            
+            #myImg{
+                max-height: 300px;
+                max-width: 500px
+            }
+  
+           
+             * {
+                margin: 0;
+            }
+            html, body {
+                height: 100%;
+            }
+            
+             .wrapper {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
+            }
+            .footerr{
+                height: 55px; /* .push must be the same height as .footer */
+                background: #efefef;
+                text-indent: 20px;
+                vertical-align: middle;
+            }
+            .push{
+                height: 80px; /* .push must be the same height as .footer */
+            }
+
+        </style>
+    </head>
+    <body>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+        <div class="wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top">  
+		<div class="container">
+			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
+			<img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon" id="logokaidee">
+			<!-- <a class="navbar-brand" href="#">Kaidee</a> -->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="http://snowywords2.ddns.net:7777/kaidee">แก้ไขข้อมูลผู้ขาย</a></li>
+					<li><button id="btnsell" type="button" class="btn btn-warning">ขาย</button></li>
+				</ul>
+			</div>
+		</div>
+	    </nav>
+        
+        <div class="container" >
+            <div class="row" >
+                <div class="col-md-1 ">
+                    <img src="img/iconsale1_bright.png" style="width:100px;height:100px;">
+                </div>
+                <div class="col-md-1">
+                    <img src="img/iconsale2_bright.png" style="width:200px;height:100px;">
+                </div>
+                <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale3_bright.png" style="width:200px;height:100px;">
+                </div>
+                 <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale4_bright.png" style="width:200px;height:100px;">
+                </div>
+                 <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale5_bright.png" style="width:200px;height:100px;">
+                </div>
+                <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale6_dark.png" style="width:200px;height:100px;">
+                </div>
+            </div>
+        </div>
+        <table class="form-table">
+            <tr>
+                <td align='right'><label class="name">ชื่อสินค้า: </label></td>
+                <td ><label id='pname'> รองเท้าnike</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label class="name">หมวดสินค้า: </label></td>
+                <td><label id='category'> รองเท้า</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label class="name">ราคาสินค้า: </label></td>
+                <td><label id='price'> 106บาท</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label class="name">รายละเอียดสินค้า: </label></td>
+                <td><label id='detail'> ก็รองเท้า</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label class="name">จังหวัด: </label></td>
+                <td><label id="category1">ปทุมธานี</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label class="name">อำเภอ: </label></td>
+                <td><label id="category2">ลำลูกกา</label></td>
+            </tr>
+            <tr>
+                <td align='right'><label class="name">รูปภาพสินค้า: </label></td>
+                <td><img id="myImg" src="" ></td>
+            </tr>
+
+        </table>
+
+        <div style="margin-left: 100px;">
+            <button id="goToPreviousPage" style="float:left;" type="button" class="btn btn-warning">ย้อนกลับ</button>
+        </div>
+        <div style="margin-right: 100px;">
+            <button id="goToNextPage" style="float:right;" type="button" class="btn btn-success">ไปต่อ</button>
+        </div>
+        </div>
+        <div class="push"></div>
+        <div class="footerr">
+            <a href="./help.html" id='openfaq'><h3 style="line-height:50px; height:50px;">FAQ</h3></a>
+        </div>
+        
+        <script>
+            
+            
+            $(document).ready(function() {
+                var pname = localStorage.getItem('pname');
+                var price = localStorage.getItem('price');
+                var cate = localStorage.getItem('cate');
+                var cate1 = localStorage.getItem('cate1');
+                var cate2 = localStorage.getItem('cate2');
+                var detail = localStorage.getItem('pdetail');
+                var pic = localStorage.getItem('pic');
+//                var pic = localStorage.getItem('pic');
+                document.getElementById('pname').innerHTML = pname.substr(1,pname.length-2);
+                document.getElementById('price').innerHTML = price.substr(1,price.length-2);
+                document.getElementById('category').innerHTML = cate.substr(1,cate.length-2);
+                document.getElementById('category1').innerHTML = cate1.substr(1,cate1.length-2);
+                document.getElementById('category2').innerHTML = cate2.substr(1,cate2.length-2);
+                document.getElementById('detail').innerHTML = detail.substr(1,detail.length-2);
+                $('#myImg').attr('src', JSON.parse(pic));
+//                console.log(pic);
+            });
+            
+            
+            $('#goToNextPage').click(function(){
+                window.location.href = "./uploadSale6.html";
+                
+            });
+        
+            $('#goToPreviousPage').click(function(){
+                window.location.href = "./uploadSale4.html";
+                
+            });
+            
+            $('#btnsell').click(function(){
+                window.location.href = "./uploadSale1.html";
+
+            });
+            
+            $('#logokaidee').click(function(){
+                window.location.href = "./index.html";
+
+            });
+        </script>
+        
+    </body>
+</html> 

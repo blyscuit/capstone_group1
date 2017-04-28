@@ -31,15 +31,6 @@
                 height: 100%;
                 margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
             }
-            .footerr{
-                height: 55px; /* .push must be the same height as .footer */
-                background: #efefef;
-                text-indent: 20px;
-                vertical-align: middle;
-            }
-            .push{
-                height: 80px; /* .push must be the same height as .footer */
-            }
 
 
         </style>
@@ -108,7 +99,7 @@
                     //$('#textAndPic').append('<div class="col-md-12"><p>'+result[i].Detail+'</p></div>');
                 }
 
-                $.getJSON('http://snowywords2.ddns.net:5000/session_data', function(data) {
+                $.getJSON('./session_data', function(data) {
 
 
                     if(data == 404){
@@ -133,7 +124,7 @@
                     console.log(typeof(datatosenty));
                     $.ajax({
                           type: 'POST',
-                          url: 'http://snowywords2.ddns.net:5000/faqfeedback',
+                          url: './faqfeedback',
                           data: datatosenty,
                           dataType:'json',
                           contentType: "application/json",
@@ -158,7 +149,7 @@
                     console.log(typeof(datatosentn));
                     $.ajax({
                           type: 'POST',
-                          url: 'http://snowywords2.ddns.net:5000/faqfeedback',
+                          url: './faqfeedback',
                           data: datatosentn,
                           dataType:'json',
                           contentType: "application/json",
@@ -186,7 +177,7 @@
 
 
         		<!-- CHAT UI -->
-        		<div class="container">
+        		<div class="container" style="z-index: 100;">
         				<div class="row chat-window col-xs-10 col-md-3" id="chat_window_1">
         						<div class="col-xs-12 col-md-12">
         							<div class="panel panel-default">

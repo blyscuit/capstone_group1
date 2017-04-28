@@ -202,3 +202,19 @@ ul, menu, dir {
 	margin-top:10px;
 }
 
+.footerr{
+		height: 55px; /* .push must be the same height as .footer */
+		background: #efefef;
+		text-indent: 20px;
+		vertical-align: middle;
+		    z-index: -1;
+}
+.wrapper {
+	 min-height: 100%;
+	 height: auto !important;
+	 height: 100%;
+	 margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
+}
+.push{
+		height: 80px; /* .push must be the same height as .footer */
+}

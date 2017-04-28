@@ -37,6 +37,8 @@
 
     </head>
     <body>
+    <body>
+    <div class="wrapper">
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -89,9 +91,10 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <a href="./help"><h3 id='openfaq'>FAQ</h3></a>
-        </footer>
+        <div class="push"></div>
+               <div class="footerr">
+                   <a href="./help"><h3 id='openfaq' style="line-height:50px; height:50px;">FAQ</h3></a>
+               </div>
 
         <script>
                        var Category1 = []
@@ -112,7 +115,7 @@
                        var Category16 = []
 
             window.onload = function() {
-               $.getJSON('http://snowywords2.ddns.net:5000/faq/all', function(data) {
+               $.getJSON('./faq/all', function(data) {
 
                    console.log(data)
 //                   console.log(data[0].Title)
