@@ -312,31 +312,23 @@ def get_deal_list(UserID):
         return ('404')
 
 
-@app.route('/get_deal_info/<int:ItemID>', methods=['GET'])
-def get_deal_info(ItemID):
+@app.route('/get_deal_info/<int:ChatID>', methods=['GET'])
+def get_deal_info(ChatID):
     cur = mysql.get_db().cursor()
     cur2 = mysql.get_db().cursor()
-    query_string = "SELECT Name as ItemName, Description as ItemDescription, UserID, Display_name, ProfilePic  \
-                   FROM item i, user u \
-                   WHERE i.ItemID = '{ItemID}' AND i.UserID_i = u.UserID".format(ItemID=ItemID)
+    query_string = "SELECT ItemID, Name AS ItemName, Description AS ItemDescription, BuyerID_c AS BuyerID, SellerID_c AS SellerID, \
+                    Display_name, ProfilePic FROM item i, user u, chat c \
+                    WHERE c.ChatID = '{ChatID}' AND i.UserID_i = c.SellerID_c AND u.UserID = c.SellerID_c AND c.ItemID_c = i.ItemID".format(ChatID=ChatID)
     cur.execute(query_string)
     columns = [column[0] for column in cur.description]
     results = []
     columns.append('ItemImage')
-    columns.append('ChatID')
     for row in cur.fetchall():
+        itemID = row[0]
         row = list(row)
-        query_string_2 = "SELECT ItemImage FROM itempicture WHERE ItemID_ip=" + str(ItemID)
+        query_string_2 = "SELECT ItemImage FROM itempicture WHERE ItemID_ip=" + str(itemID)
         cur2.execute(query_string_2)
         row.append(cur2.fetchall()[0][0])
-
-        sellerID = row[2]
-        query_string_2 = "SELECT ChatID FROM chat WHERE SellerID_c=" + str(sellerID) + " AND ItemID_c=" + str(ItemID)
-        cur2.execute(query_string_2)
-        chats = []
-        for i in cur2.fetchall():
-            chats.append(i[0])
-        row.append(chats)
         results.append(dict(zip(columns, row)))
     if len(results)>0:
         return jsonify(results)
@@ -364,7 +356,7 @@ def get_message_history(ChatID):
 @app.route('/get_latest_msg/<int:ChatID>', methods=['GET'])
 def get_latest_msg(ChatID):
     cur = mysql.get_db().cursor()
-    query_string = "SELECT * FROM message WHERE ChatID_m = '{ChatID}' ORDER BY MessageID DESC LIMIT 1".format(ChatID=ChatID)
+    query_string = "SELECT * FROM message WHERE ChatID_m = '{ChatID}' AND IsRead = 0 ORDER BY MessageID DESC".format(ChatID=ChatID)
     cur.execute(query_string)
     columns = [column[0] for column in cur.description]
     results = []
