@@ -207,7 +207,7 @@
 
 $(document).ready(function(){
 	var itemId = $(document).getUrlParam("id");
-	$.get(`http://snowywords2.ddns.net:5000/view_product/`+itemId, function(data, status){
+	$.get(`./view_product/`+itemId, function(data, status){
 			console.log(data);
 			var itemObject = data[0];
 			iDate = itemObject.Date;

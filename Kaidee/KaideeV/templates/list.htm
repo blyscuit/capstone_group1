@@ -124,7 +124,7 @@
 
 	$(document).ready(function(){
 
-		$.get("http://snowywords2.ddns.net:5000/browse_product", function(data, status){
+		$.get("./browse_product", function(data, status){
 				for (count in data){
 					itemObject = data[count];
 					console.log(itemObject);

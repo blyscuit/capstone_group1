@@ -145,7 +145,7 @@
 
 $(document).ready(function(){
 
-	$.get("http://snowywords2.ddns.net:5000/unverified", function(data, status){
+	$.get("./unverified", function(data, status){
 		if (data != 404){
 			for (count in data){
 				itemObject = data[count];
@@ -212,7 +212,7 @@ $(document).ready(function(){
 						datatosenty = '{"VerificationID":' + iID + ', "Status":' + iStatus + '}'
 						$.ajax({
 									type: 'POST',
-									url: 'http://snowywords2.ddns.net:5000/verify',
+									url: './verify',
 									data: datatosenty,
 									dataType:'json',
 									contentType: "application/json",

@@ -148,7 +148,7 @@
 		<script>
 
 		$(document).ready(function(){
-			$.get(`http://snowywords2.ddns.net:5000/get_verification`, function(data, status){
+			$.get(`./get_verification`, function(data, status){
 					console.log(data);
 					var d = data[0];
 					var vlevel = d.VLevel;

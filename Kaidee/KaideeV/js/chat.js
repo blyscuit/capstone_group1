@@ -91,7 +91,7 @@ function getDealList(UserID){
     INCLUDE DEAL ID, PRODUCT IMAGE, PRODUCT NAME, AND IN-CONTACT USER NAME */
     $.ajax({
          type: 'GET',
-         url: 'http://snowywords2.ddns.net:5000/get_deal_list/' + UserID,
+         url: './get_deal_list/' + UserID,
          data: {
             UserID: UserID
          },
@@ -117,7 +117,7 @@ function getDealInfo(ItemID){
     // GET PRODUCT IMAGE, PRODUCT NAME, INCONTACT USER ID + NAME + PROFILE PIC ACCORDING TO DEAL ID
     $.ajax({
          type: 'GET',
-         url: 'http://snowywords2.ddns.net:5000/get_deal_info/' + ItemID,
+         url: './get_deal_info/' + ItemID,
          data: {
             ItemID: ItemID
          },
@@ -144,7 +144,7 @@ function getMessageHistory(ChatID){
     USER ID (ORIGIN OF EACH MESSAGE), MESSAGE, TIMESTAMP */
     $.ajax({
          type: 'GET',
-         url: 'http://snowywords2.ddns.net:5000/get_message_history/' + ChatID,
+         url: './get_message_history/' + ChatID,
          data: {
             ChatID: ChatID
          },
@@ -181,7 +181,7 @@ function sendMessage(){
     };
     $.ajax({
         type: 'POST',
-        url: 'http://snowywords2.ddns.net:5000/send_message',
+        url: './send_message',
         contentType:"application/json",
         dataType: "json",
         data: JSON.stringify(data),
@@ -200,7 +200,7 @@ function getLatestMessage(ChatID){
     IF THERE'S AN UPDATE, RETURN THE LATEST MESSAGE. ELSE, RETURN ANYTHING "SMALL" (AND PLZ TELL ME WHAT IT IS) */
     $.ajax({
         type: 'GET',
-        url: 'http://snowywords2.ddns.net:5000/get_latest_msg/' + ChatID,
+        url: './get_latest_msg/' + ChatID,
         data: {
             ChatID: ChatID
         },
@@ -229,7 +229,7 @@ function getLatestMessage(ChatID){
 function getUserData(id){
     $.ajax({
         type: 'GET',
-        url: 'http://snowywords2.ddns.net:5000/users/' + id,
+        url: './users/' + id,
         data: {
             UserID: id
         },
@@ -284,7 +284,7 @@ function checkNotiForDeal(chatid){
 function countUnread(chatid){
     $.ajax({
         type: 'GET',
-        url: 'http://snowywords2.ddns.net:5000/count_unread/' + chatid,
+        url: './count_unread/' + chatid,
         success: function(response){
             if(response != 'No data found at the index'){
                 if(notiDict["noti_chat_"+chatid] != response[0].UnreadQty){
@@ -307,7 +307,7 @@ function markAsRead(msgID){
     };
     $.ajax({
         type: 'POST',
-        url: 'http://snowywords2.ddns.net:5000/set_as_read',
+        url: './set_as_read',
         contentType:"application/json",
         dataType: "json",
         data: JSON.stringify(data),
@@ -323,8 +323,8 @@ function markAsRead(msgID){
 function getSession(){
 
   console.log("GET SESSION")
-  // $.getJSON('http://snowywords2.ddns.net:5000/session_data', function(data) {
-  $.getJSON('http://localhost:5000/session_data', function(data) {
+  $.getJSON('./session_data', function(data) {
+  // $.getJSON('http://localhost:5000/session_data', function(data) {
       if(data == 404){
           UserID = null;
       }else{
