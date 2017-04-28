@@ -121,12 +121,16 @@ def logout():
 
 # ========================= User Information =========================
 
-@app.route('/users/<int:UserID>', methods=['GET'])
-def users(UserID):
+@app.route('/users', methods=['GET'])
+def users():
+    if not session.get('logged_in'):
+        print ('Not logged in : redirect to login page')
+        return redirect('/loginpage')
+    userID = json.loads(session.get('udata'))[0].get('UserID')
     cur = mysql.get_db().cursor()
     cur2 = mysql.get_db().cursor()
     query_string = "SELECT Firstname, Lastname, Email, Postcode, Display_name, LevelID_u AS VLevel, ProfilePic \
-                    FROM kaidee.user WHERE UserID = '{UserID}'".format(UserID=UserID)
+                    FROM kaidee.user WHERE UserID = " + str(userID)
     cur.execute(query_string)
     columns = [column[0] for column in cur.description]
     results = []
@@ -135,13 +139,13 @@ def users(UserID):
     for row in cur.fetchall():
         FAQID = row[0]
         row = list(row)
-        query_string_2 = "SELECT Phone_no FROM phone WHERE UserID_p = '{UserID}'".format(UserID=UserID)
+        query_string_2 = "SELECT Phone_no FROM phone WHERE UserID_p = " + str(userID)
         cur2.execute(query_string_2)
         phoneNo = []
         for i in cur2.fetchall():
             phoneNo.append(i[0])
         row.append(phoneNo)
-        query_string_2 = "SELECT SocialID, Type FROM social WHERE UserID_s = '{UserID}'".format(UserID=UserID)
+        query_string_2 = "SELECT SocialID, Type FROM social WHERE UserID_s = " + str(userID)
         cur2.execute(query_string_2)
         data = cur2.fetchall()
         columns2 = getSocialType([r[1] for r in data])
