@@ -12,7 +12,6 @@ getSession();
 
 $(document).ready(function() {
     //document.getElementById('#minim_chat_window').click();
-
     $("#notification").hide();
     $('#chatpage, #to_contact').hide();
 
@@ -286,13 +285,17 @@ function countUnread(chatid){
         type: 'GET',
         url: './count_unread/' + chatid,
         success: function(response){
-            if(response != 'No data found at the index'){
-                if(notiDict["noti_chat_"+chatid] != response[0].UnreadQty){
-                    notiDict["noti_chat_"+chatid] = response[0].UnreadQty;
+            for(var i = 0; i < response.length; i++){
+                if(response != 'No data found at the index'){
+                    if(UserID = response[i].SenderID){
+                        if(notiDict["noti_chat_"+chatid] != response[i].UnreadQty){
+                            notiDict["noti_chat_"+chatid] = response[i].UnreadQty;
+                        }
+                    }
+                    checkNotification();
+                }else{
+                    //DO NOTHING
                 }
-                checkNotification();
-            }else{
-                return response;
             }
         },
         error: function(){
@@ -342,6 +345,22 @@ function getSession(){
           }, 1000);
       }
   });
+}
+
+function startChat(itemID){
+    $.ajax({
+        type: 'GET',
+        url: './start_chat/' + itemID,
+        success: function(response){
+            newChatID = response[0].ChatID;
+            $("#itemList").empty();
+            getDealList(UserID);
+            getDealInfo(newChatID);
+        },
+        error: function(){
+
+        }
+    })
 }
 
 function scrollChatBoxDown(){
