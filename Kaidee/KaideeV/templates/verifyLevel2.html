@@ -91,7 +91,7 @@
     </div>
     <div class="upload-container">
       <div class="col-md-4" style="border-radius: 10px; background: #eeeeee; width: 550px; height: 350px;">
-        <img src="img/choosePic.png" style="border-radius: 10px; margin-top:25px; margin-left:25px; background-color:white; height:250px;">
+        <img src="img/choosePic.png" id="file" style="border-radius: 10px; margin-top:25px; margin-left:25px; background-color:white; height:250px;">
         </img>
         <div style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58  ; color:white; font-size:25px; height:50px; line-height:50px;position:absolute; bottom:10px; left:225px; ">
           อัพโหลด
@@ -109,6 +109,13 @@
 </div>
 </div>
     </div>
+
+    <form action="./upload?vlevel=2" method="post" enctype="multipart/form-data">
+       <!-- <input id="fileInput" name="file" type="file"  style="display:none;"> /> -->
+          <input id="fileInput" name="file" type="file" />
+        <input id="theButton" type="submit" name="u_button" value="Upload" />
+    </form>
+
  <div class="push"></div>
         <div class="footerr">
             <a href="./help"><h3 id='openfaq' style="line-height:50px; height:50px;">FAQ</h3></a>
@@ -118,6 +125,14 @@
                 window.location.href = "./upload_sale_1";
 
         });
+        window.onload = function () {
+          document.getElementById('file').onclick = function() {
+            document.getElementById('fileInput').click();
+          };
+          document.getElementById('upload').onclick = function() {
+            document.getElementById('theButton').click();
+          };
+        }
     </script>
 
     <!-- CHAT UI -->
