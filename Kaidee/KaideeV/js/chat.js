@@ -9,9 +9,15 @@ notiDict = {};
 
 
 $(document).ready(function() {
-var UserID = null;
-getSession();
-    //document.getElementById('#minim_chat_window').click();
+
+    var UserID = null;
+    getSession();
+
+    var $minus = $('.panel-heading span.icon_chat_minimize')
+    $minus.parents('.panel').find('.panel-body, .panel-footer').hide();
+    $minus.addClass('panel-collapsed');
+    $minus.removeClass('glyphicon-minus').addClass('glyphicon-plus');
+
     $("#notification").hide();
     $('#chatpage, #to_contact').hide();
 
@@ -73,16 +79,14 @@ function addMsgRow(isSender, isHistory, msg, timestamp){
 }
 
 
-function createDeal(id, img, itemName, user, isBuy, chatID){
+function createDeal(img, itemName, user, isBuy, chatID){
     if(isBuy){
         statuspic = "img/buy_icon.png";
     }else{
         statuspic = "img/sell_icon.png";
     }
-    console.log(chatID);
     // $("#itemList").append('<a href="#" onclick="getDealInfo(' + id + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h4>' + itemName + '</h4><h5>' + user +'</h5></div></div></a>');
-    $("#itemList").append('<a href="#" onclick="getDealInfo(' + id + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h5 class="infotext">' + itemName + '</h5><h5 class="infotext">' + user +'</h5></div><div class="col-md-2 col-xs-2 info_content"><span class="badge" id="deal_chat_' + chatID + '"></span></div></div></a>');
-    console.log(notiDict["noti_chat_"+chatID]);
+    $("#itemList").append('<a href="#" onclick="getDealInfo(' + chatID + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h5 class="infotext">' + itemName + '</h5><h5 class="infotext">' + user +'</h5></div><div class="col-md-2 col-xs-2 info_content"><span class="badge" id="deal_chat_' + chatID + '"></span></div></div></a>');
 }
 
 function getDealList(UserID){
@@ -95,7 +99,6 @@ function getDealList(UserID){
             UserID: UserID
          },
          success: function(response){
-            $('#status').text("ONLINE"); //FOR DEBUGGING
             for(var i = 0; i < response.length; i++){
                 if(response[i].Display_name == USERNAME){
                     isBuy = false;
@@ -107,16 +110,16 @@ function getDealList(UserID){
             }
          },
          error: function(){
-            $('#status').text("OFFLINE"); //FOR DEBUGGING
+            window.alert("Cannot obtain lists");
          }
     });
 }
 
-function getDealInfo(ItemID){
+function getDealInfo(ChatID){
     // GET PRODUCT IMAGE, PRODUCT NAME, INCONTACT USER ID + NAME + PROFILE PIC ACCORDING TO DEAL ID
     $.ajax({
          type: 'GET',
-         url: './get_deal_info/' + ItemID,
+         url: './get_deal_info/' + ChatID,
          data: {
             ItemID: ItemID
          },
@@ -129,11 +132,11 @@ function getDealInfo(ItemID){
             $('#productName').text(response[0].ItemName); //CHANGE PRODUCT NAME
             $('#targetImg').attr('src', response[0].ProfilePic); //CHANGE INCONTACT_USER_NAME
             $('#targetName').text(response[0].Display_name); //CHANGE INCONTACT_PROFILE_PIC
-            getMessageHistory(response[0].ChatID[0]);
-            currentChatID = response[0].ChatID[0];
+            getMessageHistory(ChatID);
+            currentChatID = ChatID;
          },
          error: function(){
-            console.log("Cannot obtain the information");
+            window.alert("Cannot obtain information");
          }
     });
 }
@@ -165,7 +168,7 @@ function getMessageHistory(ChatID){
             }
          },
          error: function(){
-            window.alert("Cannot obtain the messages");
+            window.alert("Cannot obtain message history");
          }
     });
 }
@@ -205,20 +208,22 @@ function getLatestMessage(ChatID){
             ChatID: ChatID
         },
         success: function(response){
-            if(response[0].MessageID != latestMessage){
-                latestMessage = response[0].MessageID;
-                if(response[0].SenderID == UserID){
-                    addMsgRow(true, false, response[0].Text, response[0].Timestamp);
-                }else{
-                    addMsgRow(false, false, response[0].Text, response[0].Timestamp);
+            for(var i = response.length - 1; i >= 0; i--){
+                if(response[i].MessageID != latestMessage){
+                    latestMessage = response[i].MessageID;
+                    if(response[i].SenderID == UserID){
+                        addMsgRow(true, false, response[i].Text, response[i].Timestamp);
+                    }else{
+                        addMsgRow(false, false, response[i].Text, response[i].Timestamp);
+                    }
+                }
+                if($("#chat-textbox").is(":visible")){
+                    if(response[i].IsRead == 0 && response[i].SenderID != UserID){
+                        markAsRead(response[i].MessageID);
+                    }
                 }
             }
-            if($("#chat-textbox").is(":visible")){
-              if(response[0].IsRead == 0 && response[0].SenderID != UserID){
-                markAsRead(response[0].MessageID);
-              }
-                scrollChatBoxDown();
-            }
+            scrollChatBoxDown();
         },
         error: function(){
             //DO NOTHING
@@ -356,13 +361,13 @@ function startChat(itemID){
         type: 'GET',
         url: './start_chat/' + itemID,
         success: function(response){
-          if(response==404||response==404){
+          if(response=='403'||response=='404'){
             alert('Please try again.');
           }else{
             newChatID = response[0].ChatID;
               console.log("new chat"+newChatID);
             $("#itemList").empty();
-            getDealList(UserID);
+            getDealList(ChatID);
             getDealInfo(itemID);
           }
         },
