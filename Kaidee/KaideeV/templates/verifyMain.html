@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Kaidee || รถ มือสอง, บ้าน, มือถือ มือสอง ซื้อขายใกล้บ้าน</title>
+	<link rel="shortcut icon" href="./img/web_favicon.png">
+
+	<!--jQuery-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="./css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="./css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="./js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="./css/chatbox.css" rel="stylesheet">
+
+	<script src="./js/hover4content.js"></script>
+
+	<script src="./js/chatbox.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <!--  ?????????? wtf Jchul
+		<link rel="stylesheet" type="text/css" href="//assets.kaidee.com/blackpearl/ff8cf73f8638040cc0f30e2cf8980588/stylesheets/style.css" />
+    <link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/1.6/appboy.min.css" />
+		-->
+      <style>
+          * {
+                margin: 0;
+            }
+            html, body {
+                height: 100%;
+            }
+
+             .wrapper {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
+            }
+            .footerr{
+                height: 55px; /* .push must be the same height as .footer */
+                background: #efefef;
+                text-indent: 20px;
+                vertical-align: middle;
+            }
+            .push{
+                height: 80px; /* .push must be the same height as .footer */
+            }
+
+
+    </style>
+
+</head>
+
+<body>
+<div class="wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
+			<a href="./"><img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon"></a>
+
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="./verification">แก้ไขข้อมูลผู้ขาย</a></li>
+					<li><button id="btnsell" type="button" class="btn btn-warning">ขาย</button></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 verify-stat-text">
+				ระดับการยืนยันตัวตนปัจจุบันของคุณ
+			</div>
+			<div class="col-md-6" style="text-align:center;">
+				<img id="verify-show" style='height: 100%; width: 100%; object-fit: contain' src="img/Level0.png">
+
+			</div>
+		</div>
+	</div>
+
+	<div class="container" style="margin-top: 100px;">
+		<div class="row verify-row" style="text-align:center">
+			<div class="col-md-4" style="border-radius: 10px; background: #eeeeee; width: 280px; height: 350px; ">
+				<div class="top-row" style="margin-top:25px; margin-left:-15px; height:40px;">
+					<img src="img/r1.png" style="float:left;">
+					<span class="verify-level-text">ระดับ 1</span>
+				</div>
+				<img id="docLv1" class="middle-row" src="img/noData.png" style="margin-top:25px; background-color:white; height:170px;">
+
+			</img>
+				<div class="bottom-row" style="margin-top:25px; text-align:center;">
+					<a href="./verification_1">
+						<div id="level-1-button" class="bottom-button" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58; color:white; font-size:25px; height:50px; line-height:50px; ">
+							เพิ่ม
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-md-4" style="border-radius: 10px; background: #eeeeee; width: 280px; height: 350px;">
+				<div class="top-row" style="margin-top:25px; margin-left:-15px; height:40px;">
+					<img src="img/r2.png" style="float:left;">
+					<span class="verify-level-text">ระดับ 2</span>
+				</div>
+				<img id="docLv2" class="middle-row" src="img/noData.png" style="margin-top:25px; background-color:white; height:170px;">
+
+			</img>
+				<div class="bottom-row" style="margin-top:25px; text-align:center;">
+					<a href="./verification_2">
+						<div id="level-2-button" class="bottom-button" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58; color:white; font-size:25px; height:50px; line-height:50px; ">
+							เพิ่ม
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-md-4" style="border-radius: 10px; background: #eeeeee; width: 280px; height: 350px;">
+				<div class="top-row" style="margin-top:25px; margin-left:-15px; height:40px;">
+					<img src="img/r3.png" style="float:left;">
+					<span class="verify-level-text">ระดับ 3</span>
+				</div>
+				<img id="docLv3" class="middle-row" src="img/noData.png" style="margin-top:25px; background-color:white; height:170px;">
+
+			</img>
+				<div class="bottom-row" style="margin-top:25px; text-align:center;">
+					<a href="./verification_3">
+						<div id="level-3-button" class="bottom-button" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58; color:white; font-size:25px; height:50px; line-height:50px; ">
+							เพิ่ม
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+    </div>
+ <div class="push"></div>
+        <div class="footerr">
+            <a href="./help"><h3 id='openfaq' style="line-height:50px; height:50px;">FAQ</h3></a>
+        </div>
+
+		<script>
+
+		$(document).ready(function(){
+			$.get(`http://snowywords2.ddns.net:5000/get_verification`, function(data, status){
+					console.log(data);
+					var d = data[0];
+					var vlevel = d.VLevel;
+					var vd = d.VData;
+					switch (vlevel) {
+						case 1:
+							$("#verify-show").attr('src',"img/Level1.png");
+							$("#docLv1").attr('src',vd[0].VPicture);
+							$("#level-1-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							break;
+						case 2:
+							$("#verify-show").attr('src',"img/Level2.png");
+							$("#docLv1").attr('src',vd[0].VPicture);
+							$("#docLv2").attr('src',vd[1].VPicture);
+							$("#level-1-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							$("#level-2-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							break;
+						case 3:
+							$("#verify-show").attr('src',"img/Level3.png");
+							$("#docLv1").attr('src',vd[0].VPicture);
+							$("#docLv2").attr('src',vd[1].VPicture);
+							$("#docLv3").attr('src',vd[2].VPicture);
+							$("#level-1-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							$("#level-2-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							$("#level-3-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+							break;
+						default:
+							console.log("ERROR getting verification level");
+
+					}
+			});
+
+		});
+
+		        $('#btnsell').click(function(){
+		                window.location.href = "./upload_sale_1";
+
+		        });
+
+
+
+		</script>
+		<!-- CHAT UI -->
+		<div class="container">
+				<div class="row chat-window col-xs-10 col-md-3" id="chat_window_1">
+						<div class="col-xs-12 col-md-12">
+							<div class="panel panel-default">
+										<div class="panel-heading top-bar">
+												<div class="col-md-2 col-xs-2">
+														<img class="chat-icon" src="img/Chat_topic.png"></img>
+												</div>
+												 <div class="col-md-4 col-xs-4">
+														<h3 class="panel-title"> Chat</h3>
+												</div>
+												<div class="col-md-2 col-xs-2">
+													<span id="notification" class="badge">0</span>
+												</div>
+												<div class="col-md-4 col-xs-4" style="text-align: right;">
+													<a href="#"><span id="to_contact" class="glyphicon glyphicon-list icon_chat_tolist"></span></a>
+														<a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_chat_minimize"></span></a>
+												</div>
+										</div>
+										<div id="contactpage">
+											<div class="panel-body contact_list_base">
+												<div id="itemList">
+												</div>
+										</div>
+									</div>
+										<div id="chatpage" style="display: none;">
+											<div class="panel-body">
+												<div class="col-md-6 col-xs-6 info_content">
+													<img id="productImg" class="itempic_info" src=""></img>
+													<span id="productName"></span>
+												</div>
+												<div class="col-md-6 col-xs-6 info_content">
+													<img id="targetImg" class="itempic_info" src=""></img>
+													<span id="targetName"></span>
+												</div>
+											</div>
+											<div id ="chat-textbox" class="panel-body msg_container_base">
+											</div>
+											<div class="panel-footer">
+													<div class="input-group">
+															<input id="btn-input" type="text" class="form-control input-sm inputbar" placeholder="Write your message here..." />
+															<span class="input-group-btn">
+															<button class="btn btn-sm chatbtn" id="btn-chat">Send</button>
+															</span>
+													</div>
+											</div>
+									</div>
+						</div>
+						</div>
+				</div>
+
+		<link rel="stylesheet" href="css/chat.css">
+		<script src="js/chat.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+flask
+flask_login
+flask_cors
+MySQL
+flask-mysql
+wand
+pytest
+Flask-Session

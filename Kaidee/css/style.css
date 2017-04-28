@@ -1,0 +1,112 @@
+body {
+	background-color: #f9f9f9;
+	padding-top: 80px; 
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+.nav ul{
+	margin:0;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #4d6ac8; /*Change active text color here*/
+}
+
+.navbar .brand, .navbar .nav > li > a:hover {
+    color: #4058a6;
+}
+
+.btnsell-toggle {
+	padding: 5px;
+	height: 35px;
+	width: 60px;
+}
+
+.btnsell-toggle:hover {
+	background-position: 0px;
+}
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #eeeeee;
+
+}
+
+.nav h6 {
+	padding: 8px 9px;
+}
+
+.nav button {
+	right: 20px;
+	width: 60px;
+	transform: translateY(25%);
+}
+
+.tutorial {
+	display:block;
+    margin-bottom : 10px;
+}
+
+.navchat {
+	padding: 8px 0px;
+}
+
+.productName {
+	color: #4d6ac8;
+}
+
+.productLocation {
+	color: #b3b3b3;
+	font-size: 10px;
+}
+
+.productImage {
+    display:block;
+    margin:auto;
+    height: 150px;
+    width: auto;
+}
+
+.ratingImg{
+	margin-top :20px;
+	float: left;
+	width: auto;
+    height: 20px;
+}
+
+.productPrice {
+	margin-top :20px;
+	color: #4d6ac8;
+	float:right
+}
+
+.productPanel {
+	width: 220px;
+	max-width:220px;
+	height: auto;
+}
+
+.my-popover-content {
+    display:none;
+}
+
+.toPopup {
+   background-color: #ffffff;
+    border: 1px solid #b0b0b0;
+    bottom: 0;
+    display: none;
+    height: 50px;
+    position: fixed;
+    right: 70px;
+    width: 300px;
+}
+
+.chatBtn {
+    position: fixed;
+    width: 296px;
+    bottom: 0px;
+    right: 72px; 
+}

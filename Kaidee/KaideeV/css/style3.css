@@ -1,0 +1,204 @@
+body {
+	background-color: #f9f9f9;
+	padding-top: 80px;
+}
+
+/** {
+  border-radius: 0 !important;
+}*/
+
+.nav ul{
+	margin:0;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #4d6ac8; /*Change active text color here*/
+}
+
+.navbar .brand, .navbar .nav > li > a:hover {
+    color: #4058a6;
+}
+
+.btnsell-toggle {
+	padding: 5px;
+	height: 35px;
+	width: 60px;
+}
+
+.btnsell-toggle:hover {
+	background-position: 0px;
+}
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #eeeeee;
+
+}
+
+.nav h6 {
+	padding: 8px 9px;
+}
+
+.nav button {
+	right: 20px;
+	width: 60px;
+	transform: translateY(25%);
+}
+
+.tutorial {
+	display:block;
+    margin-bottom : 10px;
+}
+
+.navchat {
+	padding: 8px 0px;
+}
+
+.productName {
+	color: #4d6ac8;
+}
+
+.productLocation {
+	color: #b3b3b3;
+	font-size: 10px;
+}
+
+.productImage {
+    display:block;
+    margin:auto;
+    height: 150px;
+    width: auto;
+}
+
+.ratingImg{
+	margin-top :20px;
+	float: left;
+	width: auto;
+    height: 20px;
+}
+
+.productPrice {
+	margin-top :20px;
+	color: #4d6ac8;
+	float:right
+}
+
+.productPanel {
+	width: 220px;
+	max-width:220px;
+	height: auto;
+}
+
+.my-popover-content {
+    display:none;
+}
+
+.toPopup {
+   background-color: #ffffff;
+    border: 1px solid #b0b0b0;
+    bottom: 0;
+    display: none;
+    height: 50px;
+    position: fixed;
+    right: 70px;
+    width: 300px;
+}
+
+.chatBtn {
+    position: fixed;
+    width: 296px;
+    bottom: 0px;
+    right: 72px;
+}
+
+.ad-contacts, .product-active .ad-info, .ad-info-mb, .additional-info, .main-information {
+    background-color: #fff;
+    box-shadow: 1px 1px 2px 1px hsla(0,0%,59%,.05);
+    margin-bottom: 20px;
+}
+.price-mb {
+    top: 4px;
+    font-size: 180%;
+    color: #f70;
+}
+.ad-price {
+    margin-top :20px;
+    float: right;
+    font-size: 14px;
+    font-weight: 700;
+    color: #f70;
+}
+.call-to-buyer {
+    display: block;
+    color: #00c977;
+}
+.ad-info-mb>li [class*=df-icon], .ad-info>li [class*=df-icon], .additional-info>li [class*=df-icon], .additional-info, .main-information {
+    display: block;
+    line-height: 38px;
+    color: #969696;
+    font-size: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+
+.verify-stat-text {
+		text-align:center;
+		font-size: 30px;
+		height: 150px;
+		line-height: 150px;
+		color:#4d6ac8;
+}
+
+.verify-level-text {
+	text-align:center;
+	font-size: 30px;
+	color:#4d6ac8;
+}
+
+.verify-row > div{
+	margin-right:100px;
+}
+
+.verify-result-text {
+	margin-top: 50px;
+	text-align:center;
+	font-size: 45px;
+	color:#4d6ac8;"
+}
+
+.verify-title {
+	font-size: 35px;
+	color:#4d6ac8;"
+}
+
+.verify-sub-container {
+	margin-top: 30px;
+}
+
+.verify-subtitle {
+	font-size: 20px;
+	color:#DA1C1C;
+	margin-left: 50px;
+}
+
+.upload-container{
+	margin-top: 50px;
+}
+
+.verify-example-text{
+	text-align:center;
+	font-size: 35px;
+	color:#4d6ac8;
+	margin-top:10px;
+}
+

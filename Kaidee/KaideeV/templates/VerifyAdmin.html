@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Kaidee || รถ มือสอง, บ้าน, มือถือ มือสอง ซื้อขายใกล้บ้าน</title>
+	<link rel="shortcut icon" href="./img/web_favicon.png">
+
+	<!--jQuery-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="./css/bootstrap-theme.min.css" rel="stylesheet">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="./js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="./css/chatbox.css" rel="stylesheet">
+
+  <script src="./js/hover4content.js"></script>
+
+  <script src="./js/chatbox.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <style>
+        .footer {
+                  position: absolute;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                  padding: 3px;
+                  background-color: #efefef;
+                  text-align: left;
+                    z-index: 99;
+            }
+            #openfaq{
+                align-content: center;
+                margin-left: 10px;
+
+            }
+
+
+    </style>
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
+			<a href="#"><img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon"></a>
+
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					</ul>
+			</div>
+		</div>
+	</nav>
+
+    <!-- Page Content -->
+    <div class="container">
+    <div class="row" id='productListRow'>
+        <!-- <div class="col-md-6">
+            <div class="media"> <div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWI0NzkzMDc0MyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1YjQ3OTMwNzQzIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy45MjE4NzUiIHk9IjM2LjM2NDA2MjUiPjY0eDY0PC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a> </div> <div class="media-body"> <h4 class="media-heading">ภคิน ยืนยันระดับ3</h4> OTP: 81322 </div>
+            <div class="media-right"> <button type="button" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Accept
+</button><button type="button" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Decline
+</button>
+            </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+    <!-- /.container -->
+
+
+<!--
+    <div class='circle-multiline'>
+    <span style='font-size: 2.5em'>ขาย</span><br>
+    <br>ของ
+    </div>
+-->
+<!-- CHAT UI -->
+<div class="container">
+		<div class="row chat-window col-xs-10 col-md-3" id="chat_window_1">
+				<div class="col-xs-12 col-md-12">
+					<div class="panel panel-default">
+								<div class="panel-heading top-bar">
+										<div class="col-md-2 col-xs-2">
+												<img class="chat-icon" src="img/Chat_topic.png"></img>
+										</div>
+										 <div class="col-md-4 col-xs-4">
+												<h3 class="panel-title"> Chat</h3>
+										</div>
+										<div class="col-md-2 col-xs-2">
+											<span id="notification" class="badge">0</span>
+										</div>
+										<div class="col-md-4 col-xs-4" style="text-align: right;">
+											<a href="#"><span id="to_contact" class="glyphicon glyphicon-list icon_chat_tolist"></span></a>
+												<a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_chat_minimize"></span></a>
+										</div>
+								</div>
+								<div id="contactpage">
+									<div class="panel-body contact_list_base">
+										<div id="itemList">
+										</div>
+								</div>
+							</div>
+								<div id="chatpage" style="display: none;">
+									<div class="panel-body">
+										<div class="col-md-6 col-xs-6 info_content">
+											<img id="productImg" class="itempic_info" src=""></img>
+											<span id="productName"></span>
+										</div>
+										<div class="col-md-6 col-xs-6 info_content">
+											<img id="targetImg" class="itempic_info" src=""></img>
+											<span id="targetName"></span>
+										</div>
+									</div>
+									<div id ="chat-textbox" class="panel-body msg_container_base">
+									</div>
+									<div class="panel-footer">
+											<div class="input-group">
+													<input id="btn-input" type="text" class="form-control input-sm inputbar" placeholder="Write your message here..." />
+													<span class="input-group-btn">
+													<button class="btn btn-sm chatbtn" id="btn-chat">Send</button>
+													</span>
+											</div>
+									</div>
+							</div>
+				</div>
+				</div>
+		</div>
+
+<link rel="stylesheet" href="css/chat.css">
+<script src="js/chat.js"></script>
+
+<script>
+
+$(document).ready(function(){
+
+	$.get("http://snowywords2.ddns.net:5000/unverified", function(data, status){
+		if (data != 404){
+			for (count in data){
+				itemObject = data[count];
+				console.log(itemObject);
+				iID = itemObject.VerificationID
+				iOTP = itemObject.OTP;
+				iImg = itemObject.VPicture;
+				iLv = itemObject.VLevel;
+				iName = itemObject.UserID;
+				iStatus = itemObject.Status;
+
+				$("#productListRow").append(`
+					<div class="col-md-6" id="item`+iID+`">
+	            <div class="media"> <div class="media-left"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="`+iImg+`" data-holder-rendered="true" style="width: 64px; height: 64px;"> </div> <div class="media-body"> <h4 class="media-heading">`+iName+` ยืนยันระดับ`+iLv+`</h4> OTP: `+iOTP+` </div>
+	            <div class="media-right">
+							<button type="button" class="btn btn-default btn-lg" onclick="myFunction('`+iID+`','`+1+`')">
+	  <span class="glyphicons glyphicons-ok-circle" aria-hidden="true"></span> Accept
+	</button>
+							<button type="button" class="btn btn-default btn-lg" onclick="myFunction('`+iID+`','`+2+`')">
+	  <span class="glyphicons glyphicons-remove-circle" aria-hidden="true"></span> Decline
+	</button>
+	            </div>
+	            </div>
+	        </div>
+					`);
+			}
+		} else {
+			$("#productListRow").append(`
+				<div class="col-md-6" id="nono">
+						<div class="media"> <div class="media-left"></div> <div class="media-body"> <h4 class="media-heading"> No verification at the moment.</h4></div>
+
+						</div>
+				</div>
+				`);
+		}
+	});
+//
+// 	$("#productListRow").append(`
+// 		<div class="col-md-6">
+// 				<div class="media"> <div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWI0NzkzMDc0MyB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1YjQ3OTMwNzQzIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy45MjE4NzUiIHk9IjM2LjM2NDA2MjUiPjY0eDY0PC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a> </div> <div class="media-body"> <h4 class="media-heading">มิกะ ยืนยันระดับ1</h4> OTP: 12123 </div>
+// 				<div class="media-right"> <button type="button" class="btn btn-default btn-lg">
+// <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Accept
+// </button><button type="button" class="btn btn-default btn-lg">
+// <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Decline
+// </button>
+// 				</div>
+// 				</div>
+// 		</div>`);
+
+});
+        $('#btnsell').click(function(){
+                window.location.href = "./upload_sale_1";
+
+        });
+
+				function myFunction(iID, iStatus) {
+					//1 for Aprrove, 2 for reject
+					var text = "Approve "+ iID +"?"
+					if (iStatus == 2) {
+						text = "Disapprove "+ iID +"?"
+					}
+					var r = confirm(text);
+			    if (r == true) {
+						datatosenty = '{"VerificationID":' + iID + ', "Status":' + iStatus + '}'
+						$.ajax({
+									type: 'POST',
+									url: 'http://snowywords2.ddns.net:5000/verify',
+									data: datatosenty,
+									dataType:'json',
+									contentType: "application/json",
+									success: function(data){
+										if (data=='201'){
+											alert("Done");
+											$("#item"+iID+"").fadeOut(300, function() { $("#item"+iID+"").remove(); });
+										}
+									}
+						});
+			    } else {
+			    }
+				}
+
+
+</script>
+</body>
+
+
+</html>

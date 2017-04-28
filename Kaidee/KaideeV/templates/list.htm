@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Kaidee || รถ มือสอง, บ้าน, มือถือ มือสอง ซื้อขายใกล้บ้าน</title>
+	<link rel="shortcut icon" href="./img/web_favicon.png">
+
+	<!--jQuery-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="./css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="./css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="./js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="./css/chatbox.css" rel="stylesheet">
+
+	<script src="./js/hover4content.js"></script>
+
+	<script src="./js/chatbox.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
+			<a href="./"><img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon"></a>
+			<!-- <a class="navbar-brand" href="#">Kaidee</a> -->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/verification">แก้ไขข้อมูลผู้ขาย</a></li>
+					<li><button id="btnsell" type="button" class="btn btn-warning">ขาย</button></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container" style="text-align: center; margin: 0 auto;float: none;">
+		<img class="img-responsive tutorial" href="#" src="img/tutorial2.png" width="70%" height="70%" style="text-align: center; margin: 0 auto;float: none;">
+
+		</br>
+	</div>
+
+	<div id="productList">
+		<div class="container">
+			<div class="row" id="productListRow">
+
+
+
+			</div>
+		</div>
+	</div>
+
+	<div class="popup-box chat-popup" id="qnimate">
+		<div class="popup-head">
+			<div class="popup-head-left pull-left"><img src="img/profile.png" alt="iamgurdeeposahan"> Mr. Osas</div>
+			<div class="popup-head-right pull-right">
+						  <!--
+							<div class="btn-group">
+	    							<button class="chat-header-button" data-toggle="dropdown" type="button" aria-expanded="false">
+									<i class="glyphicon glyphicon-cog"></i> </button>
+									<ul role="menu" class="dropdown-menu pull-right">
+										<li><a href="#">Media</a></li>
+										<li><a href="#">Block</a></li>
+										<li><a href="#">Clear Chat</a></li>
+										<li><a href="#">Email Chat</a></li>
+									</ul>
+							</div>
+
+							<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button>
+						-->
+						<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button">X</button>
+					</div>
+				</div>
+				<div class="popup-messages">
+					<div class="direct-chat-messages">
+
+
+						<div class="chat-box-single-line">
+							<abbr class="timestamp">September 11th, 2016</abbr>
+						</div>
+
+
+						<!-- Message. Default to the left -->
+						<div class="direct-chat-msg doted-border">
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-name pull-left">Mr. Osas</span>
+							</div>
+							<!-- /.direct-chat-info -->
+							<img alt="message user image" src="img/profile.png" class="direct-chat-img"><!-- /.direct-chat-img -->
+							<div class="direct-chat-text">
+								My name? My name na Uvuvwevwevwe Onyetenyevwe Ugwemuhwem Osas
+							</div>
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-timestamp pull-right">1.12 AM</span>
+							</div>
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-img-reply-small pull-left">
+
+								</span>
+								<span class="direct-chat-reply-name">Me</span>
+							</div>
+							<!-- /.direct-chat-text -->
+							<div class="direct-chat-text">
+								Pardon?
+							</div>
+						</div>
+						<!-- /.direct-chat-msg -->
+
+					</div>
+					<div class="popup-messages-footer">
+						<textarea id="status_message" placeholder="Type a message..." rows="10" cols="40" name="message"></textarea>
+						<div class="btn-footer">
+			<!--
+				<button class="bg_none"><i class="glyphicon glyphicon-film"></i> </button>
+				<button class="bg_none"><i class="glyphicon glyphicon-camera"></i> </button>
+	            <button class="bg_none"><i class="glyphicon glyphicon-paperclip"></i> </button>
+				<button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
+			-->
+			<span class="pull-left"><a>UPLOAD</a></span>
+			<span class="pull-right"><a>LIKE!</a></span>
+		</div>
+	</div>
+	</div>
+
+	<!-- CHAT UI -->
+	<div class="container">
+			<div class="row chat-window col-xs-10 col-md-3" id="chat_window_1">
+					<div class="col-xs-12 col-md-12">
+						<div class="panel panel-default">
+									<div class="panel-heading top-bar">
+											<div class="col-md-2 col-xs-2">
+													<img class="chat-icon" src="img/Chat_topic.png"></img>
+											</div>
+											 <div class="col-md-4 col-xs-4">
+													<h3 class="panel-title"> Chat</h3>
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<span id="notification" class="badge">0</span>
+											</div>
+											<div class="col-md-4 col-xs-4" style="text-align: right;">
+												<a href="#"><span id="to_contact" class="glyphicon glyphicon-list icon_chat_tolist"></span></a>
+													<a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_chat_minimize"></span></a>
+											</div>
+									</div>
+									<div id="contactpage">
+										<div class="panel-body contact_list_base">
+											<div id="itemList">
+											</div>
+									</div>
+								</div>
+									<div id="chatpage" style="display: none;">
+										<div class="panel-body">
+											<div class="col-md-6 col-xs-6 info_content">
+												<img id="productImg" class="itempic_info" src=""></img>
+												<span id="productName"></span>
+											</div>
+											<div class="col-md-6 col-xs-6 info_content">
+												<img id="targetImg" class="itempic_info" src=""></img>
+												<span id="targetName"></span>
+											</div>
+										</div>
+										<div id ="chat-textbox" class="panel-body msg_container_base">
+										</div>
+										<div class="panel-footer">
+												<div class="input-group">
+														<input id="btn-input" type="text" class="form-control input-sm inputbar" placeholder="Write your message here..." />
+														<span class="input-group-btn">
+														<button class="btn btn-sm chatbtn" id="btn-chat">Send</button>
+														</span>
+												</div>
+										</div>
+								</div>
+					</div>
+					</div>
+			</div>
+
+	<link rel="stylesheet" href="css/chat.css">
+	<script src="js/chat.js"></script>
+
+
+	<script>
+
+	$(document).ready(function(){
+
+		$.get("http://snowywords2.ddns.net:5000/browse_product", function(data, status){
+				for (count in data){
+					itemObject = data[count];
+					console.log(itemObject);
+					iId = itemObject.ItemID;
+					iImg = itemObject.ItemImage[0];
+					iLv = itemObject.LevelID_u;
+					iName = itemObject.Name;
+					iPost = itemObject.Postcode;
+					iPrice = itemObject.Price;
+
+					$("#productListRow").append(`
+						<a href="./product?id=`+iId+`">
+							<div class="col-sm-3">
+								<div class="panel panel-default productPanel">
+									<div class="panel-heading text-center">
+										<img class="img-responsive productImage" href="./kaidee3.htm" src="`+iImg+`">
+									</div>
+									<div class="panel-body">
+										<div class="productName">`+iName+`</div>
+										<div class="productLocation">`+iPost+`</div>
+										<div><span><img class="img-responsive ratingImg" src="img/r`+iLv+`.png"><div class="my-popover-content">Verification Lv.`+iLv+`</div></span><span class="ad-price">฿`+iPrice+`</span></div>
+									</div>
+									<div class="my-popover-content">
+										DESCRIPTION
+									</div>
+								</div>
+							</div>
+						</a>
+						`);
+				}
+		});
+
+	});
+	$('#btnsell').click(function(){
+					window.location.href = "./upload_sale_1";
+
+	});
+</body>
+
+
+
+
+</script>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Kaidee || ช่วยเหลือ หัวข้อย่อย</title>
+	    <link rel="shortcut icon" href="./img/web_favicon.png">
+        <!--jQuery-->
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	    <!-- Latest compiled and minified CSS -->
+	    <link rel="stylesheet" href="./css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="./css/bootstrap-theme.min.css" rel="stylesheet">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="./js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <style>
+             #space{
+                height: 40px;
+            }
+
+             .footer {
+                  position: absolute;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                  padding: 3px;
+                  background-color: #efefef;
+                  text-align: left;
+            }
+
+        </style>
+    </head>
+    <body>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+		<div class="container">
+			<button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
+			<a href="./"><img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon"></a>
+			<!-- <a class="navbar-brand" href="#">Kaidee</a> -->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/verification">แก้ไขข้อมูลผู้ขาย</a></li>
+					<li><button id="btnsell" type="button" class="btn btn-warning">ขาย</button></li>
+				</ul>
+			</div>
+		</div>
+	    </nav>
+        <div class="container" >
+            <div class="row" >
+                <div class="col-md-1 ">
+                    <img src="img/iconsale1_bright.png" style="width:100px;height:100px;">
+                </div>
+                <div class="col-md-1">
+                    <img src="img/iconsale2_bright.png" style="width:200px;height:100px;">
+                </div>
+                <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale3_bright.png" style="width:200px;height:100px;">
+                </div>
+                 <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale4_bright.png" style="width:200px;height:100px;">
+                </div>
+                 <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale5_bright.png" style="width:200px;height:100px;">
+                </div>
+                <div class="col-md-1 col-md-offset-1">
+                    <img src="img/iconsale6_bright.png" style="width:200px;height:100px;">
+                </div>
+            </div>
+        </div>
+        <div id="space"></div>
+        <div style="text-align: center;">
+            <h1>ทางระบบได้รับข้อมูลแล้ว กรุณารอยืนยันผล</h1>
+        </div>
+        <div id="space"></div>
+        <div style="text-align: center;">
+            <button id="goToHomePage" style="float:center;" type="button" class="btn btn-success">ย้อนกลับหน้าหลัก</button>
+        </div>
+        <script>
+
+            $('#goToHomePage').click(function(){
+                window.location.href = "/";
+
+            });
+        </script>
+
+        <div class="footer">
+            <a href="./help"><h3 id='openfaq'>FAQ</h3></a>
+        </div>
+        <!-- CHAT UI -->
+        <div class="container">
+            <div class="row chat-window col-xs-10 col-md-3" id="chat_window_1">
+                <div class="col-xs-12 col-md-12">
+                  <div class="panel panel-default">
+                        <div class="panel-heading top-bar">
+                            <div class="col-md-2 col-xs-2">
+                                <img class="chat-icon" src="img/Chat_topic.png"></img>
+                            </div>
+                             <div class="col-md-4 col-xs-4">
+                                <h3 class="panel-title"> Chat</h3>
+                            </div>
+                            <div class="col-md-2 col-xs-2">
+                              <span id="notification" class="badge">0</span>
+                            </div>
+                            <div class="col-md-4 col-xs-4" style="text-align: right;">
+                              <a href="#"><span id="to_contact" class="glyphicon glyphicon-list icon_chat_tolist"></span></a>
+                                <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_chat_minimize"></span></a>
+                            </div>
+                        </div>
+                        <div id="contactpage">
+                          <div class="panel-body contact_list_base">
+                            <div id="itemList">
+                            </div>
+                        </div>
+                      </div>
+                        <div id="chatpage" style="display: none;">
+                          <div class="panel-body">
+                            <div class="col-md-6 col-xs-6 info_content">
+                              <img id="productImg" class="itempic_info" src=""></img>
+                              <span id="productName"></span>
+                            </div>
+                            <div class="col-md-6 col-xs-6 info_content">
+                              <img id="targetImg" class="itempic_info" src=""></img>
+                              <span id="targetName"></span>
+                            </div>
+                          </div>
+                          <div id ="chat-textbox" class="panel-body msg_container_base">
+                          </div>
+                          <div class="panel-footer">
+                              <div class="input-group">
+                                  <input id="btn-input" type="text" class="form-control input-sm inputbar" placeholder="Write your message here..." />
+                                  <span class="input-group-btn">
+                                  <button class="btn btn-sm chatbtn" id="btn-chat">Send</button>
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                </div>
+                </div>
+            </div>
+
+        <link rel="stylesheet" href="css/chat.css">
+        <script src="js/chat.js"></script>
+    </body>
+</html>
