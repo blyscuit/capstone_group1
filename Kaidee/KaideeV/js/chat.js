@@ -102,7 +102,7 @@ function getDealList(){
                     name = response[i].SellerID;
                 }
                 chatIDAvaiable[i] = response[i].ChatID;
-                createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID[0]);
+                createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID);
             }
          },
          error: function(){
