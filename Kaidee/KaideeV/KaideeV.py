@@ -127,8 +127,8 @@ def logout():
 
 # ========================= User Information =========================
 
-@app.route('/users/<int:UserID>', methods=['GET'])
-def users(UserID):
+@app.route('/users', methods=['GET'])
+def users():
     if not session.get('logged_in'):
         print('Not logged in!')
         return ('Cannot load data: user is not logged in')
@@ -136,7 +136,7 @@ def users(UserID):
     cur = mysql.get_db().cursor()
     cur2 = mysql.get_db().cursor()
     query_string = "SELECT Firstname, Lastname, Email, Postcode, Display_name, LevelID_u AS VLevel, ProfilePic \
-                    FROM kaidee.user WHERE UserID = {'UserID'}".format(UserID=UserID)
+                    FROM kaidee.user WHERE UserID = " + str(userID)
     cur.execute(query_string)
     columns = [column[0] for column in cur.description]
     results = []
@@ -145,13 +145,13 @@ def users(UserID):
     for row in cur.fetchall():
         FAQID = row[0]
         row = list(row)
-        query_string_2 = "SELECT Phone_no FROM phone WHERE UserID_p = {'UserID'}".format(UserID=UserID)
+        query_string_2 = "SELECT Phone_no FROM phone WHERE UserID_p = " + str(userID)
         cur2.execute(query_string_2)
         phoneNo = []
         for i in cur2.fetchall():
             phoneNo.append(i[0])
         row.append(phoneNo)
-        query_string_2 = "SELECT SocialID, Type FROM social WHERE UserID_s = {'UserID'}".format(UserID=UserID)
+        query_string_2 = "SELECT SocialID, Type FROM social WHERE UserID_s = " + str(userID)
         cur2.execute(query_string_2)
         data = cur2.fetchall()
         columns2 = getSocialType([r[1] for r in data])
@@ -328,8 +328,9 @@ def get_deal_info(ChatID):
     cur = mysql.get_db().cursor()
     cur2 = mysql.get_db().cursor()
     query_string = "SELECT ItemID, Name AS ItemName, Description AS ItemDescription, BuyerID_c AS BuyerID, SellerID_c AS SellerID, \
-                    Display_name, ProfilePic FROM item i, user u, chat c \
-                    WHERE c.ChatID = '{ChatID}' AND i.UserID_i = c.SellerID_c AND u.UserID = c.SellerID_c AND c.ItemID_c = i.ItemID".format(ChatID=ChatID)
+                    b.Display_name AS BuyerName, s.Display_name AS SellerName, b.ProfilePic AS BuyerPic, s.ProfilePic AS SellerPic \
+                    FROM item i, user b, user s, chat c WHERE c.ChatID = '{ChatID}' AND i.UserID_i = c.SellerID_c \
+                    AND s.UserID = c.SellerID_c AND b.UserID = c.BuyerID_c AND c.ItemID_c = i.ItemID".format(ChatID=ChatID)
     cur.execute(query_string)
     columns = [column[0] for column in cur.description]
     results = []
