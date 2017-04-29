@@ -10,11 +10,6 @@ $(document).ready(function() {
     var UserID = null;
     getSession();
 
-    var $minus = $('.panel-heading span.icon_chat_minimize')
-    $minus.parents('.panel').find('.panel-body, .panel-footer').hide();
-    $minus.addClass('panel-collapsed');
-    $minus.removeClass('glyphicon-minus').addClass('glyphicon-plus');
-
     $("#notification").hide();
     $('#chatpage, #to_contact').hide();
 
@@ -305,22 +300,26 @@ function getSession(){
   $.getJSON('./session_data', function(data) {
   // $.getJSON('http://localhost:5000/session_data', function(data) {
       if(data == 404){
-      console.log("no user:"+UserID);
-          UserID = null;
+        console.log("no user:"+UserID);
+        UserID = null;
+        var $minus = $('.panel-heading span.icon_chat_minimize')
+        $minus.parents('.panel').find('.panel-body, .panel-footer').hide();
+        $minus.addClass('panel-collapsed');
+        $minus.removeClass('glyphicon-minus').addClass('glyphicon-plus');
       }else{
-          UserID = data.UserID;
-          console.log("get user: "+UserID);
-          USERNAME = data.Display_name;
-          getDealList();
-          console.log(UserID);
-          setInterval(function(){
-              checkNotification();
-              getLatestMessage(currentChatID);
-              for(var i = 0; i < chatIDAvaiable.length; i++){
-                  countUnread(chatIDAvaiable[i]);
-                  checkNotiForDeal(chatIDAvaiable[i]);
-              }
-          }, 1000);
+        UserID = data.UserID;
+        console.log("get user: "+UserID);
+        USERNAME = data.Display_name;
+        getDealList();
+        console.log(UserID);
+        setInterval(function(){
+            checkNotification();
+            getLatestMessage(currentChatID);
+            for(var i = 0; i < chatIDAvaiable.length; i++){
+              countUnread(chatIDAvaiable[i]);
+              checkNotiForDeal(chatIDAvaiable[i]);
+            }
+        }, 1000);
       }
   });
 }
