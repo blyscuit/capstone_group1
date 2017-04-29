@@ -18,10 +18,12 @@ from random import randint
 
 app = Flask(__name__, static_url_path = "", static_folder = "")
 # app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+
 app.config['MYSQL_DATABASE_HOST'] = 'snowywords2.ddns.net'
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = '0904'
 app.config['SERVER_NAME'] = 'localhost:5000'
+
 # app.config['SERVER_NAME'] = 'snowywords2.ddns.net:5000'
 
 # app.config['MYSQL_DATABASE_HOST'] = 'localhost'
@@ -46,6 +48,7 @@ CORS(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+URL_for_inserting_Picture = "http://snowywords2.ddns.net:5000"
 
 # ========================= Default Route =========================
 
@@ -514,7 +517,7 @@ def upload():
 
         cur = mysql.get_db().cursor()
         db = mysql.get_db()
-        url = "http://snowywords2.ddns.net:5000" + str(url_for('uploaded_file', filename = unique_filename))
+        url = URL_for_inserting_Picture + str(url_for('uploaded_file', filename = unique_filename))
         query_string = "INSERT INTO verification(Vlevel, VPicture, Status, OTP, UserID_v) \
                         VALUES (" + str(vlevel) + ", \"" + url + "\", 0, " + randomOTP() + ", " + str(userID) +")"
         try:
