@@ -78,7 +78,7 @@ function createDeal(img, itemName, user, isBuy, chatID){
         statuspic = "img/sell_icon.png";
     }
     // $("#itemList").append('<a href="#" onclick="getDealInfo(' + id + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h4>' + itemName + '</h4><h5>' + user +'</h5></div></div></a>');
-    $("#itemList").append('<a href="#" onclick="getDealInfo(' + chatID + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h5 class="infotext">' + itemName + '</h5><h5 class="infotext">Seller ID: ' + user +'</h5></div><div class="col-md-2 col-xs-2 info_content"><span class="badge" id="deal_chat_' + chatID + '"></span></div></div></a>');
+    $("#itemList").append('<a href="#" onclick="getDealInfo(' + chatID + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h5 class="infotext">' + itemName + '</h5><h5 class="infotext">' + user +'</h5></div><div class="col-md-2 col-xs-2 info_content"><span class="badge" id="deal_chat_' + chatID + '"></span></div></div></a>');
 }
 
 function getDealList(){
@@ -118,13 +118,16 @@ function getDealInfo(ChatID){
             $(".msg_container_base").empty();
             $('#productImg').attr('src', response[0].ItemImage);
             $('#productName').text(response[0].ItemName);
-            if(response[0].BuyerID == UserID){
+            if(response[0].BuyerID == 0 || response[0].SellerID == 0){
+                $('#targetImg').attr('src', '');
+                $('#targetName').text('DELETED USER');
+            }else if(response[0].BuyerID == UserID){
                 //IF USER IS THE BUYER
-                $('#targetImg').attr('src', response[0].SellerPic); //DUMMY IMG
+                $('#targetImg').attr('src', response[0].SellerPic);
                 $('#targetName').text(response[0].SellerName);
             }else{
                 //IF USER IS THE SELLER
-                $('#targetImg').attr('src', response[0].BuyerPic); //DUMMY IMG
+                $('#targetImg').attr('src', response[0].BuyerPic);
                 $('#targetName').text(response[0].BuyerName);
             }
             getMessageHistory(ChatID);
@@ -184,7 +187,6 @@ function sendMessage(){
         dataType: "json",
         data: JSON.stringify(data),
         success: function(){
-            getLatestMessage(currentChatID);
             $("#btn-input").val("");
         },
         error: function(){
@@ -203,22 +205,24 @@ function getLatestMessage(ChatID){
             ChatID: ChatID
         },
         success: function(response){
-            for(var i = response.length - 1; i <= 0; i--){
-                if(response[i].MessageID >= latestMessage){
-                    latestMessage = response[i].MessageID;
-                    if(response[i].SenderID == UserID){
-                        addMsgRow(true, false, response[i].Text, response[i].Timestamp);
-                    }else{
-                        addMsgRow(false, false, response[i].Text, response[i].Timestamp);
+            if(response != 404){
+                for(var i = response.length - 1; i >= 0; i--){
+                    if(response[i].MessageID >= latestMessage){
+                        latestMessage = response[i].MessageID;
+                        if(response[i].SenderID == UserID){
+                            addMsgRow(true, false, response[i].Text, response[i].Timestamp);
+                        }else{
+                            addMsgRow(false, false, response[i].Text, response[i].Timestamp);
+                        }
+                        scrollChatBoxDown();
                     }
-                }
-                if($("#chat-textbox").is(":visible")){
-                    if(response[i].IsRead == 0 && response[i].SenderID != UserID){
-                        markAsRead(response[i].MessageID);
+                    if($("#chat-textbox").is(":visible")){
+                        if(response[i].IsRead == 0 && response[i].SenderID != UserID){
+                            markAsRead(response[i].MessageID);
+                        }
                     }
                 }
             }
-            scrollChatBoxDown();
         },
         error: function(){
             //DO NOTHING
@@ -258,7 +262,7 @@ function countUnread(chatid){
         success: function(response){
             for(var i = 0; i < response.length; i++){
                 if(response != 'No data found at the index'){
-                    if(UserID == response[i].SenderID){
+                    if(UserID != response[i].SenderID){
                         if(notiDict["noti_chat_"+chatid] != response[i].UnreadQty){
                             notiDict["noti_chat_"+chatid] = response[i].UnreadQty;
                         }
