@@ -21,11 +21,17 @@ app = Flask(__name__, static_url_path = "", static_folder = "")
 app.config['MYSQL_DATABASE_HOST'] = 'snowywords2.ddns.net'
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = '0904'
+app.config['SERVER_NAME'] = 'localhost:5000'
+
+# app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+# app.config['MYSQL_DATABASE_USER'] = 'root'
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+
 app.config['MYSQL_DATABASE_DB'] = 'kaidee'
 app.config['UPLOAD_FOLDER'] = 'upload/'
 app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 # app.config['SERVER_NAME'] = 'snowywords2.ddns.net:5000'
-app.config['SERVER_NAME'] = 'localhost:5000'
+
 app.config.update(dict(
     # DATABASE=os.path.join(app.root_path, 'flaskr.db'),
     DEBUG=True,
