@@ -91,7 +91,7 @@ function getDealList(){
     INCLUDE DEAL ID, PRODUCT IMAGE, PRODUCT NAME, AND IN-CONTACT USER NAME */
     $.ajax({
          type: 'GET',
-         url: './get_deal_list/',
+         url: './get_deal_list',
          data: {
             UserID: UserID
          },
@@ -105,7 +105,7 @@ function getDealList(){
                     name = response[i].SellerID;
                 }
                 chatIDAvaiable[i] = response[i].ChatID[0];
-                createDeal(response[i].ItemID, response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID[0]);
+                createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID[0]);
             }
          },
          error: function(){
