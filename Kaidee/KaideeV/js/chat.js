@@ -96,13 +96,11 @@ function getDealList(){
             for(var i = 0; i < response.length; i++){
                 if(response[i].BuyerID == UserID){
                     isBuy = false;
-                    name = getUserInfo(response[i].BuyerID).Display_name;
                 }else{
                     isBuy = true;
-                    name = getUserInfo(response[i].SellerID).Display_name;
                 }
                 chatIDAvaiable[i] = response[i].ChatID;
-                createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID);
+                createDeal(response[i].ItemImage, response[i].ItemName, " ", isBuy, response[i].ChatID);
             }
          },
          error: function(){
@@ -127,12 +125,12 @@ function getDealInfo(ChatID){
             $('#productName').text(response[0].ItemName);
             if(response[0].BuyerID == UserID){
                 //IF USER IS THE BUYER
-                $('#targetImg').attr('src', getUserInfo(response[0].SellerID).ProfilePic); //DUMMY IMG
-                $('#targetName').text(getUserInfo(response[0].SellerID).Display_name);
+                $('#targetImg').attr('src', response[0].SellerPic); //DUMMY IMG
+                $('#targetName').text(response[0].SellerName);
             }else{
                 //IF USER IS THE SELLER
-                $('#targetImg').attr('src', getUserInfo(response[0].BuyerID).ProfilePic); //DUMMY IMG
-                $('#targetName').text(getUserInfo(response[0].BuyerID).Display_name);
+                $('#targetImg').attr('src', response[0].BuyerPic); //DUMMY IMG
+                $('#targetName').text(response[0].BuyerName);
             }
             getMessageHistory(ChatID);
             currentChatID = ChatID;
@@ -231,27 +229,6 @@ function getLatestMessage(ChatID){
             //DO NOTHING
         }
     });
-}
-
-function getUserInfo(id){
-    $.ajax({
-        type: 'GET',
-        url: './users/' + id,
-        data: {
-            UserID: id
-        },
-        success: function(response){
-            if(response != 'No data found at the index'){
-                return response;
-            }else{
-                return response[0];
-            }
-        },
-        error: function(){
-            //DO NOTHING
-        }
-    });
-
 }
 
 function checkNotification(){
