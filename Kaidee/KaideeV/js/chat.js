@@ -104,7 +104,7 @@ function getDealList(){
                     isBuy = true;
                     name = response[i].SellerID;
                 }
-                chatIDAvaiable[i] = response[i].ChatID[0];
+                chatIDAvaiable[i] = response[i].ChatID;
                 createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID[0]);
             }
          },
@@ -128,10 +128,10 @@ function getDealInfo(ChatID){
             $(".msg_container_base").empty();
             $('#productImg').attr('src', response[0].ItemImage);
             $('#productName').text(response[0].ItemName);
-            if(response[0].BuyerID == UserID){ 
+            if(response[0].BuyerID == UserID){
                 //IF USER IS THE BUYER
                 $('#targetImg').attr('src', response[0].ProfilePic); //DUMMY IMG
-                $('#targetName').text("SELLER ID: " + response[0].SellerID); 
+                $('#targetName').text("SELLER ID: " + response[0].SellerID);
             }else{
                 //IF USER IS THE SELLER
                 $('#targetImg').attr('src', response[0].ProfilePic); //DUMMY IMG

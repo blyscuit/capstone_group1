@@ -18,14 +18,14 @@ from random import randint
 
 app = Flask(__name__, static_url_path = "", static_folder = "")
 # app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_HOST'] = 'snowywords2.ddns.net'
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '0904'
-app.config['SERVER_NAME'] = 'localhost:5000'
-
-# app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+# app.config['MYSQL_DATABASE_HOST'] = 'snowywords2.ddns.net'
 # app.config['MYSQL_DATABASE_USER'] = 'root'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+# app.config['MYSQL_DATABASE_PASSWORD'] = '0904'
+# app.config['SERVER_NAME'] = 'localhost:5000'
+
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
 
 app.config['MYSQL_DATABASE_DB'] = 'kaidee'
 app.config['UPLOAD_FOLDER'] = 'upload/'
