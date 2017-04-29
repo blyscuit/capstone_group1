@@ -92,9 +92,6 @@ function getDealList(){
     $.ajax({
          type: 'GET',
          url: './get_deal_list',
-         data: {
-            UserID: UserID
-         },
          success: function(response){
             for(var i = 0; i < response.length; i++){
                 if(response[i].BuyerID == UserID){
@@ -120,7 +117,7 @@ function getDealInfo(ChatID){
          type: 'GET',
          url: './get_deal_info/' + ChatID,
          data: {
-            ItemID: ItemID
+            ChatID: ChatID
          },
          success: function(response){
             $('#contactpage').hide();
