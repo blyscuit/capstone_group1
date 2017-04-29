@@ -66,6 +66,9 @@ def static_file(path):
 
 @app.route('/login', methods=['POST'])
 def login():
+    if (request.form['username'] == 'deleted user') and (request.form['password'] == '0000'):
+        print ("User not found")
+        return ('This user does not exist')
     username = None
     password = None
     userID = None
@@ -81,35 +84,35 @@ def login():
         username = row[0]
         password = row[1]
         userID = row[2]
-    query_string = "SELECT UserID, Firstname, Lastname, Email, Postcode, Display_name, LevelID_u AS VLevel, ProfilePic \
-                    FROM kaidee.user WHERE UserID = " + str(userID)
-    cur.execute(query_string)
-    columns = [column[0] for column in cur.description]
-    results = []
-    columns.append('Phone')
-    columns.append('Social')
-    for row in cur.fetchall():
-        FAQID = row[0]
-        row = list(row)
-        query_string_2 = "SELECT Phone_no FROM phone WHERE UserID_p = " + str(userID)
-        cur2.execute(query_string_2)
-        phoneNo = []
-        for i in cur2.fetchall():
-            phoneNo.append(i[0])
-        row.append(phoneNo)
-        query_string_2 = "SELECT SocialID, Type FROM social WHERE UserID_s = " + str(userID)
-        cur2.execute(query_string_2)
-        data = cur2.fetchall()
-        columns2 = getSocialType([r[1] for r in data])
-        social = []
-        row2 = []
-        for i in data:
-            row2.append(i[0])
-        social.append(dict(zip(columns2, row2)))
-        row.append(social[0])
-        results.append(dict(zip(columns, row)))
     if request.form['password'] == str(password) and request.form['username'] == str(username):
         session['logged_in'] = True
+        query_string = "SELECT UserID, Firstname, Lastname, Email, Postcode, Display_name, LevelID_u AS VLevel, ProfilePic \
+                        FROM kaidee.user WHERE UserID = " + str(userID)
+        cur.execute(query_string)
+        columns = [column[0] for column in cur.description]
+        results = []
+        columns.append('Phone')
+        columns.append('Social')
+        for row in cur.fetchall():
+            FAQID = row[0]
+            row = list(row)
+            query_string_2 = "SELECT Phone_no FROM phone WHERE UserID_p = " + str(userID)
+            cur2.execute(query_string_2)
+            phoneNo = []
+            for i in cur2.fetchall():
+                phoneNo.append(i[0])
+            row.append(phoneNo)
+            query_string_2 = "SELECT SocialID, Type FROM social WHERE UserID_s = " + str(userID)
+            cur2.execute(query_string_2)
+            data = cur2.fetchall()
+            columns2 = getSocialType([r[1] for r in data])
+            social = []
+            row2 = []
+            for i in data:
+                row2.append(i[0])
+            social.append(dict(zip(columns2, row2)))
+            row.append(social[0])
+            results.append(dict(zip(columns, row)))
         if len(results)>0:
             session['udata'] = json.dumps(results)
             if str(username) == "admin@admin.com":
@@ -119,7 +122,7 @@ def login():
                 return redirect('/')
     else:
         flash('wrong password!')
-        return "the password is fucking wrongggggg"
+        return "The password is incorrect"
 
 
 @app.route("/logout")
@@ -759,7 +762,7 @@ def uploadsale6():
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return 'This page does not exist you fuckin dummy', 404
+    return 'The page does not exist', 404
 
 
 # ========================= Methods =========================
