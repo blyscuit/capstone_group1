@@ -96,10 +96,10 @@ function getDealList(){
             for(var i = 0; i < response.length; i++){
                 if(response[i].BuyerID == UserID){
                     isBuy = false;
-                    name = response[i].BuyerID;
+                    name = getUserInfo(response[i].BuyerID).Display_name;
                 }else{
                     isBuy = true;
-                    name = response[i].SellerID;
+                    name = getUserInfo(response[i].SellerID).Display_name;
                 }
                 chatIDAvaiable[i] = response[i].ChatID;
                 createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID);
@@ -127,12 +127,12 @@ function getDealInfo(ChatID){
             $('#productName').text(response[0].ItemName);
             if(response[0].BuyerID == UserID){
                 //IF USER IS THE BUYER
-                $('#targetImg').attr('src', response[0].ProfilePic); //DUMMY IMG
-                $('#targetName').text("SELLER ID: " + response[0].SellerID);
+                $('#targetImg').attr('src', getUserInfo(response[0].SellerID).ProfilePic); //DUMMY IMG
+                $('#targetName').text(getUserInfo(response[0].SellerID).Display_name);
             }else{
                 //IF USER IS THE SELLER
-                $('#targetImg').attr('src', response[0].ProfilePic); //DUMMY IMG
-                $('#targetName').text("BUYER ID: " + response[0].BuyerID);
+                $('#targetImg').attr('src', getUserInfo(response[0].BuyerID).ProfilePic); //DUMMY IMG
+                $('#targetName').text(getUserInfo(response[0].BuyerID).Display_name);
             }
             getMessageHistory(ChatID);
             currentChatID = ChatID;
@@ -233,35 +233,26 @@ function getLatestMessage(ChatID){
     });
 }
 
-// function getUserData(id){
-//     $.ajax({
-//         type: 'GET',
-//         url: './users/' + id,
-//         data: {
-//             UserID: id
-//         },
-//         success: function(response){
-//             if(response != 'No data found at the index'){
-//                 return response[0];
-//             }else{
-//                 return response;
-//             }
-//         },
-//         error: function(){
-//             //DO NOTHING
-//         }
-//     });
+function getUserInfo(id){
+    $.ajax({
+        type: 'GET',
+        url: './users/' + id,
+        data: {
+            UserID: id
+        },
+        success: function(response){
+            if(response != 'No data found at the index'){
+                return response;
+            }else{
+                return response[0];
+            }
+        },
+        error: function(){
+            //DO NOTHING
+        }
+    });
 
-// }
-
-// function getDisplayName(id){
-//     info = getUserData(id).Display_name;
-//     if(response != 'No data found at the index'){
-//         return info.Display_name;
-//     }else{
-//         return info;
-//     }
-// }
+}
 
 function checkNotification(){
     temp = 0;
