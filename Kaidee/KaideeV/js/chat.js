@@ -150,7 +150,7 @@ function getMessageHistory(ChatID){
             ChatID: ChatID
          },
          success: function(response){
-            if(response != 'No data found at the index'){
+            if(response != '404'){
               latestMessage = response[0].MessageID;
                 for(var i = 0; i < response.length; i++){
                     if(UserID == response[i].SenderID){
@@ -207,7 +207,8 @@ function getLatestMessage(ChatID){
         success: function(response){
             if(response != 404){
                 for(var i = response.length - 1; i >= 0; i--){
-                    if(response[i].MessageID >= latestMessage){
+                    console.log(response[i].MessageID + ' | ' + latestMessage)
+                    if(response[i].MessageID > latestMessage){
                         latestMessage = response[i].MessageID;
                         if(response[i].SenderID == UserID){
                             addMsgRow(true, false, response[i].Text, response[i].Timestamp);
