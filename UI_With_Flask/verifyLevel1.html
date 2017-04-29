@@ -64,12 +64,11 @@
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <button id="btnsell-toggle" type="button" class="navbar-toggle btn btn-warning btnsell-toggle">ขาย</button>
-      <a href="#"><img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon"></a>
+      <a href="./"><img class="navbar-brand" src="img/Kaidee-logo-300.png" alt="Kaidee icon"></a>
 
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" id="addClass">พูดคุย</a></li>
-          <li><a href="./verify.html">แก้ไขข้อมูลผู้ขาย</a></li>
+          <li><a href="./verification">แก้ไขข้อมูลผู้ขาย</a></li>
           <li><button id="btnsell" type="button" class="btn btn-warning">ขาย</button></li>
         </ul>
       </div>
@@ -92,9 +91,9 @@
     </div>
     <div class="upload-container">
       <div class="col-md-4" style="border-radius: 10px; background: #eeeeee; width: 550px; height: 350px;">
-        <img src="img/choosePic.png" style="border-radius: 10px; margin-top:25px; margin-left:25px; background-color:white; height:250px;">
-      </img>
-        <div style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58  ; color:white; font-size:25px; height:50px; line-height:50px;position:absolute; bottom:10px; left:225px; ">
+        <img id="file" src="img/choosePic.png" style="position: absolute; margin: auto; top: 25px; left: 0; right: 0; border-radius: 10px; background-color:white; height:250px;">
+        </img>
+        <div id="upload" style="display:inline-block; border-radius: 10px; padding-left: 15px; padding-right:15px; background-color:#6DDA58  ; color:white; font-size:25px; height:50px; line-height:50px;position:absolute; bottom:10px; left:225px; ">
           อัพโหลด
         </div>
       </div>
@@ -102,26 +101,115 @@
         <div class="verify-example-text">
           ภาพตัวอย่าง
           <div>
-        <div style=" border-radius: 10px; margin-top:20px; background-color:white; height:240px;">
-        </div>
+        <img src="img/lv1.png" style=" border-radius: 10px; margin-top:20px; background-color:white; height:240px;">
+        </img>
       </div>
     </div>
   </div>
 </div>
 </div>
+
+<form action="./upload?vlevel=1" method="post" enctype="multipart/form-data" hidden>
+   <!-- <input id="fileInput" name="file" type="file"  style="display:none;"> /> -->
+      <input id="fileInput" name="file" type="file"/>
+    <input id="theButton" type="submit" name="u_button" value="Upload" />
+</form>
+
         <div class="push"></div>
         <div class="footerr">
-            <a href="./help.html"><h3 id='openfaq' style="line-height:50px; height:50px;">FAQ</h3></a>
+            <a href="./help"><h3 id='openfaq' style="line-height:50px; height:50px;">FAQ</h3></a>
         </div>
+
+
 
  <script>
         $('#btnsell').click(function(){
-                window.location.href = "./uploadSale1.html";
+                window.location.href = "./upload_sale_1";
 
+        });
+
+        window.onload = function () {
+          document.getElementById('file').onclick = function() {
+            document.getElementById('fileInput').click();
+          };
+          document.getElementById('upload').onclick = function() {
+            document.getElementById('theButton').click();
+          };
+        }
+
+
+        function readURL(input) {
+
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+              $('#file').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+
+        $("#fileInput").change(function(){
+          readURL(this);
         });
     </script>
 
+    <!-- CHAT UI -->
+    <div class="container">
+        <div class="row chat-window col-xs-10 col-md-3" id="chat_window_1">
+            <div class="col-xs-12 col-md-12">
+              <div class="panel panel-default">
+                    <div class="panel-heading top-bar">
+                        <div class="col-md-2 col-xs-2">
+                            <img class="chat-icon" src="img/Chat_topic.png"></img>
+                        </div>
+                         <div class="col-md-4 col-xs-4">
+                            <h3 class="panel-title"> Chat</h3>
+                        </div>
+                        <div class="col-md-2 col-xs-2">
+                          <span id="notification" class="badge">0</span>
+                        </div>
+                        <div class="col-md-4 col-xs-4" style="text-align: right;">
+                          <a href="#"><span id="to_contact" class="glyphicon glyphicon-list icon_chat_tolist"></span></a>
+                            <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_chat_minimize"></span></a>
+                        </div>
+                    </div>
+                    <div id="contactpage">
+                      <div class="panel-body contact_list_base">
+                        <div id="itemList">
+                        </div>
+                    </div>
+                  </div>
+                    <div id="chatpage" style="display: none;">
+                      <div class="panel-body">
+                        <div class="col-md-6 col-xs-6 info_content">
+                          <img id="productImg" class="itempic_info" src=""></img>
+                          <span id="productName"></span>
+                        </div>
+                        <div class="col-md-6 col-xs-6 info_content">
+                          <img id="targetImg" class="itempic_info" src=""></img>
+                          <span id="targetName"></span>
+                        </div>
+                      </div>
+                      <div id ="chat-textbox" class="panel-body msg_container_base">
+                      </div>
+                      <div class="panel-footer">
+                          <div class="input-group">
+                              <input id="btn-input" type="text" class="form-control input-sm inputbar" placeholder="Write your message here..." />
+                              <span class="input-group-btn">
+                              <button class="btn btn-sm chatbtn" id="btn-chat">Send</button>
+                              </span>
+                          </div>
+                      </div>
+                  </div>
+            </div>
+            </div>
+        </div>
 
+    <link rel="stylesheet" href="css/chat.css">
+    <script src="js/chat.js"></script>
 
 </body>
 </html>
