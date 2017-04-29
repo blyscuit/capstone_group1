@@ -203,8 +203,8 @@ function getLatestMessage(ChatID){
             ChatID: ChatID
         },
         success: function(response){
-            for(var i = response.length - 1; i >= 0; i--){
-                if(response[i].MessageID != latestMessage){
+            for(var i = response.length - 1; i <= 0; i--){
+                if(response[i].MessageID >= latestMessage){
                     latestMessage = response[i].MessageID;
                     if(response[i].SenderID == UserID){
                         addMsgRow(true, false, response[i].Text, response[i].Timestamp);
