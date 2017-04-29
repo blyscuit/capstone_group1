@@ -1,6 +1,3 @@
-// //FOR TESTING ONLY
-// USERNAME = "Newy";
-
 //DO NOT DELETE THIS
 currentChatID = 0;
 latestMessage = 0;
@@ -86,27 +83,26 @@ function createDeal(img, itemName, user, isBuy, chatID){
         statuspic = "img/sell_icon.png";
     }
     // $("#itemList").append('<a href="#" onclick="getDealInfo(' + id + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h4>' + itemName + '</h4><h5>' + user +'</h5></div></div></a>');
-    $("#itemList").append('<a href="#" onclick="getDealInfo(' + chatID + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h5 class="infotext">' + itemName + '</h5><h5 class="infotext">' + user +'</h5></div><div class="col-md-2 col-xs-2 info_content"><span class="badge" id="deal_chat_' + chatID + '"></span></div></div></a>');
+    $("#itemList").append('<a href="#" onclick="getDealInfo(' + chatID + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h5 class="infotext">' + itemName + '</h5><h5 class="infotext">Seller ID: ' + user +'</h5></div><div class="col-md-2 col-xs-2 info_content"><span class="badge" id="deal_chat_' + chatID + '"></span></div></div></a>');
 }
 
-function getDealList(UserID){
+function getDealList(){
     /* THE USER ID WILL BE SENT TO THE SERVER AND GET LIST OF DEALS MADE BY THE USER WHICH
     INCLUDE DEAL ID, PRODUCT IMAGE, PRODUCT NAME, AND IN-CONTACT USER NAME */
     $.ajax({
          type: 'GET',
-         url: './get_deal_list/' + UserID,
-         data: {
-            UserID: UserID
-         },
+         url: './get_deal_list',
          success: function(response){
             for(var i = 0; i < response.length; i++){
-                if(response[i].Display_name == USERNAME){
+                if(response[i].BuyerID == UserID){
                     isBuy = false;
+                    name = response[i].BuyerID;
                 }else{
                     isBuy = true;
+                    name = response[i].SellerID;
                 }
-                chatIDAvaiable[i] = response[i].ChatID[0];
-                createDeal(response[i].ItemID, response[i].ItemImage, response[i].ItemName, response[i].Display_name, isBuy, response[i].ChatID[0]);
+                chatIDAvaiable[i] = response[i].ChatID;
+                createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID);
             }
          },
          error: function(){
@@ -121,17 +117,23 @@ function getDealInfo(ChatID){
          type: 'GET',
          url: './get_deal_info/' + ChatID,
          data: {
-            ItemID: ItemID
+            ChatID: ChatID
          },
          success: function(response){
-           console.log("getting deal:"+ItemID);
             $('#contactpage').hide();
             $('#chatpage, #to_contact').fadeIn();
             $(".msg_container_base").empty();
-            $('#productImg').attr('src', response[0].ItemImage); //CHANGE PRODUCT IMAGE
-            $('#productName').text(response[0].ItemName); //CHANGE PRODUCT NAME
-            $('#targetImg').attr('src', response[0].ProfilePic); //CHANGE INCONTACT_USER_NAME
-            $('#targetName').text(response[0].Display_name); //CHANGE INCONTACT_PROFILE_PIC
+            $('#productImg').attr('src', response[0].ItemImage);
+            $('#productName').text(response[0].ItemName);
+            if(response[0].BuyerID == UserID){
+                //IF USER IS THE BUYER
+                $('#targetImg').attr('src', response[0].ProfilePic); //DUMMY IMG
+                $('#targetName').text("SELLER ID: " + response[0].SellerID);
+            }else{
+                //IF USER IS THE SELLER
+                $('#targetImg').attr('src', response[0].ProfilePic); //DUMMY IMG
+                $('#targetName').text("BUYER ID: " + response[0].BuyerID);
+            }
             getMessageHistory(ChatID);
             currentChatID = ChatID;
          },
@@ -231,35 +233,35 @@ function getLatestMessage(ChatID){
     });
 }
 
-function getUserData(id){
-    $.ajax({
-        type: 'GET',
-        url: './users/' + id,
-        data: {
-            UserID: id
-        },
-        success: function(response){
-            if(response != 'No data found at the index'){
-                return response[0];
-            }else{
-                return response;
-            }
-        },
-        error: function(){
-            //DO NOTHING
-        }
-    });
+// function getUserData(id){
+//     $.ajax({
+//         type: 'GET',
+//         url: './users/' + id,
+//         data: {
+//             UserID: id
+//         },
+//         success: function(response){
+//             if(response != 'No data found at the index'){
+//                 return response[0];
+//             }else{
+//                 return response;
+//             }
+//         },
+//         error: function(){
+//             //DO NOTHING
+//         }
+//     });
 
-}
+// }
 
-function getDisplayName(id){
-    info = getUserData(id).Display_name;
-    if(response != 'No data found at the index'){
-        return info.Display_name;
-    }else{
-        return info;
-    }
-}
+// function getDisplayName(id){
+//     info = getUserData(id).Display_name;
+//     if(response != 'No data found at the index'){
+//         return info.Display_name;
+//     }else{
+//         return info;
+//     }
+// }
 
 function checkNotification(){
     temp = 0;
@@ -341,7 +343,7 @@ function getSession(){
           UserID = data.UserID;
           console.log("get user: "+UserID);
           USERNAME = data.Display_name;
-          getDealList(UserID);
+          getDealList();
           console.log(UserID);
           setInterval(function(){
               checkNotification();
@@ -365,10 +367,9 @@ function startChat(itemID){
             alert('Please try again.');
           }else{
             newChatID = response[0].ChatID;
-              console.log("new chat"+newChatID);
             $("#itemList").empty();
-            getDealList(ChatID);
-            getDealInfo(itemID);
+            getDealList();
+            getDealInfo(newChatID);
           }
         },
         error: function(){

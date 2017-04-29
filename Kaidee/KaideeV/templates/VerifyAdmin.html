@@ -22,9 +22,9 @@
 
   <script src="./js/hover4content.js"></script>
 
-  <script src="./js/chatbox.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/styleModal.css">
 
     <style>
         .footer {
@@ -142,7 +142,25 @@
 <link rel="stylesheet" href="css/chat.css">
 <script src="js/chat.js"></script>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- The Close Button -->
+  <span class="close" onclick="document.getElementById('myModal').style.display='none'"><br><br><br>&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img01">
+
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+
 <script>
+
+var modal = document.getElementById('myModal');
+console.log(modal);
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
 
 $(document).ready(function(){
 
@@ -160,7 +178,11 @@ $(document).ready(function(){
 
 				$("#productListRow").append(`
 					<div class="col-md-6" id="item`+iID+`">
-	            <div class="media"> <div class="media-left"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="`+iImg+`" data-holder-rendered="true" style="width: 64px; height: 64px;"> </div> <div class="media-body"> <h4 class="media-heading">`+iName+` ยืนยันระดับ`+iLv+`</h4> OTP: `+iOTP+` </div>
+	            <div class="media"> <div class="media-left">
+							<img alt="64x64" onclick='modal.style.display = "block";
+					    modalImg.src = this.src;
+					    captionText.innerHTML = "`+iName+` ยืนยันระดับ`+iLv+`</h4> OTP: `+iOTP+`"' class="media-object myImg" data-src="holder.js/64x64" src="`+iImg+`" data-holder-rendered="true" style="width: 64px; height: 64px;">
+							</div> <div class="media-body"> <h4 class="media-heading">`+iName+` ยืนยันระดับ`+iLv+`</h4> OTP: `+iOTP+` </div>
 	            <div class="media-right">
 							<button type="button" class="btn btn-default btn-lg" onclick="myFunction('`+iID+`','`+1+`')">
 	  <span class="glyphicons glyphicons-ok-circle" aria-hidden="true"></span> Accept
@@ -229,7 +251,18 @@ $(document).ready(function(){
 				}
 
 
+				// Get the <span> element that closes the modal
+				var span = $("#close");
+
+				// When the user clicks on <span> (x), close the modal
+				span.onclick = function() {
+				  modal.style.display = "none";
+				}
+				modalImg.onclick = function() {
+				  modal.style.display = "none";
+				}
 </script>
+
 </body>
 
 
