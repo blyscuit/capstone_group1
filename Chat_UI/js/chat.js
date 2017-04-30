@@ -15,6 +15,7 @@ $(document).ready(function() {
     $(document).on('click', '.panel-heading span.icon_chat_tolist', function (e) {
         $('#contactpage').fadeIn();
         $('#chatpage, #to_contact').hide();
+        e.stopPropagation();
     });
 
     $(document).on('click', '.panel div.top-bar', function (e) {
@@ -22,11 +23,9 @@ $(document).ready(function() {
         if (!$this.hasClass('panel-collapsed')) {
             $this.parents('.panel').find('.panel-body, .panel-footer').slideUp();
             $this.addClass('panel-collapsed');
-            $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
         } else {
             $this.parents('.panel').find('.panel-body, .panel-footer').slideDown();
             $this.removeClass('panel-collapsed');
-            $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
         }
     });
 
@@ -276,7 +275,6 @@ function checkNotification(){
 }
 
 function checkNotiForDeal(chatid){
-    console.log(notiDict);
     if(notiDict["noti_chat_"+chatid] == 0 || notiDict["noti_chat_"+chatid] == undefined){
         $("#deal_chat_" + chatid).hide();
     }else{

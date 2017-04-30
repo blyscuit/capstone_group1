@@ -15,6 +15,7 @@ $(document).ready(function() {
     $(document).on('click', '.panel-heading span.icon_chat_tolist', function (e) {
         $('#contactpage').fadeIn();
         $('#chatpage, #to_contact').hide();
+        e.stopPropagation();
     });
 
     $(document).on('click', '.panel div.top-bar', function (e) {
@@ -22,11 +23,9 @@ $(document).ready(function() {
         if (!$this.hasClass('panel-collapsed')) {
             $this.parents('.panel').find('.panel-body, .panel-footer').slideUp();
             $this.addClass('panel-collapsed');
-            $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
         } else {
             $this.parents('.panel').find('.panel-body, .panel-footer').slideDown();
             $this.removeClass('panel-collapsed');
-            $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
         }
     });
 
@@ -55,7 +54,6 @@ $(document).ready(function() {
 //Origin: 1 = Send, 2 = Receive
 function addMsgRow(isSender, isHistory, msg, timestamp){
     dt = new Date(timestamp).toLocaleString();
-    console.log(msg);
     if(isSender){
         var $newmsg = $('<div class="row msg_container base_sent" style="display: none;"><div class="col-md-10 col-xs-10"><div class="messages msg_sent"><p>' + msg + '</p></div><time class="time_send">' + dt + '</time></div></div>');
     }else{
@@ -251,7 +249,6 @@ function checkNotification(){
 }
 
 function checkNotiForDeal(chatid){
-    console.log(notiDict);
     if(notiDict["noti_chat_"+chatid] == 0 || notiDict["noti_chat_"+chatid] == undefined){
         $("#deal_chat_" + chatid).hide();
     }else{
@@ -315,7 +312,6 @@ function getSession(){
         $minus.removeClass('glyphicon-minus').addClass('glyphicon-plus');
       }else{
         UserID = data.UserID;
-        console.log("get user: "+UserID);
         USERNAME = data.Display_name;
         getDealList();
         setInterval(function(){
