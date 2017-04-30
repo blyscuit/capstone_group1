@@ -242,7 +242,7 @@ def browse_product():
     cur2 = mysql.get_db().cursor()
     query_string = "SELECT ItemID, Name, Price, Postcode, LevelID_u \
                    FROM item i, user u \
-                   WHERE i.UserID_i = u.UserID \
+                   WHERE i.UserID_i = u.UserID AND ItemID != 0\
                    ORDER BY ItemID ASC"
     cur.execute(query_string)
     columns = [column[0] for column in cur.description]
@@ -267,6 +267,9 @@ def browse_product():
 
 @app.route('/view_product/<int:ItemID>', methods=['GET'])
 def view_product(ItemID):
+    if ItemID == 0 :
+        print('No data found at the index')
+        return ('404')
     cur = mysql.get_db().cursor()
     cur2 = mysql.get_db().cursor()
     query_string = "SELECT ItemID, Name, Description, Date, Price, Display_name, Postcode, LevelID_u \
