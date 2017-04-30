@@ -2,16 +2,13 @@ MANIFEST.in
 setup.cfg
 KaideeV/KaideeV.py
 KaideeV/__init__.py
-KaideeV.egg-info/.DS_Store
 KaideeV.egg-info/PKG-INFO
 KaideeV.egg-info/SOURCES.txt
 KaideeV.egg-info/dependency_links.txt
 KaideeV.egg-info/requires.txt
 KaideeV.egg-info/top_level.txt
-KaideeV/static/.DS_Store
 KaideeV/static/style2.css
 KaideeV/static/style3.css
-KaideeV/templates/.DS_Store
 KaideeV/templates/Product.html
 KaideeV/templates/VerifyAdmin.html
 KaideeV/templates/faq.html

@@ -18,7 +18,7 @@ $(document).ready(function() {
         $('#chatpage, #to_contact').hide();
     });
 
-    $(document).on('click', '.panel-heading span.icon_chat_minimize', function (e) {
+    $(document).on('click', '.panel div.top-bar', function (e) {
         var $this = $(this);
         if (!$this.hasClass('panel-collapsed')) {
             $this.parents('.panel').find('.panel-body, .panel-footer').slideUp();
