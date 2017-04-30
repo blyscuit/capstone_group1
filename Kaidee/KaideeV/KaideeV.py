@@ -402,18 +402,36 @@ def count_unread(ChatID):
         print('Not logged in!')
         return ('Cannot load data: user is not logged in')
     cur = mysql.get_db().cursor()
-    query_string = "SELECT COUNT(MessageID) AS UnreadQty, SenderID FROM message \
-                    WHERE ChatID_m = '{ChatID}' AND IsRead = 0 GROUP BY SenderID".format(ChatID=ChatID)
+    query_string = "SELECT BuyerID_c, SellerID_c FROM chat WHERE ChatID = '{ChatID}'".format(ChatID=ChatID)
     cur.execute(query_string)
-    columns = [column[0] for column in cur.description]
+    result = cur.fetchall()
+    try:
+        BuyerID = result[0][0]
+        SellerID = result[0][1]
+    except:
+        print('No chat found')
+        return('404')
+    columns = ['UnreadQty', 'SenderID']
     results = []
-    for row in cur.fetchall():
-        results.append(dict(zip(columns, row)))
-    if len(results)>0:
-        return jsonify(results)
-    else:
-        print('No data found at the index')
-        return ('404')
+    query_string = "SELECT COUNT(MessageID) FROM message \
+                    WHERE ChatID_m = '{ChatID}' AND IsRead = 0 AND SenderID = ".format(ChatID=ChatID) + str(BuyerID)
+    cur.execute(query_string)
+    temp = []
+    try:
+        temp = [cur.fetchall()[0][0], BuyerID]
+    except:
+        temp = [0, BuyerID]
+    results.append(dict(zip(columns, temp)))
+    query_string = "SELECT COUNT(MessageID) FROM message \
+                    WHERE ChatID_m = '{ChatID}' AND IsRead = 0 AND SenderID = ".format(ChatID=ChatID) + str(SellerID)
+    cur.execute(query_string)
+    temp = []
+    try:
+        temp = [cur.fetchall()[0][0], SellerID]
+    except:
+        temp = [0, SellerID]
+    results.append(dict(zip(columns, temp)))
+    return jsonify(results)
 
 
 @app.route('/send_message', methods=['POST'])
