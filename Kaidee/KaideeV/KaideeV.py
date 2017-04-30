@@ -34,6 +34,9 @@ app.config['MYSQL_DATABASE_DB'] = 'kaidee'
 app.config['UPLOAD_FOLDER'] = 'upload/'
 app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
+
 app.config.update(dict(
     # DATABASE=os.path.join(app.root_path, 'flaskr.db'),
     DEBUG=True,

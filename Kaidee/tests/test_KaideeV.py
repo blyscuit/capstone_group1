@@ -16,7 +16,6 @@ from KaideeV import KaideeV
 import json
 import time
 
-
 @pytest.fixture
 def client(request):
     db_fd, KaideeV.app.config['DATABASE'] = tempfile.mkstemp()
@@ -35,18 +34,31 @@ def client(request):
 
     return client
 
+def login(client, username, password):
+    return client.post('/login', data=dict(
+        username=username,
+        password=password
+    ), follow_redirects=True)
+
+
+def test_login(client):
+    fileContent = {"username":'newpalita@gmail.com'
+    , "password":'1234'}
+    rv = client.post('/login', data = json.dumps(fileContent), content_type='application/json')
+    assert rv.data
+
 def test_get_user(client):
-    rv = client.get('/users/1')
+    login(client, 'newpalita@gmail.com', '1234')
+    rv = client.get('/session_data')
     dic = json.loads(rv.data)
-    assert dic[0]['Display_name']
-    assert dic[0]['Email']
-    assert dic[0]['Firstname']
-    assert dic[0]['Lastname']
-    assert dic[0]['LevelID_u']
-    assert dic[0]['Password']
-    assert dic[0]['Postcode']
-    assert dic[0]['ProfilePic']
-    assert dic[0]['UserID']
+    assert dic['Display_name']
+    assert dic['Email']
+    assert dic['Firstname']
+    assert dic['Lastname']
+    assert dic['VLevel']
+    assert dic['Postcode']
+    assert dic['ProfilePic']
+    assert dic['UserID']
 
 def test_get_faqs(client):
     rv = client.get('/faq/all')
@@ -81,7 +93,8 @@ def test_get_single_product(client):
     assert dic[0]['Price']
 
 def test_get_all_deal(client):
-    rv = client.get('/get_deal_list/1')
+    login(client, 'newpalita@gmail.com', '1234')
+    rv = client.get('/get_deal_list')
     dic = json.loads(rv.data)
     assert dic[0]['Display_name']
     assert dic[0]['ItemDescription']
@@ -90,17 +103,21 @@ def test_get_all_deal(client):
     assert dic[0]['ItemName']
 
 def test_get_one_deal(client):
+    login(client, 'newpalita@gmail.com', '1234')
     rv = client.get('/get_deal_info/1')
     dic = json.loads(rv.data)
-    assert dic[0]['ChatID']
-    assert dic[0]['Display_name']
+    assert dic[0]['BuyerID']
+    assert dic[0]['BuyerName']
+    assert dic[0]['SellerName']
     assert dic[0]['ItemDescription']
     assert dic[0]['ItemImage']
     assert dic[0]['ItemName']
-    assert dic[0]['ProfilePic']
-    assert dic[0]['UserID']
+    assert dic[0]['SellerPic']
+    assert dic[0]['BuyerPic']
+    assert dic[0]['SellerID']
 
 def test_get_one_chat(client):
+    login(client, 'newpalita@gmail.com', '1234')
     rv = client.get('/get_message_history/1')
     dic = json.loads(rv.data)
     assert dic[0]['ChatID_m']
@@ -111,6 +128,7 @@ def test_get_one_chat(client):
     assert dic[0]['IsRead'] != None
 
 def test_get_last_message(client):
+    login(client, 'newpalita@gmail.com', '1234')
     rv = client.get('/get_latest_msg/1')
     dic = json.loads(rv.data)
     assert dic[0]['ChatID_m']
@@ -128,6 +146,7 @@ def test_post_feedback(client):
     # assert dic['title']
 
 def test_post_message(client):
+    login(client, 'newpalita@gmail.com', '1234')
     fileContent2 = {
     "chatID": 1,
     "senderID": 1,
