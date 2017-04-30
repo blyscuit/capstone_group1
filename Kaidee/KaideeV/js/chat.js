@@ -188,6 +188,7 @@ function sendMessage(){
         data: JSON.stringify(data),
         success: function(){
             $("#btn-input").val("");
+            getLatestMessage(currentChatID);
         },
         error: function(){
             //DO NOTHING
@@ -324,7 +325,7 @@ function getSession(){
               countUnread(chatIDAvaiable[i]);
               checkNotiForDeal(chatIDAvaiable[i]);
             }
-        }, 1000);
+        }, 5000);
       }
   });
 }
