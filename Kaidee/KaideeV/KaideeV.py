@@ -307,9 +307,9 @@ def get_deal_list():
     userID = json.loads(session.get('udata'))[0].get('UserID')
     cur = mysql.get_db().cursor()
     cur2 = mysql.get_db().cursor()
-    query_string = "SELECT ItemID, Name AS ItemName, Description AS ItemDescription, Display_name, BuyerID_c AS BuyerID, \
-                    SellerID_c AS SellerID, ChatID FROM item i, user u, chat c \
-                    WHERE i.ItemID = c.ItemID_c AND u.UserID = " + str(userID) + " AND (c.BuyerID_c = " + str(userID) + " \
+    query_string = "SELECT ItemID, Name AS ItemName, Description AS ItemDescription, b.Display_name AS BuyerName, s.Display_name AS SellerName, \
+                    BuyerID_c AS BuyerID, SellerID_c AS SellerID, ChatID FROM item i, user b, user s, chat c \
+                    WHERE i.ItemID = c.ItemID_c AND b.UserID = c.BuyerID_c AND s.UserID = c.SellerID_c AND (c.BuyerID_c = " + str(userID) + " \
                     OR c.SellerID_c = " + str(userID) + ")"
     cur.execute(query_string)
     columns = [column[0] for column in cur.description]
