@@ -4,7 +4,6 @@ latestMessage = 0;
 chatIDAvaiable = [];
 notiDict = {};
 
-
 $(document).ready(function() {
 
     var UserID = null;
@@ -18,7 +17,7 @@ $(document).ready(function() {
         $('#chatpage, #to_contact').hide();
     });
 
-    $(document).on('click', '.panel-heading span.icon_chat_minimize', function (e) {
+    $(document).on('click', '.panel div.top-bar', function (e) {
         var $this = $(this);
         if (!$this.hasClass('panel-collapsed')) {
             $this.parents('.panel').find('.panel-body, .panel-footer').slideUp();
@@ -78,7 +77,7 @@ function createDeal(img, itemName, user, isBuy, chatID){
         statuspic = "img/sell_icon.png";
     }
     // $("#itemList").append('<a href="#" onclick="getDealInfo(' + id + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h4>' + itemName + '</h4><h5>' + user +'</h5></div></div></a>');
-    $("#itemList").append('<a href="#" onclick="getDealInfo(' + chatID + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h5 class="infotext">' + itemName + '</h5><h5 class="infotext">' + user +'</h5></div><div class="col-md-2 col-xs-2 info_content"><span class="badge" id="deal_chat_' + chatID + '"></span></div></div></a>');
+    $("#itemList").append('<a href="#" onclick="getDealInfo(' + chatID + ')"><div class="well contact"><div class="col-md-2 col-xs-2 info_content"><img class="statuspic" src="' + statuspic + '"></img></div><div class="col-md-2 col-xs-2 info_content"><img class="itempic" src="' + img + '"></img></div><div class="col-md-6 col-xs-6 info_content"><h5 class="infotext">' + itemName + '</h5><h5 class="infotext">' + user +'</h5></div><div class="col-md-2 col-xs-2 info_content"><span class="badge" style="display:none" id="deal_chat_' + chatID + '"></span></div></div></a>');
 }
 
 function getDealList(){
@@ -90,12 +89,14 @@ function getDealList(){
          success: function(response){
             for(var i = 0; i < response.length; i++){
                 if(response[i].BuyerID == UserID){
-                    isBuy = false;
-                }else{
                     isBuy = true;
+                    name = response[i].SellerName;
+                }else{
+                    isBuy = false;
+                    name = response[i].BuyerName;
                 }
                 chatIDAvaiable[i] = response[i].ChatID;
-                createDeal(response[i].ItemImage, response[i].ItemName, " ", isBuy, response[i].ChatID);
+                createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID);
             }
          },
          error: function(){
@@ -143,6 +144,7 @@ function getDealInfo(ChatID){
 function getMessageHistory(ChatID){
     /* GET ALL CHAT HISTORY ACCORDING TO DEAL ID. THE MESSAGE SHOULD INCLUDE:
     USER ID (ORIGIN OF EACH MESSAGE), MESSAGE, TIMESTAMP */
+    delete notiDict["noti_chat_"+ChatID];
     $.ajax({
          type: 'GET',
          url: 'http://snowywords2.ddns.net:5000/get_message_history/' + ChatID,
@@ -160,6 +162,8 @@ function getMessageHistory(ChatID){
                         markAsRead(response[i].MessageID);
                     }
                 }
+                checkNotification();
+                checkNotiForDeal(ChatID);
                 scrollChatBoxDown();
             }else{
                 //DO NOTHING
@@ -188,6 +192,32 @@ function sendMessage(){
         data: JSON.stringify(data),
         success: function(){
             $("#btn-input").val("");
+            getLatestMessage(currentChatID);
+        },
+        error: function(){
+            //DO NOTHING
+        }
+    });
+}
+
+function sendMessageTest(){
+    var dt = new Date().getTime();
+    var msg = $("#btn-input").val();
+    data = {
+        "chatID": 2,
+        "senderID": 3,
+        "message": "YOLO",
+        "timestamp": dt
+    };
+    $.ajax({
+        type: 'POST',
+        url: 'http://snowywords2.ddns.net:5000/send_message',
+        contentType:"application/json",
+        dataType: "json",
+        data: JSON.stringify(data),
+        success: function(){
+            $("#btn-input").val("");
+            getLatestMessage(currentChatID);
         },
         error: function(){
             //DO NOTHING
@@ -207,7 +237,6 @@ function getLatestMessage(ChatID){
         success: function(response){
             if(response != 404){
                 for(var i = response.length - 1; i >= 0; i--){
-                    console.log(response[i].MessageID + ' | ' + latestMessage)
                     if(response[i].MessageID > latestMessage){
                         latestMessage = response[i].MessageID;
                         if(response[i].SenderID == UserID){
@@ -217,8 +246,8 @@ function getLatestMessage(ChatID){
                         }
                         scrollChatBoxDown();
                     }
-                    if($("#chat-textbox").is(":visible")){
-                        if(response[i].IsRead == 0 && response[i].SenderID != UserID){
+                    if($("#chatpage").is(":visible")){
+                        if(response[i].SenderID != UserID){
                             markAsRead(response[i].MessageID);
                         }
                     }
@@ -238,7 +267,7 @@ function checkNotification(){
              temp += notiDict[key];
         }
     }
-    if(temp == 0){
+    if(temp == 0 || temp == undefined){
         $("#notification").hide();
     }else{
         $("#notification").show();
@@ -247,12 +276,12 @@ function checkNotification(){
 }
 
 function checkNotiForDeal(chatid){
-    temp = notiDict["noti_chat_"+chatid];
-    if(temp == 0){
+    console.log(notiDict);
+    if(notiDict["noti_chat_"+chatid] == 0 || notiDict["noti_chat_"+chatid] == undefined){
         $("#deal_chat_" + chatid).hide();
     }else{
         $("#deal_chat_" + chatid).show();
-        $("#deal_chat_" + chatid).text(temp);
+        $("#deal_chat_" + chatid).text(notiDict["noti_chat_"+chatid]);
     }
 }
 
@@ -262,15 +291,15 @@ function countUnread(chatid){
         url: 'http://snowywords2.ddns.net:5000/count_unread/' + chatid,
         success: function(response){
             for(var i = 0; i < response.length; i++){
-                if(response != 'No data found at the index'){
-                    if(UserID != response[i].SenderID){
-                        if(notiDict["noti_chat_"+chatid] != response[i].UnreadQty){
-                            notiDict["noti_chat_"+chatid] = response[i].UnreadQty;
+                if(UserID != response[i].SenderID){
+                    if(notiDict["noti_chat_"+chatid] != response[i].UnreadQty){
+                        notiDict["noti_chat_"+chatid] = response[i].UnreadQty;
+                        if(notiDict["noti_chat_"+chatid] == 0){
+                            delete notiDict["noti_chat_"+chatid];
                         }
+                    }else if(response == 404){
+                        delete notiDict["noti_chat_"+chatid];
                     }
-                    checkNotification();
-                }else{
-                    //DO NOTHING
                 }
             }
         },
@@ -286,15 +315,15 @@ function markAsRead(msgID){
     };
     $.ajax({
         type: 'POST',
-        url: './set_as_read',
+        url: 'http://snowywords2.ddns.net:5000/set_as_read',
         contentType:"application/json",
         dataType: "json",
         data: JSON.stringify(data),
         success: function(){
-            console.log(msgID + " has been readed")
+            //NOTHING
         },
         error: function(){
-            //DO NOTHING
+            //NOTHING
         }
     });
 }
@@ -303,9 +332,7 @@ function getSession(){
 
   console.log("GET SESSION")
   $.getJSON('http://snowywords2.ddns.net:5000/session_data', function(data) {
-  // $.getJSON('http://localhost:5000/session_data', function(data) {
       if(data == 404){
-        console.log("no user:"+UserID);
         UserID = null;
         var $minus = $('.panel-heading span.icon_chat_minimize')
         $minus.parents('.panel').find('.panel-body, .panel-footer').hide();
@@ -316,15 +343,14 @@ function getSession(){
         console.log("get user: "+UserID);
         USERNAME = data.Display_name;
         getDealList();
-        console.log(UserID);
         setInterval(function(){
-            checkNotification();
             getLatestMessage(currentChatID);
             for(var i = 0; i < chatIDAvaiable.length; i++){
               countUnread(chatIDAvaiable[i]);
               checkNotiForDeal(chatIDAvaiable[i]);
             }
-        }, 1000);
+            checkNotification();
+        }, 5000);
       }
   });
 }
@@ -339,6 +365,9 @@ function startChat(itemID){
             alert('Please try again.');
           }else{
             newChatID = response[0].ChatID;
+            if(chatIDAvaiable.indexOf(newChatID) == -1){
+                chatIDAvaiable.push(newChatID);
+            }
             $("#itemList").empty();
             getDealList();
             getDealInfo(newChatID);
@@ -347,7 +376,7 @@ function startChat(itemID){
         error: function(){
 
         }
-    })
+    });
 }
 
 function scrollChatBoxDown(){
