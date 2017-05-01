@@ -208,6 +208,7 @@ ul, menu, dir {
 		text-indent: 20px;
 		vertical-align: middle;
 		    z-index: -1;
+				position: fixed; left: 0; right: 0; bottom: 0;
 }
 .wrapper {
 	 min-height: 100%;
