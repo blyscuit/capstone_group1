@@ -217,5 +217,5 @@ ul, menu, dir {
 	 margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
 }
 .push{
-		height: 80px; /* .push must be the same height as .footer */
+		height: 55px; /* .push must be the same height as .footer */
 }
