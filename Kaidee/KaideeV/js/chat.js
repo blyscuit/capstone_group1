@@ -85,16 +85,20 @@ function getDealList(){
          type: 'GET',
          url: './get_deal_list',
          success: function(response){
-            for(var i = 0; i < response.length; i++){
-                if(response[i].BuyerID == UserID){
-                    isBuy = true;
-                    name = response[i].SellerName;
-                }else{
-                    isBuy = false;
-                    name = response[i].BuyerName;
+            if(response != 404){
+                for(var i = 0; i < response.length; i++){
+                    if(response[i].BuyerID == UserID){
+                        isBuy = true;
+                        name = response[i].SellerName;
+                    }else{
+                        isBuy = false;
+                        name = response[i].BuyerName;
+                    }
+                    chatIDAvaiable[i] = response[i].ChatID;
+                    createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID);
                 }
-                chatIDAvaiable[i] = response[i].ChatID;
-                createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID);
+            }else{
+                //DO NOTHING
             }
          },
          error: function(){
@@ -104,73 +108,74 @@ function getDealList(){
 }
 
 function getDealInfo(ChatID){
-    // GET PRODUCT IMAGE, PRODUCT NAME, INCONTACT USER ID + NAME + PROFILE PIC ACCORDING TO DEAL ID
-    $.ajax({
-         type: 'GET',
-         url: './get_deal_info/' + ChatID,
-         data: {
-            ChatID: ChatID
-         },
-         success: function(response){
-            $('#contactpage').hide();
-            $('#chatpage, #to_contact').fadeIn();
-            $(".msg_container_base").empty();
-            $('#productImg').attr('src', response[0].ItemImage);
-            $('#productName').text(response[0].ItemName);
-            if(response[0].BuyerID == 0 || response[0].SellerID == 0){
-                $('#targetImg').attr('src', '');
-                $('#targetName').text('DELETED USER');
-            }else if(response[0].BuyerID == UserID){
-                //IF USER IS THE BUYER
-                $('#targetImg').attr('src', response[0].SellerPic);
-                $('#targetName').text(response[0].SellerName);
-            }else{
-                //IF USER IS THE SELLER
-                $('#targetImg').attr('src', response[0].BuyerPic);
-                $('#targetName').text(response[0].BuyerName);
-            }
-            getMessageHistory(ChatID);
-            currentChatID = ChatID;
-         },
-         error: function(){
-            window.alert("Cannot obtain information");
-         }
-    });
+    if(ChatID != undefined){
+        $.ajax({
+             type: 'GET',
+             url: './get_deal_info/' + ChatID,
+             data: {
+                ChatID: ChatID
+             },
+             success: function(response){
+                $('#contactpage').hide();
+                $('#chatpage, #to_contact').fadeIn();
+                $(".msg_container_base").empty();
+                $('#productImg').attr('src', response[0].ItemImage);
+                $('#productName').text(response[0].ItemName);
+                if(response[0].BuyerID == 0 || response[0].SellerID == 0){
+                    $('#targetImg').attr('src', '');
+                    $('#targetName').text('DELETED USER');
+                }else if(response[0].BuyerID == UserID){
+                    //IF USER IS THE BUYER
+                    $('#targetImg').attr('src', response[0].SellerPic);
+                    $('#targetName').text(response[0].SellerName);
+                }else{
+                    //IF USER IS THE SELLER
+                    $('#targetImg').attr('src', response[0].BuyerPic);
+                    $('#targetName').text(response[0].BuyerName);
+                }
+                getMessageHistory(ChatID);
+                currentChatID = ChatID;
+             },
+             error: function(){
+                window.alert("Cannot obtain information");
+             }
+        });
+    }
 }
 
 //WILL ADD USER ID LATER
 function getMessageHistory(ChatID){
-    /* GET ALL CHAT HISTORY ACCORDING TO DEAL ID. THE MESSAGE SHOULD INCLUDE:
-    USER ID (ORIGIN OF EACH MESSAGE), MESSAGE, TIMESTAMP */
-    delete notiDict["noti_chat_"+ChatID];
-    $.ajax({
-         type: 'GET',
-         url: './get_message_history/' + ChatID,
-         data: {
-            ChatID: ChatID
-         },
-         success: function(response){
-            if(response != '404'){
-              latestMessage = response[0].MessageID;
-                for(var i = 0; i < response.length; i++){
-                    if(UserID == response[i].SenderID){
-                        addMsgRow(true, true, response[i].Text, response[i].Timestamp);
-                    }else{
-                        addMsgRow(false, true, response[i].Text, response[i].Timestamp);
-                        markAsRead(response[i].MessageID);
+    if(ChatID != undefined){
+        delete notiDict["noti_chat_"+ChatID];
+        $.ajax({
+             type: 'GET',
+             url: './get_message_history/' + ChatID,
+             data: {
+                ChatID: ChatID
+             },
+             success: function(response){
+                if(response != '404'){
+                  latestMessage = response[0].MessageID;
+                    for(var i = 0; i < response.length; i++){
+                        if(UserID == response[i].SenderID){
+                            addMsgRow(true, true, response[i].Text, response[i].Timestamp);
+                        }else{
+                            addMsgRow(false, true, response[i].Text, response[i].Timestamp);
+                            markAsRead(response[i].MessageID);
+                        }
                     }
+                    checkNotification();
+                    checkNotiForDeal(ChatID);
+                    scrollChatBoxDown();
+                }else{
+                    //DO NOTHING
                 }
-                checkNotification();
-                checkNotiForDeal(ChatID);
-                scrollChatBoxDown();
-            }else{
-                //DO NOTHING
-            }
-         },
-         error: function(){
-            window.alert("Cannot obtain message history");
-         }
-    });
+             },
+             error: function(){
+                window.alert("Cannot obtain message history");
+             }
+        });
+    }
 }
 
 function sendMessage(){
@@ -199,38 +204,38 @@ function sendMessage(){
 }
 
 function getLatestMessage(ChatID){
-    /* GET LATEST MESSAGE FROM THE SERVER. CLIENT-SIDE WILL CALL THIS MESSAGE REPEATLY TO LOOK FOR UPDATE
-    IF THERE'S AN UPDATE, RETURN THE LATEST MESSAGE. ELSE, RETURN ANYTHING "SMALL" (AND PLZ TELL ME WHAT IT IS) */
-    $.ajax({
-        type: 'GET',
-        url: './get_latest_msg/' + ChatID,
-        data: {
-            ChatID: ChatID
-        },
-        success: function(response){
-            if(response != 404){
-                for(var i = response.length - 1; i >= 0; i--){
-                    if(response[i].MessageID > latestMessage){
-                        latestMessage = response[i].MessageID;
-                        if(response[i].SenderID == UserID){
-                            addMsgRow(true, false, response[i].Text, response[i].Timestamp);
-                        }else{
-                            addMsgRow(false, false, response[i].Text, response[i].Timestamp);
+    if(ChatID != undefined){
+        $.ajax({
+            type: 'GET',
+            url: './get_latest_msg/' + ChatID,
+            data: {
+                ChatID: ChatID
+            },
+            success: function(response){
+                if(response != 404){
+                    for(var i = response.length - 1; i >= 0; i--){
+                        if(response[i].MessageID > latestMessage){
+                            latestMessage = response[i].MessageID;
+                            if(response[i].SenderID == UserID){
+                                addMsgRow(true, false, response[i].Text, response[i].Timestamp);
+                            }else{
+                                addMsgRow(false, false, response[i].Text, response[i].Timestamp);
+                            }
+                            scrollChatBoxDown();
                         }
-                        scrollChatBoxDown();
-                    }
-                    if($("#chatpage").is(":visible")){
-                        if(response[i].SenderID != UserID){
-                            markAsRead(response[i].MessageID);
+                        if($("#chatpage").is(":visible")){
+                            if(response[i].SenderID != UserID){
+                                markAsRead(response[i].MessageID);
+                            }
                         }
                     }
                 }
+            },
+            error: function(){
+                //DO NOTHING
             }
-        },
-        error: function(){
-            //DO NOTHING
-        }
-    });
+        });
+    }
 }
 
 function checkNotification(){
@@ -249,36 +254,40 @@ function checkNotification(){
 }
 
 function checkNotiForDeal(chatid){
-    if(notiDict["noti_chat_"+chatid] == 0 || notiDict["noti_chat_"+chatid] == undefined){
-        $("#deal_chat_" + chatid).hide();
-    }else{
-        $("#deal_chat_" + chatid).show();
-        $("#deal_chat_" + chatid).text(notiDict["noti_chat_"+chatid]);
+    if(chatid != undefined){
+        if(notiDict["noti_chat_"+chatid] == 0 || notiDict["noti_chat_"+chatid] == undefined){
+            $("#deal_chat_" + chatid).hide();
+        }else{
+            $("#deal_chat_" + chatid).show();
+            $("#deal_chat_" + chatid).text(notiDict["noti_chat_"+chatid]);
+        }
     }
 }
 
 function countUnread(chatid){
-    $.ajax({
-        type: 'GET',
-        url: './count_unread/' + chatid,
-        success: function(response){
-            for(var i = 0; i < response.length; i++){
-                if(UserID != response[i].SenderID){
-                    if(notiDict["noti_chat_"+chatid] != response[i].UnreadQty){
-                        notiDict["noti_chat_"+chatid] = response[i].UnreadQty;
-                        if(notiDict["noti_chat_"+chatid] == 0){
+    if(chatid != undefined){
+        $.ajax({
+            type: 'GET',
+            url: './count_unread/' + chatid,
+            success: function(response){
+                for(var i = 0; i < response.length; i++){
+                    if(UserID != response[i].SenderID){
+                        if(notiDict["noti_chat_"+chatid] != response[i].UnreadQty){
+                            notiDict["noti_chat_"+chatid] = response[i].UnreadQty;
+                            if(notiDict["noti_chat_"+chatid] == 0){
+                                delete notiDict["noti_chat_"+chatid];
+                            }
+                        }else if(response == 404){
                             delete notiDict["noti_chat_"+chatid];
                         }
-                    }else if(response == 404){
-                        delete notiDict["noti_chat_"+chatid];
                     }
                 }
+            },
+            error: function(){
+                //DO NOTHING
             }
-        },
-        error: function(){
-            //DO NOTHING
-        }
-    });
+        });
+    }
 }
 
 function markAsRead(msgID){
