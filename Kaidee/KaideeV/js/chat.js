@@ -86,16 +86,18 @@ function getDealList(){
          url: './get_deal_list',
          success: function(response){
             if(response != 404){
-                for(var i = 0; i < response.length; i++){
-                    if(response[i].BuyerID == UserID){
-                        isBuy = true;
-                        name = response[i].SellerName;
-                    }else{
-                        isBuy = false;
-                        name = response[i].BuyerName;
+                if(chatIDAvaiable.indexOf(response[i].ChatID) == -1){
+                    for(var i = 0; i < response.length; i++){
+                        if(response[i].BuyerID == UserID){
+                            isBuy = true;
+                            name = response[i].SellerName;
+                        }else{
+                            isBuy = false;
+                            name = response[i].BuyerName;
+                        }
+                        chatIDAvaiable[i] = response[i].ChatID;
+                        createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID);
                     }
-                    chatIDAvaiable[i] = response[i].ChatID;
-                    createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID);
                 }
             }else{
                 //DO NOTHING
@@ -324,6 +326,7 @@ function getSession(){
         USERNAME = data.Display_name;
         getDealList();
         setInterval(function(){
+            getDealList();
             getLatestMessage(currentChatID);
             for(var i = 0; i < chatIDAvaiable.length; i++){
               countUnread(chatIDAvaiable[i]);
@@ -348,7 +351,6 @@ function startChat(itemID){
             if(chatIDAvaiable.indexOf(newChatID) == -1){
                 chatIDAvaiable.push(newChatID);
             }
-            $("#itemList").empty();
             getDealList();
             getDealInfo(newChatID);
           }
