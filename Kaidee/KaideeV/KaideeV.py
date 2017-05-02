@@ -541,7 +541,7 @@ def upload():
                     watermark.resize(width=background.size[1], height=background.size[1])
                 background.watermark(image=watermark, transparency=0.1)
             background.save(filename = app.config['UPLOAD_FOLDER'] + filename)
-        os.replace(app.config['UPLOAD_FOLDER'] + filename, app.config['UPLOAD_FOLDER'] + unique_filename)
+        # os.replace(app.config['UPLOAD_FOLDER'] + filename, app.config['UPLOAD_FOLDER'] + unique_filename)
 
         cur = mysql.get_db().cursor()
         db = mysql.get_db()

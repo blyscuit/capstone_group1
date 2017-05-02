@@ -218,3 +218,16 @@ ul, menu, dir {
 .push{
 		height: 55px; /* .push must be the same height as .footer */
 }
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin-left: 5em;
+    margin-right: 5em;
+    padding: 0;
+}
+footer{
+	margin-bottom: 2em;
+	margin-top: -1em;
+}
