@@ -9,10 +9,8 @@ $(document).ready(function() {
     var UserID = null;
     getSession();
 
-    var $minus = $('.panel div.top-bar');
-    $minus.parents('.panel').find('.panel-body, .panel-footer').hide();
-    $minus.addClass('panel-collapsed');
-    $minus.removeClass('glyphicon-minus').addClass('glyphicon-plus');
+    $('.panel div.top-bar').parents('.panel').find('.panel-body, .panel-footer').hide();
+    $('.panel div.top-bar').addClass('panel-collapsed');
 
     $("#notification").hide();
     $('#chatpage, #to_contact').hide();
@@ -95,10 +93,10 @@ function getDealList(){
                 if(chatIDAvaiable.indexOf(response[i].ChatID) == -1){
                     if(response[i].BuyerID == UserID){
                         isBuy = true;
-                        name = response[i].SellerName;
+                        name = "Seller: " + response[i].SellerName;
                     }else{
                         isBuy = false;
-                        name = response[i].BuyerName;
+                        name = "Buyer: " + response[i].BuyerName;
                     }
                     chatIDAvaiable[i] = response[i].ChatID;
                     createDeal(response[i].ItemImage, response[i].ItemName, name, isBuy, response[i].ChatID);
@@ -348,6 +346,8 @@ function startChat(itemID){
         if(response=='403'||response=='404'){
             alert('Please try again.');
         }else{
+            $('.panel div.top-bar').parents('.panel').find('.panel-body, .panel-footer').slideDown();
+            $('.panel div.top-bar').removeClass('panel-collapsed');
             newChatID = response[0].ChatID;
             if(chatIDAvaiable.indexOf(newChatID) == -1){
                 chatIDAvaiable.push(newChatID);
