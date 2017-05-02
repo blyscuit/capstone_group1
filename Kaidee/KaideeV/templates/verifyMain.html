@@ -155,31 +155,36 @@
 					var d = data[0];
 					var vlevel = d.VLevel;
 					var vd = d.VData;
-					switch (vlevel) {
-						case 1:
-							$("#verify-show").attr('src',"img/Level1.png");
-							$("#docLv1").attr('src',vd[0].VPicture);
-							$("#level-1-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
-							break;
-						case 2:
-							$("#verify-show").attr('src',"img/Level2.png");
-							$("#docLv1").attr('src',vd[0].VPicture);
-							$("#docLv2").attr('src',vd[1].VPicture);
-							$("#level-1-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
-							$("#level-2-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
-							break;
-						case 3:
-							$("#verify-show").attr('src',"img/Level3.png");
-							$("#docLv1").attr('src',vd[0].VPicture);
-							$("#docLv2").attr('src',vd[1].VPicture);
-							$("#docLv3").attr('src',vd[2].VPicture);
-							$("#level-1-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
-							$("#level-2-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
-							$("#level-3-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
-							break;
-						default:
-							console.log("ERROR getting verification level");
-
+					var pic1,pic2,pic3;
+					for (o in vd){
+						switch (o.VLevel) {
+							case 1:
+								pic1 = o.VPicture;
+								break;
+							case 2:
+								pic2 = o.VPicture;
+								break;
+							case 3:
+				 				pic3 = o.VPicture;
+								break;
+							default:
+								console.log("ERROR getting verification level");
+						}
+					}
+					if(pic1){
+						$("#verify-show").attr('src',"img/Level1.png");
+						$("#docLv1").attr('src',pic1);
+						$("#level-1-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+					}
+					if(pic2){
+						$("#verify-show").attr('src',"img/Level2.png");
+						$("#docLv2").attr('src',pic2);
+						$("#level-2-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
+					}
+					if(pic3){
+						$("#verify-show").attr('src',"img/Level3.png");
+						$("#docLv3").attr('src',pic3);
+						$("#level-3-button").text("แก้ไขข้อมูล").css('background-color', '#F1A513');
 					}
 			});
 
