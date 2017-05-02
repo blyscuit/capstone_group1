@@ -32,6 +32,14 @@
                 margin: 0 auto -55px; /* the bottom margin is the negative value of the footer's height */
             }
 
+            .myImg{
+                max-height: 500px;
+                max-width: 500px;
+            }
+
+            .space{
+              height: 20px;
+            }
 
         </style>
 
@@ -93,7 +101,8 @@
                      console.log(result[i]);
                     $('#textAndPic').append('<div class="col-md-12"><h4>'+result[i].Detail+'</h4></div>');
                       for(var j=0; j < result[i].FAQImage.length;j++){
-                          $('#textAndPic').append('<div class="col-md-12"><img src="'+result[i].FAQImage[j]+'"></div>');
+                          $('#textAndPic').append('<div class="col-md-12"><img class="myImg" src="'+result[i].FAQImage[j]+'"></div><div class="space"> </div>');
+                          //<div class="space"> </div>
                       }
 
                     //$('#textAndPic').append('<div class="col-md-12"><p>'+result[i].Detail+'</p></div>');
