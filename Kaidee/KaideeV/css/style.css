@@ -207,8 +207,7 @@ ul, menu, dir {
 		background: #efefef;
 		text-indent: 20px;
 		vertical-align: middle;
-		    z-index: -1;
-				position: fixed; left: 0; right: 0; bottom: 0;
+				position: fixed; left: 0; right: 0; bottom: 30px;
 }
 .wrapper {
 	 min-height: 100%;
