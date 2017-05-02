@@ -37,6 +37,7 @@
 			<!-- <a class="navbar-brand" href="#">Kaidee</a> -->
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
+                    <li><a id="loginout" href="./loginpage">ลงชื่อเข้าใช้</a></li>
 					<li><a href="/verification">แก้ไขข้อมูลผู้ขาย</a></li>
 					<li><button id="btnsell" type="button" class="btn btn-warning">ขาย</button></li>
 				</ul>
@@ -129,6 +130,16 @@
 
 	$(document).ready(function(){
 
+         $.getJSON('./session_data', function(data) {
+                    if(data == 404){
+                        $('#loginout').attr('href','./loginpage');
+                        $('#loginout').text('ลงชื่อเข้าใช้');
+                    }else{
+                        $('#loginout').attr('href','./logout');
+                        $('#loginout').text('ลงชื่อออก');
+                    }
+                });
+        
 		$.get("./browse_product", function(data, status){
 				for (count in data){
 					itemObject = data[count];
