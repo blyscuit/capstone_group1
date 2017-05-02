@@ -88,8 +88,16 @@
         ** ทางเว็บไซด์ kaidee.com จะเก็บรูปภาพที่ถูกใส่ลายน้ำแล้วเท่านั้น เพื่อป้องกันการนำไปใช้กระทำการอื่นๆ ที่นอกเหนือจาก <br>
         &nbsp;&nbsp;&nbsp;&nbsp; ที่ได้กล่าวไว้ข้างต้น
       </div>
+      <div class="verify-subtitle">
+        กรุณาถ่ายรูปหลักฐานการยืนยันและกระดาษที่เขียนรหัสOTPด้านล่าง
+      </div>
     </div>
     <div class="upload-container">
+      <div class="col-md-12" style="border-radius: 10px;">
+        <div id="OTPCode" style="font-size:25px;">
+          OTP = zzzz
+        </div>
+      </div>
       <div class="col-md-4" style="border-radius: 10px; background: #eeeeee; width: 550px; height: 350px;">
         <img id="file" src="img/choosePic.png" style="position: absolute; margin: auto; top: 25px; left: 0; right: 0; border-radius: 10px; background-color:white; height:250px;">
         </img>
@@ -110,9 +118,9 @@
 </div>
     </div>
 
-    <form action="./upload?vlevel=1" method="post" enctype="multipart/form-data" hidden>
+    <form id="upupForm" action="./upload?vlevel=2" method="post" enctype="multipart/form-data" hidden>
        <!-- <input id="fileInput" name="file" type="file"  style="display:none;"> /> -->
-          <input id="fileInput" name="file" type="file" />
+          <input id="fileInput" name="file" type="file"/>
         <input id="theButton" type="submit" name="u_button" value="Upload" />
     </form>
 
@@ -125,13 +133,20 @@
                 window.location.href = "./upload_sale_1";
 
         });
+
         window.onload = function () {
+          var OTP = Math.floor(Math.random() * 8999) + 1000;
           document.getElementById('file').onclick = function() {
             document.getElementById('fileInput').click();
           };
           document.getElementById('upload').onclick = function() {
             document.getElementById('theButton').click();
           };
+          document.getElementById('OTPCode').innerHTML = "OTP: "+OTP
+          var frm = document.getElementById('upupForm') || null;
+          if(frm) {
+            frm.action = './upload?vlevel=2&OTP='+OTP;
+          }
         }
 
 

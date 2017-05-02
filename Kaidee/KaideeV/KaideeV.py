@@ -523,6 +523,7 @@ def upload():
         return ('Cannot load data: user is not logged in')
     userID = json.loads(session.get('udata'))[0].get('UserID')
     vlevel = request.args.get('vlevel')
+    OOTP = request.args.get('OTP')
     file = request.files['file']
     if not session.get('logged_in'):
         print ("Not logged in")
@@ -546,7 +547,7 @@ def upload():
         db = mysql.get_db()
         url = URL_for_inserting_Picture + str(url_for('uploaded_file', filename = unique_filename))
         query_string = "INSERT INTO verification(Vlevel, VPicture, Status, OTP, UserID_v) \
-                        VALUES (" + str(vlevel) + ", \"" + url + "\", 0, " + randomOTP() + ", " + str(userID) +")"
+                        VALUES (" + str(vlevel) + ", \"" + url + "\", 0, " + OOTP + ", " + str(userID) +")"
         try:
             cur.execute(query_string)
             db.commit()
