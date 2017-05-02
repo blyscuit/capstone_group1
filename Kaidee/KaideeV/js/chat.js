@@ -91,8 +91,8 @@ function getDealList(){
        url: './get_deal_list',
        success: function(response){
         if(response != 404){
-            if(chatIDAvaiable.indexOf(response[i].ChatID) == -1){
-                for(var i = 0; i < response.length; i++){
+            for(var i = 0; i < response.length; i++){
+                if(chatIDAvaiable.indexOf(response[i].ChatID) == -1){
                     if(response[i].BuyerID == UserID){
                         isBuy = true;
                         name = response[i].SellerName;
