@@ -714,7 +714,7 @@ def verification_result():
     return render_template('verifyResult.html')
 
 @app.route('/verification_fail')
-def verification_result():
+def verification_fail():
     if not session.get('logged_in'):
         print('Not logged in!')
         return redirect('/loginpage')
