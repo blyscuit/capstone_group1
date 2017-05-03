@@ -559,7 +559,7 @@ def upload():
         return redirect('/verification_result')
     else:
         print ('Invalid file type')
-        return ('403')
+        return redirect('/verification_fail')
 
 
 @app.route('/uploads/<filename>')
@@ -713,6 +713,12 @@ def verification_result():
         return redirect('/loginpage')
     return render_template('verifyResult.html')
 
+@app.route('/verification_fail')
+def verification_fail():
+    if not session.get('logged_in'):
+        print('Not logged in!')
+        return redirect('/loginpage')
+    return render_template('verifyFail.html')
 
 @app.route('/list')
 def listpage():
