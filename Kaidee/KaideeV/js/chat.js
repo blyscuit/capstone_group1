@@ -3,6 +3,7 @@ currentChatID = 0;
 latestMessage = 0;
 chatIDAvaiable = [];
 notiDict = {};
+isConnected = true;
 
 $(document).ready(function() {
 
@@ -103,11 +104,14 @@ function getDealList(){
                 }
             }
         }else{
-                //DO NOTHING
+
             }
         },
         error: function(){
-            window.alert("Cannot obtain lists");
+            if(isConnected){
+              window.alert("Cannot obtain lists");
+              isConnected = false;
+            }
         }
     });
 }
@@ -325,13 +329,15 @@ function getSession(){
         USERNAME = data.Display_name;
         getDealList();
         setInterval(function(){
+          if(isConnected){
             getDealList();
             getLatestMessage(currentChatID);
             for(var i = 0; i < chatIDAvaiable.length; i++){
               countUnread(chatIDAvaiable[i]);
               checkNotiForDeal(chatIDAvaiable[i]);
+            }
+            checkNotification();
           }
-          checkNotification();
       }, 5000);
     }
 });
